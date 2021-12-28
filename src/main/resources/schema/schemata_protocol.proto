@@ -20,6 +20,13 @@ enum Type {
   EVENT = 2;
 }
 
+enum EventType {
+  NONE = 0;
+  LIFECYCLE = 1;
+  INTERACTION = 2;
+  AGGREGATED = 3;
+}
+
 // CommonMetadata is the set of attribute apply to both the Message & Field
 message CoreMetadata {
   // Mandatory Metadata: description of the entity
@@ -51,6 +58,8 @@ extend google.protobuf.MessageOptions {
   string team_channel = 60006;
   // Slack or Teams channel name to alert for any validation errors.
   string alert_channel = 60007;
+  // Type of the event. Set if the Type = 'EVENT'
+  EventType event_type = 60008;
 }
 
 extend google.protobuf.FieldOptions {
@@ -59,22 +68,4 @@ extend google.protobuf.FieldOptions {
   string classification_level = 7003;
   string product_type = 70004;
   bool is_primary_key = 70005;
-}
-
-message Department {
-  int32 id = 1;
-  string name = 2;
-}
-
-message Person {
-  option(message_core).description = "This is the description of the users table";
-  option(message_core).comment = "The comment added after thought";
-  option(owner) = "Growth";
-  option(domain) = "Core";
-  option(type) = ENTITY;
-
-  string name = 1 [(field_core).description = "person name"];
-  int32 id = 2 [(field_core).description = "unique identifier for a given person", (is_primary_key) = true];
-  string email = 3 [(field_core).description = "official email address", (is_classified) = true, (classification_level) = "HIGH", (product_type) = "email"];
-  Department dept = 4 [(field_core).description = "department name of the person"] ;
 }

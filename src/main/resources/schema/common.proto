@@ -1,0 +1,17 @@
+syntax = "proto3";
+package org.schemata.schema;
+
+option java_package = "org.schemata.schema";
+option java_outer_classname = "ActivityStateBuilder";
+
+enum ActivityType {
+  CREATED = 0;
+  DELETED = 1;
+  UPDATED = 2;
+}
+
+enum TimeUnit {
+  SECONDS = 0;
+  MINUTES = 1;
+  HOURS = 2;
+}

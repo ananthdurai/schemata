@@ -1,0 +1,91 @@
+syntax = "proto3";
+package org.schemata.schema;
+
+import "schemata_protocol.proto";
+import "common.proto";
+import "product.proto";
+import "google/protobuf/timestamp.proto";
+import "category.proto";
+
+option java_package = "org.schemata.schema";
+option java_outer_classname = "CampaignBuilder";
+
+
+enum CampaignOrigin {
+  EMAIL = 0;
+  SOCIAL_MEDIA = 1;
+}
+
+message Campaign {
+
+  option(message_core).description = "This is the description of the Campaign table";
+  option(message_core).comment = "The comment added after thought";
+  option(message_core).see_also = "db.campaign MySQL table";
+  option(owner) = "Marketing";
+  option(domain) = "Growth";
+  option(type) = ENTITY;
+  option(team_channel) = "#team-growth";
+  option(alert_channel) = "#alerts-growth";
+
+  int32 id = 1
+  [(field_core).description = "Unique identifier for Campaign", (is_primary_key) = true];
+
+  string name = 2
+  [(field_core).description = "Name of the Campaign"];
+
+  bool is_active = 3
+  [(field_core).description = "define the active status of the Campaign. `true` == active; `false` = inactive`", (field_core).comment = "should refactor to non-binary status"];
+
+}
+
+message CampaignEvent {
+  option(message_core).description = "This is the description of the Campaign activity table";
+  option(owner) = "Marketing";
+  option(domain) = "Growth";
+  option(type) = EVENT;
+  option(event_type) = LIFECYCLE;
+  option(team_channel) = "#team-growth";
+  option(alert_channel) = "#alerts-growth";
+
+  Campaign previous_campaign_state = 1
+  [(field_core).description = "Previous version of the Campaign entity before the mutation"];
+
+  Campaign current_campaign_state = 2
+  [(field_core).description = "Current version of the Campaign entity before the mutation"];
+
+  ActivityType activity_type = 3
+  [(field_core).description = "Lifecycle event type for the Campaign table"];
+}
+
+message CampaignCategoryTrackerEvent {
+  option(message_core).description = "This is the description of the Campaign activity table";
+  option(owner) = "Marketing";
+  option(domain) = "Growth";
+  option(type) = EVENT;
+  option(event_type) = INTERACTION;
+  option(team_channel) = "#team-growth";
+  option(alert_channel) = "#alerts-growth";
+
+  Campaign campaign = 1 [(field_core).description = "Campaign entity"];
+  Category category = 2 [(field_core).description = "Category of the targeted campaign"];
+  CampaignOrigin origin = 3 [(field_core).description = "origin source of the campaign"] ;
+  google.protobuf.Timestamp timestamp = 4 [(field_core).description = "Timestamp of the activity"];
+
+}
+
+message CampaignProductTrackerEvent {
+
+  option(message_core).description = "This is the description of the Campaign activity table";
+  option(owner) = "Marketing";
+  option(domain) = "Growth";
+  option(type) = EVENT;
+  option(event_type) = INTERACTION;
+  option(team_channel) = "#team-growth";
+  option(alert_channel) = "#alerts-growth";
+
+  Campaign campaign = 1 [(field_core).description = "Campaign entity"];
+  Product product = 2 [(field_core).description = "Product of the targeted campaign"];
+  CampaignOrigin origin = 3 [(field_core).description = "origin source of the campaign"] ;
+  google.protobuf.Timestamp timestamp = 4 [(field_core).description = "Timestamp of the activity"];
+
+}
