@@ -1,8 +1,6 @@
 package org.schemata.domain;
 
 import java.util.List;
-import org.apache.commons.lang3.StringUtils;
-import org.schemata.exception.InvalidSchemaException;
 import org.schemata.schema.SchemataBuilder;
 
 
@@ -12,23 +10,8 @@ public record Schema(String name, String description, String comment, String see
 
   private Schema(Builder builder) {
     this(builder.name, builder.description, builder.comment, builder.seeAlso, builder.reference, builder.owner,
-        builder.domain, builder.status, builder.type.name(), builder.teamChannel, builder.alertChannel, builder.fieldList);
-  }
-
-  public void validate()
-      throws InvalidSchemaException {
-    if (StringUtils.isBlank(this.description)) {
-      throw new InvalidSchemaException("metadata description is null or empty");
-    }
-    if (StringUtils.isBlank(this.owner)) {
-      throw new InvalidSchemaException("metadata owner is null or empty");
-    }
-    if (StringUtils.isBlank(this.domain)) {
-      throw new InvalidSchemaException("metadata domain is null or empty");
-    }
-    if (SchemataBuilder.Type.UNKNOWN.name().equals(this.type)) {
-      throw new InvalidSchemaException("Type can't be unknown. It should be either ENTITY or EVENT");
-    }
+        builder.domain, builder.status, builder.type.name(), builder.teamChannel, builder.alertChannel,
+        builder.fieldList);
   }
 
   public static class Builder {
@@ -100,8 +83,7 @@ public record Schema(String name, String description, String comment, String see
       return this;
     }
 
-    public Schema build()
-        throws InvalidSchemaException {
+    public Schema build() {
       return new Schema(this);
     }
   }
