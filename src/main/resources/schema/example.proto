@@ -1,0 +1,28 @@
+syntax = "proto3";
+
+package org.schemata.schema;
+
+import "google/protobuf/descriptor.proto";
+import "schemata_protocol.proto";
+
+option java_package = "org.schemata.schema";
+option java_outer_classname = "ExampleBuilder";
+
+
+message Department {
+  int32 id = 1;
+  string name = 2;
+}
+
+message Person {
+  option(message_core).description = "This is the description of the users table";
+  option(message_core).comment = "The comment added after thought";
+  option(owner) = "Growth";
+  option(domain) = "Core";
+  option(type) = ENTITY;
+
+  string name = 1 [(field_core).description = "person name"];
+  int32 id = 2 [(field_core).description = "unique identifier for a given person", (is_primary_key) = true];
+  string email = 3 [(field_core).description = "official email address", (is_classified) = true, (classification_level) = "HIGH", (product_type) = "email"];
+  Department dept = 4 [(field_core).description = "department name of the person"] ;
+}

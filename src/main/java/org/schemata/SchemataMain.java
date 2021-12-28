@@ -8,7 +8,11 @@ import java.util.Set;
 import org.schemata.domain.Field;
 import org.schemata.domain.Schema;
 import org.schemata.parser.SchemaParser;
-import org.schemata.schema.SchemataBuilder;
+import org.schemata.schema.BrandBuilder;
+import org.schemata.schema.CampaignBuilder;
+import org.schemata.schema.CategoryBuilder;
+import org.schemata.schema.ProductBuilder;
+import org.schemata.schema.UserBuilder;
 import org.schemata.validate.FieldValidator;
 import org.schemata.validate.SchemaValidator;
 import org.schemata.validate.Status;
@@ -67,6 +71,11 @@ public class SchemataMain {
   }
 
   private static List<GeneratedMessageV3> registerSchema() {
-    return List.of(SchemataBuilder.Person.newBuilder().build());
+    return List.of(UserBuilder.User.newBuilder().build(), UserBuilder.UserEvent.newBuilder().build(),
+        UserBuilder.UserActivityEvent.newBuilder().build(), UserBuilder.UserActivityAggregate.newBuilder().build(),
+        ProductBuilder.Product.newBuilder().build(), ProductBuilder.ProductEvent.newBuilder().build(),
+        CategoryBuilder.Category.newBuilder().build(), CategoryBuilder.CategoryEvent.newBuilder().build(),
+        BrandBuilder.Brand.newBuilder().build(), BrandBuilder.BrandEvent.newBuilder().build(),
+        CampaignBuilder.Campaign.newBuilder().build(), CategoryBuilder.CategoryEvent.newBuilder().build());
   }
 }
