@@ -25,4 +25,4 @@ proto-gen:
 
 .PHONY:validate
 validate: proto-gen package
-	java -jar target/schemata-1.0.jar validate
+	java -jar target/schemata-1.0.jar schemata --cmd validate
