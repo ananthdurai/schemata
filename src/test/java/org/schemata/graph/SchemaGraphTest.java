@@ -23,8 +23,7 @@ public class SchemaGraphTest {
   static SchemaGraph graph;
 
   @BeforeAll
-  static void setUp()
-      throws Exception {
+  static void setUp() {
     SchemaParser schemaParser = new SchemaParser();
     List<Schema> schemaList = schemaParser.parseSchema(SchemaRegistry.registerSchema());
     graph = new SchemaGraph(schemaList);
@@ -32,9 +31,8 @@ public class SchemaGraphTest {
 
   @Test
   public void testWithInvalidSchema() {
-    Assertions.assertThrows(SchemaNotFoundException.class, () -> {
-      graph.getSchema("User");
-    }, "Schema not found was expected");
+    Assertions.assertThrows(SchemaNotFoundException.class, () -> graph.getSchema("User"),
+        "Schema not found was expected");
   }
 
   @Test
