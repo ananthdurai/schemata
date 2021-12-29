@@ -12,9 +12,9 @@ public class SchemaParserTest {
 
   @Test
   void validate() {
-    SchemaParser validator = new SchemaParser();
+    SchemaParser schemaParser = new SchemaParser();
     List<GeneratedMessageV3> messages = List.of(ExampleBuilder.Person.newBuilder().build());
-    validator.parseSchema(messages);
+    schemaParser.parseSchema(messages);
     assertEquals(2, 2);
   }
 }

@@ -5,13 +5,13 @@ import org.schemata.schema.SchemataBuilder;
 
 
 public record Schema(String name, String description, String comment, String seeAlso, String reference, String owner,
-                     String domain, String status, String type, String teamChannel, String alertChannel,
-                     List<Field> fieldList) {
+                     String domain, String status, String type, String eventType, String teamChannel,
+                     String alertChannel, List<Field> fieldList) {
 
   private Schema(Builder builder) {
     this(builder.name, builder.description, builder.comment, builder.seeAlso, builder.reference, builder.owner,
-        builder.domain, builder.status, builder.type.name(), builder.teamChannel, builder.alertChannel,
-        builder.fieldList);
+        builder.domain, builder.status, builder.type.name(), builder.eventType.name(), builder.teamChannel,
+        builder.alertChannel, builder.fieldList);
   }
 
   public static class Builder {
@@ -24,6 +24,7 @@ public record Schema(String name, String description, String comment, String see
     String domain;
     String status;
     SchemataBuilder.Type type;
+    SchemataBuilder.EventType eventType;
     String teamChannel;
     String alertChannel;
     List<Field> fieldList;
@@ -31,6 +32,7 @@ public record Schema(String name, String description, String comment, String see
     public Builder(String name, List<Field> fieldList) {
       this.name = name;
       this.fieldList = fieldList;
+      this.eventType = SchemataBuilder.EventType.NONE;
     }
 
     public Builder description(String description) {
@@ -70,6 +72,11 @@ public record Schema(String name, String description, String comment, String see
 
     public Builder type(String typeValue) {
       this.type = SchemataBuilder.Type.valueOf(typeValue);
+      return this;
+    }
+
+    public Builder eventType(String eventTypeValue) {
+      this.eventType = SchemataBuilder.EventType.valueOf(eventTypeValue);
       return this;
     }
 

@@ -3210,19 +3210,19 @@ public final class UserBuilder {
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>.org.schemata.schema.User users = 1 [(.org.schemata.schema.field_core) = { ... }</code>
-     * @return Whether the users field is set.
+     * <code>.org.schemata.schema.User user = 1 [(.org.schemata.schema.field_core) = { ... }</code>
+     * @return Whether the user field is set.
      */
-    boolean hasUsers();
+    boolean hasUser();
     /**
-     * <code>.org.schemata.schema.User users = 1 [(.org.schemata.schema.field_core) = { ... }</code>
-     * @return The users.
+     * <code>.org.schemata.schema.User user = 1 [(.org.schemata.schema.field_core) = { ... }</code>
+     * @return The user.
      */
-    org.schemata.schema.UserBuilder.User getUsers();
+    org.schemata.schema.UserBuilder.User getUser();
     /**
-     * <code>.org.schemata.schema.User users = 1 [(.org.schemata.schema.field_core) = { ... }</code>
+     * <code>.org.schemata.schema.User user = 1 [(.org.schemata.schema.field_core) = { ... }</code>
      */
-    org.schemata.schema.UserBuilder.UserOrBuilder getUsersOrBuilder();
+    org.schemata.schema.UserBuilder.UserOrBuilder getUserOrBuilder();
 
     /**
      * <code>.org.schemata.schema.Product product = 2 [(.org.schemata.schema.field_core) = { ... }</code>
@@ -3261,6 +3261,21 @@ public final class UserBuilder {
      * @return The windowTimeUnit.
      */
     org.schemata.schema.ActivityStateBuilder.TimeUnit getWindowTimeUnit();
+
+    /**
+     * <code>.google.protobuf.Timestamp timestamp = 6 [(.org.schemata.schema.field_core) = { ... }</code>
+     * @return Whether the timestamp field is set.
+     */
+    boolean hasTimestamp();
+    /**
+     * <code>.google.protobuf.Timestamp timestamp = 6 [(.org.schemata.schema.field_core) = { ... }</code>
+     * @return The timestamp.
+     */
+    com.google.protobuf.Timestamp getTimestamp();
+    /**
+     * <code>.google.protobuf.Timestamp timestamp = 6 [(.org.schemata.schema.field_core) = { ... }</code>
+     */
+    com.google.protobuf.TimestampOrBuilder getTimestampOrBuilder();
   }
   /**
    * Protobuf type {@code org.schemata.schema.UserActivityAggregate}
@@ -3310,13 +3325,13 @@ public final class UserBuilder {
               break;
             case 10: {
               org.schemata.schema.UserBuilder.User.Builder subBuilder = null;
-              if (users_ != null) {
-                subBuilder = users_.toBuilder();
+              if (user_ != null) {
+                subBuilder = user_.toBuilder();
               }
-              users_ = input.readMessage(org.schemata.schema.UserBuilder.User.parser(), extensionRegistry);
+              user_ = input.readMessage(org.schemata.schema.UserBuilder.User.parser(), extensionRegistry);
               if (subBuilder != null) {
-                subBuilder.mergeFrom(users_);
-                users_ = subBuilder.buildPartial();
+                subBuilder.mergeFrom(user_);
+                user_ = subBuilder.buildPartial();
               }
 
               break;
@@ -3348,6 +3363,19 @@ public final class UserBuilder {
               int rawValue = input.readEnum();
 
               windowTimeUnit_ = rawValue;
+              break;
+            }
+            case 50: {
+              com.google.protobuf.Timestamp.Builder subBuilder = null;
+              if (timestamp_ != null) {
+                subBuilder = timestamp_.toBuilder();
+              }
+              timestamp_ = input.readMessage(com.google.protobuf.Timestamp.parser(), extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(timestamp_);
+                timestamp_ = subBuilder.buildPartial();
+              }
+
               break;
             }
             default: {
@@ -3382,30 +3410,30 @@ public final class UserBuilder {
               org.schemata.schema.UserBuilder.UserActivityAggregate.class, org.schemata.schema.UserBuilder.UserActivityAggregate.Builder.class);
     }
 
-    public static final int USERS_FIELD_NUMBER = 1;
-    private org.schemata.schema.UserBuilder.User users_;
+    public static final int USER_FIELD_NUMBER = 1;
+    private org.schemata.schema.UserBuilder.User user_;
     /**
-     * <code>.org.schemata.schema.User users = 1 [(.org.schemata.schema.field_core) = { ... }</code>
-     * @return Whether the users field is set.
+     * <code>.org.schemata.schema.User user = 1 [(.org.schemata.schema.field_core) = { ... }</code>
+     * @return Whether the user field is set.
      */
     @java.lang.Override
-    public boolean hasUsers() {
-      return users_ != null;
+    public boolean hasUser() {
+      return user_ != null;
     }
     /**
-     * <code>.org.schemata.schema.User users = 1 [(.org.schemata.schema.field_core) = { ... }</code>
-     * @return The users.
+     * <code>.org.schemata.schema.User user = 1 [(.org.schemata.schema.field_core) = { ... }</code>
+     * @return The user.
      */
     @java.lang.Override
-    public org.schemata.schema.UserBuilder.User getUsers() {
-      return users_ == null ? org.schemata.schema.UserBuilder.User.getDefaultInstance() : users_;
+    public org.schemata.schema.UserBuilder.User getUser() {
+      return user_ == null ? org.schemata.schema.UserBuilder.User.getDefaultInstance() : user_;
     }
     /**
-     * <code>.org.schemata.schema.User users = 1 [(.org.schemata.schema.field_core) = { ... }</code>
+     * <code>.org.schemata.schema.User user = 1 [(.org.schemata.schema.field_core) = { ... }</code>
      */
     @java.lang.Override
-    public org.schemata.schema.UserBuilder.UserOrBuilder getUsersOrBuilder() {
-      return getUsers();
+    public org.schemata.schema.UserBuilder.UserOrBuilder getUserOrBuilder() {
+      return getUser();
     }
 
     public static final int PRODUCT_FIELD_NUMBER = 2;
@@ -3475,6 +3503,32 @@ public final class UserBuilder {
       return result == null ? org.schemata.schema.ActivityStateBuilder.TimeUnit.UNRECOGNIZED : result;
     }
 
+    public static final int TIMESTAMP_FIELD_NUMBER = 6;
+    private com.google.protobuf.Timestamp timestamp_;
+    /**
+     * <code>.google.protobuf.Timestamp timestamp = 6 [(.org.schemata.schema.field_core) = { ... }</code>
+     * @return Whether the timestamp field is set.
+     */
+    @java.lang.Override
+    public boolean hasTimestamp() {
+      return timestamp_ != null;
+    }
+    /**
+     * <code>.google.protobuf.Timestamp timestamp = 6 [(.org.schemata.schema.field_core) = { ... }</code>
+     * @return The timestamp.
+     */
+    @java.lang.Override
+    public com.google.protobuf.Timestamp getTimestamp() {
+      return timestamp_ == null ? com.google.protobuf.Timestamp.getDefaultInstance() : timestamp_;
+    }
+    /**
+     * <code>.google.protobuf.Timestamp timestamp = 6 [(.org.schemata.schema.field_core) = { ... }</code>
+     */
+    @java.lang.Override
+    public com.google.protobuf.TimestampOrBuilder getTimestampOrBuilder() {
+      return getTimestamp();
+    }
+
     private byte memoizedIsInitialized = -1;
     @java.lang.Override
     public final boolean isInitialized() {
@@ -3489,8 +3543,8 @@ public final class UserBuilder {
     @java.lang.Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
-      if (users_ != null) {
-        output.writeMessage(1, getUsers());
+      if (user_ != null) {
+        output.writeMessage(1, getUser());
       }
       if (product_ != null) {
         output.writeMessage(2, getProduct());
@@ -3504,6 +3558,9 @@ public final class UserBuilder {
       if (windowTimeUnit_ != org.schemata.schema.ActivityStateBuilder.TimeUnit.SECONDS.getNumber()) {
         output.writeEnum(5, windowTimeUnit_);
       }
+      if (timestamp_ != null) {
+        output.writeMessage(6, getTimestamp());
+      }
       unknownFields.writeTo(output);
     }
 
@@ -3513,9 +3570,9 @@ public final class UserBuilder {
       if (size != -1) return size;
 
       size = 0;
-      if (users_ != null) {
+      if (user_ != null) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(1, getUsers());
+          .computeMessageSize(1, getUser());
       }
       if (product_ != null) {
         size += com.google.protobuf.CodedOutputStream
@@ -3533,6 +3590,10 @@ public final class UserBuilder {
         size += com.google.protobuf.CodedOutputStream
           .computeEnumSize(5, windowTimeUnit_);
       }
+      if (timestamp_ != null) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(6, getTimestamp());
+      }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
       return size;
@@ -3548,10 +3609,10 @@ public final class UserBuilder {
       }
       org.schemata.schema.UserBuilder.UserActivityAggregate other = (org.schemata.schema.UserBuilder.UserActivityAggregate) obj;
 
-      if (hasUsers() != other.hasUsers()) return false;
-      if (hasUsers()) {
-        if (!getUsers()
-            .equals(other.getUsers())) return false;
+      if (hasUser() != other.hasUser()) return false;
+      if (hasUser()) {
+        if (!getUser()
+            .equals(other.getUser())) return false;
       }
       if (hasProduct() != other.hasProduct()) return false;
       if (hasProduct()) {
@@ -3563,6 +3624,11 @@ public final class UserBuilder {
       if (getWindowTime()
           != other.getWindowTime()) return false;
       if (windowTimeUnit_ != other.windowTimeUnit_) return false;
+      if (hasTimestamp() != other.hasTimestamp()) return false;
+      if (hasTimestamp()) {
+        if (!getTimestamp()
+            .equals(other.getTimestamp())) return false;
+      }
       if (!unknownFields.equals(other.unknownFields)) return false;
       return true;
     }
@@ -3574,9 +3640,9 @@ public final class UserBuilder {
       }
       int hash = 41;
       hash = (19 * hash) + getDescriptor().hashCode();
-      if (hasUsers()) {
-        hash = (37 * hash) + USERS_FIELD_NUMBER;
-        hash = (53 * hash) + getUsers().hashCode();
+      if (hasUser()) {
+        hash = (37 * hash) + USER_FIELD_NUMBER;
+        hash = (53 * hash) + getUser().hashCode();
       }
       if (hasProduct()) {
         hash = (37 * hash) + PRODUCT_FIELD_NUMBER;
@@ -3589,6 +3655,10 @@ public final class UserBuilder {
       hash = (53 * hash) + getWindowTime();
       hash = (37 * hash) + WINDOW_TIME_UNIT_FIELD_NUMBER;
       hash = (53 * hash) + windowTimeUnit_;
+      if (hasTimestamp()) {
+        hash = (37 * hash) + TIMESTAMP_FIELD_NUMBER;
+        hash = (53 * hash) + getTimestamp().hashCode();
+      }
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
       return hash;
@@ -3722,11 +3792,11 @@ public final class UserBuilder {
       @java.lang.Override
       public Builder clear() {
         super.clear();
-        if (usersBuilder_ == null) {
-          users_ = null;
+        if (userBuilder_ == null) {
+          user_ = null;
         } else {
-          users_ = null;
-          usersBuilder_ = null;
+          user_ = null;
+          userBuilder_ = null;
         }
         if (productBuilder_ == null) {
           product_ = null;
@@ -3740,6 +3810,12 @@ public final class UserBuilder {
 
         windowTimeUnit_ = 0;
 
+        if (timestampBuilder_ == null) {
+          timestamp_ = null;
+        } else {
+          timestamp_ = null;
+          timestampBuilder_ = null;
+        }
         return this;
       }
 
@@ -3766,10 +3842,10 @@ public final class UserBuilder {
       @java.lang.Override
       public org.schemata.schema.UserBuilder.UserActivityAggregate buildPartial() {
         org.schemata.schema.UserBuilder.UserActivityAggregate result = new org.schemata.schema.UserBuilder.UserActivityAggregate(this);
-        if (usersBuilder_ == null) {
-          result.users_ = users_;
+        if (userBuilder_ == null) {
+          result.user_ = user_;
         } else {
-          result.users_ = usersBuilder_.build();
+          result.user_ = userBuilder_.build();
         }
         if (productBuilder_ == null) {
           result.product_ = product_;
@@ -3779,6 +3855,11 @@ public final class UserBuilder {
         result.count_ = count_;
         result.windowTime_ = windowTime_;
         result.windowTimeUnit_ = windowTimeUnit_;
+        if (timestampBuilder_ == null) {
+          result.timestamp_ = timestamp_;
+        } else {
+          result.timestamp_ = timestampBuilder_.build();
+        }
         onBuilt();
         return result;
       }
@@ -3827,8 +3908,8 @@ public final class UserBuilder {
 
       public Builder mergeFrom(org.schemata.schema.UserBuilder.UserActivityAggregate other) {
         if (other == org.schemata.schema.UserBuilder.UserActivityAggregate.getDefaultInstance()) return this;
-        if (other.hasUsers()) {
-          mergeUsers(other.getUsers());
+        if (other.hasUser()) {
+          mergeUser(other.getUser());
         }
         if (other.hasProduct()) {
           mergeProduct(other.getProduct());
@@ -3841,6 +3922,9 @@ public final class UserBuilder {
         }
         if (other.windowTimeUnit_ != 0) {
           setWindowTimeUnitValue(other.getWindowTimeUnitValue());
+        }
+        if (other.hasTimestamp()) {
+          mergeTimestamp(other.getTimestamp());
         }
         this.mergeUnknownFields(other.unknownFields);
         onChanged();
@@ -3871,123 +3955,123 @@ public final class UserBuilder {
         return this;
       }
 
-      private org.schemata.schema.UserBuilder.User users_;
+      private org.schemata.schema.UserBuilder.User user_;
       private com.google.protobuf.SingleFieldBuilderV3<
-          org.schemata.schema.UserBuilder.User, org.schemata.schema.UserBuilder.User.Builder, org.schemata.schema.UserBuilder.UserOrBuilder> usersBuilder_;
+          org.schemata.schema.UserBuilder.User, org.schemata.schema.UserBuilder.User.Builder, org.schemata.schema.UserBuilder.UserOrBuilder> userBuilder_;
       /**
-       * <code>.org.schemata.schema.User users = 1 [(.org.schemata.schema.field_core) = { ... }</code>
-       * @return Whether the users field is set.
+       * <code>.org.schemata.schema.User user = 1 [(.org.schemata.schema.field_core) = { ... }</code>
+       * @return Whether the user field is set.
        */
-      public boolean hasUsers() {
-        return usersBuilder_ != null || users_ != null;
+      public boolean hasUser() {
+        return userBuilder_ != null || user_ != null;
       }
       /**
-       * <code>.org.schemata.schema.User users = 1 [(.org.schemata.schema.field_core) = { ... }</code>
-       * @return The users.
+       * <code>.org.schemata.schema.User user = 1 [(.org.schemata.schema.field_core) = { ... }</code>
+       * @return The user.
        */
-      public org.schemata.schema.UserBuilder.User getUsers() {
-        if (usersBuilder_ == null) {
-          return users_ == null ? org.schemata.schema.UserBuilder.User.getDefaultInstance() : users_;
+      public org.schemata.schema.UserBuilder.User getUser() {
+        if (userBuilder_ == null) {
+          return user_ == null ? org.schemata.schema.UserBuilder.User.getDefaultInstance() : user_;
         } else {
-          return usersBuilder_.getMessage();
+          return userBuilder_.getMessage();
         }
       }
       /**
-       * <code>.org.schemata.schema.User users = 1 [(.org.schemata.schema.field_core) = { ... }</code>
+       * <code>.org.schemata.schema.User user = 1 [(.org.schemata.schema.field_core) = { ... }</code>
        */
-      public Builder setUsers(org.schemata.schema.UserBuilder.User value) {
-        if (usersBuilder_ == null) {
+      public Builder setUser(org.schemata.schema.UserBuilder.User value) {
+        if (userBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
           }
-          users_ = value;
+          user_ = value;
           onChanged();
         } else {
-          usersBuilder_.setMessage(value);
+          userBuilder_.setMessage(value);
         }
 
         return this;
       }
       /**
-       * <code>.org.schemata.schema.User users = 1 [(.org.schemata.schema.field_core) = { ... }</code>
+       * <code>.org.schemata.schema.User user = 1 [(.org.schemata.schema.field_core) = { ... }</code>
        */
-      public Builder setUsers(
+      public Builder setUser(
           org.schemata.schema.UserBuilder.User.Builder builderForValue) {
-        if (usersBuilder_ == null) {
-          users_ = builderForValue.build();
+        if (userBuilder_ == null) {
+          user_ = builderForValue.build();
           onChanged();
         } else {
-          usersBuilder_.setMessage(builderForValue.build());
+          userBuilder_.setMessage(builderForValue.build());
         }
 
         return this;
       }
       /**
-       * <code>.org.schemata.schema.User users = 1 [(.org.schemata.schema.field_core) = { ... }</code>
+       * <code>.org.schemata.schema.User user = 1 [(.org.schemata.schema.field_core) = { ... }</code>
        */
-      public Builder mergeUsers(org.schemata.schema.UserBuilder.User value) {
-        if (usersBuilder_ == null) {
-          if (users_ != null) {
-            users_ =
-              org.schemata.schema.UserBuilder.User.newBuilder(users_).mergeFrom(value).buildPartial();
+      public Builder mergeUser(org.schemata.schema.UserBuilder.User value) {
+        if (userBuilder_ == null) {
+          if (user_ != null) {
+            user_ =
+              org.schemata.schema.UserBuilder.User.newBuilder(user_).mergeFrom(value).buildPartial();
           } else {
-            users_ = value;
+            user_ = value;
           }
           onChanged();
         } else {
-          usersBuilder_.mergeFrom(value);
+          userBuilder_.mergeFrom(value);
         }
 
         return this;
       }
       /**
-       * <code>.org.schemata.schema.User users = 1 [(.org.schemata.schema.field_core) = { ... }</code>
+       * <code>.org.schemata.schema.User user = 1 [(.org.schemata.schema.field_core) = { ... }</code>
        */
-      public Builder clearUsers() {
-        if (usersBuilder_ == null) {
-          users_ = null;
+      public Builder clearUser() {
+        if (userBuilder_ == null) {
+          user_ = null;
           onChanged();
         } else {
-          users_ = null;
-          usersBuilder_ = null;
+          user_ = null;
+          userBuilder_ = null;
         }
 
         return this;
       }
       /**
-       * <code>.org.schemata.schema.User users = 1 [(.org.schemata.schema.field_core) = { ... }</code>
+       * <code>.org.schemata.schema.User user = 1 [(.org.schemata.schema.field_core) = { ... }</code>
        */
-      public org.schemata.schema.UserBuilder.User.Builder getUsersBuilder() {
+      public org.schemata.schema.UserBuilder.User.Builder getUserBuilder() {
         
         onChanged();
-        return getUsersFieldBuilder().getBuilder();
+        return getUserFieldBuilder().getBuilder();
       }
       /**
-       * <code>.org.schemata.schema.User users = 1 [(.org.schemata.schema.field_core) = { ... }</code>
+       * <code>.org.schemata.schema.User user = 1 [(.org.schemata.schema.field_core) = { ... }</code>
        */
-      public org.schemata.schema.UserBuilder.UserOrBuilder getUsersOrBuilder() {
-        if (usersBuilder_ != null) {
-          return usersBuilder_.getMessageOrBuilder();
+      public org.schemata.schema.UserBuilder.UserOrBuilder getUserOrBuilder() {
+        if (userBuilder_ != null) {
+          return userBuilder_.getMessageOrBuilder();
         } else {
-          return users_ == null ?
-              org.schemata.schema.UserBuilder.User.getDefaultInstance() : users_;
+          return user_ == null ?
+              org.schemata.schema.UserBuilder.User.getDefaultInstance() : user_;
         }
       }
       /**
-       * <code>.org.schemata.schema.User users = 1 [(.org.schemata.schema.field_core) = { ... }</code>
+       * <code>.org.schemata.schema.User user = 1 [(.org.schemata.schema.field_core) = { ... }</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
           org.schemata.schema.UserBuilder.User, org.schemata.schema.UserBuilder.User.Builder, org.schemata.schema.UserBuilder.UserOrBuilder> 
-          getUsersFieldBuilder() {
-        if (usersBuilder_ == null) {
-          usersBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+          getUserFieldBuilder() {
+        if (userBuilder_ == null) {
+          userBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
               org.schemata.schema.UserBuilder.User, org.schemata.schema.UserBuilder.User.Builder, org.schemata.schema.UserBuilder.UserOrBuilder>(
-                  getUsers(),
+                  getUser(),
                   getParentForChildren(),
                   isClean());
-          users_ = null;
+          user_ = null;
         }
-        return usersBuilder_;
+        return userBuilder_;
       }
 
       private org.schemata.schema.ProductBuilder.Product product_;
@@ -4224,6 +4308,125 @@ public final class UserBuilder {
         onChanged();
         return this;
       }
+
+      private com.google.protobuf.Timestamp timestamp_;
+      private com.google.protobuf.SingleFieldBuilderV3<
+          com.google.protobuf.Timestamp, com.google.protobuf.Timestamp.Builder, com.google.protobuf.TimestampOrBuilder> timestampBuilder_;
+      /**
+       * <code>.google.protobuf.Timestamp timestamp = 6 [(.org.schemata.schema.field_core) = { ... }</code>
+       * @return Whether the timestamp field is set.
+       */
+      public boolean hasTimestamp() {
+        return timestampBuilder_ != null || timestamp_ != null;
+      }
+      /**
+       * <code>.google.protobuf.Timestamp timestamp = 6 [(.org.schemata.schema.field_core) = { ... }</code>
+       * @return The timestamp.
+       */
+      public com.google.protobuf.Timestamp getTimestamp() {
+        if (timestampBuilder_ == null) {
+          return timestamp_ == null ? com.google.protobuf.Timestamp.getDefaultInstance() : timestamp_;
+        } else {
+          return timestampBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>.google.protobuf.Timestamp timestamp = 6 [(.org.schemata.schema.field_core) = { ... }</code>
+       */
+      public Builder setTimestamp(com.google.protobuf.Timestamp value) {
+        if (timestampBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          timestamp_ = value;
+          onChanged();
+        } else {
+          timestampBuilder_.setMessage(value);
+        }
+
+        return this;
+      }
+      /**
+       * <code>.google.protobuf.Timestamp timestamp = 6 [(.org.schemata.schema.field_core) = { ... }</code>
+       */
+      public Builder setTimestamp(
+          com.google.protobuf.Timestamp.Builder builderForValue) {
+        if (timestampBuilder_ == null) {
+          timestamp_ = builderForValue.build();
+          onChanged();
+        } else {
+          timestampBuilder_.setMessage(builderForValue.build());
+        }
+
+        return this;
+      }
+      /**
+       * <code>.google.protobuf.Timestamp timestamp = 6 [(.org.schemata.schema.field_core) = { ... }</code>
+       */
+      public Builder mergeTimestamp(com.google.protobuf.Timestamp value) {
+        if (timestampBuilder_ == null) {
+          if (timestamp_ != null) {
+            timestamp_ =
+              com.google.protobuf.Timestamp.newBuilder(timestamp_).mergeFrom(value).buildPartial();
+          } else {
+            timestamp_ = value;
+          }
+          onChanged();
+        } else {
+          timestampBuilder_.mergeFrom(value);
+        }
+
+        return this;
+      }
+      /**
+       * <code>.google.protobuf.Timestamp timestamp = 6 [(.org.schemata.schema.field_core) = { ... }</code>
+       */
+      public Builder clearTimestamp() {
+        if (timestampBuilder_ == null) {
+          timestamp_ = null;
+          onChanged();
+        } else {
+          timestamp_ = null;
+          timestampBuilder_ = null;
+        }
+
+        return this;
+      }
+      /**
+       * <code>.google.protobuf.Timestamp timestamp = 6 [(.org.schemata.schema.field_core) = { ... }</code>
+       */
+      public com.google.protobuf.Timestamp.Builder getTimestampBuilder() {
+        
+        onChanged();
+        return getTimestampFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>.google.protobuf.Timestamp timestamp = 6 [(.org.schemata.schema.field_core) = { ... }</code>
+       */
+      public com.google.protobuf.TimestampOrBuilder getTimestampOrBuilder() {
+        if (timestampBuilder_ != null) {
+          return timestampBuilder_.getMessageOrBuilder();
+        } else {
+          return timestamp_ == null ?
+              com.google.protobuf.Timestamp.getDefaultInstance() : timestamp_;
+        }
+      }
+      /**
+       * <code>.google.protobuf.Timestamp timestamp = 6 [(.org.schemata.schema.field_core) = { ... }</code>
+       */
+      private com.google.protobuf.SingleFieldBuilderV3<
+          com.google.protobuf.Timestamp, com.google.protobuf.Timestamp.Builder, com.google.protobuf.TimestampOrBuilder> 
+          getTimestampFieldBuilder() {
+        if (timestampBuilder_ == null) {
+          timestampBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+              com.google.protobuf.Timestamp, com.google.protobuf.Timestamp.Builder, com.google.protobuf.TimestampOrBuilder>(
+                  getTimestamp(),
+                  getParentForChildren(),
+                  isClean());
+          timestamp_ = null;
+        }
+        return timestampBuilder_;
+      }
       @java.lang.Override
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
@@ -4346,25 +4549,27 @@ public final class UserBuilder {
       "mpB!\212\227\"\035\212\265\030\031Timestamp of the activity:q\212" +
       "\246\035.\212\265\030*This is the description of the us" +
       "ers table\222\246\035\007Product\232\246\035\006Growth\240\246\035\002\300\246\035\002\262\246" +
-      "\035\014#team-growth\272\246\035\016#alerts-growth\"\330\004\n\025Use" +
-      "rActivityAggregate\022G\n\005users\030\001 \001(\0132\031.org." +
-      "schemata.schema.UserB\035\212\227\"\031\212\265\030\025User entit" +
-      "y reference\022O\n\007product\030\002 \001(\0132\034.org.schem" +
-      "ata.schema.ProductB \212\227\"\034\212\265\030\030Product enti" +
-      "ty reference\022Z\n\005count\030\003 \001(\003BK\212\227\"5\212\265\0301Agg" +
-      "regated count of the user activity per p" +
-      "roduct\242\227\"\016activity_count\022?\n\nwindowTime\030\004" +
-      " \001(\005B+\212\227\"\'\212\265\030#Max window time for the ag" +
-      "gregation\022g\n\020window_time_unit\030\005 \001(\0162\035.or" +
-      "g.schemata.schema.TimeUnitB.\212\227\"*\212\265\030&Time" +
-      "Unit of window for the aggregation:\236\001\212\246\035" +
-      "[\212\265\030WThis is the aggregated user activit" +
-      "y view count. The event aggregated by us" +
-      "er & product\222\246\035\007Product\232\246\035\006Growth\240\246\035\002\300\246\035" +
-      "\003\262\246\035\014#team-growth\272\246\035\016#alerts-growth*C\n\020U" +
-      "serActivityType\022\010\n\004VIEW\020\000\022\017\n\013READ_REVIEW" +
-      "\020\001\022\024\n\020VIEW_DESCRIPTION\020\002B\"\n\023org.schemata" +
-      ".schemaB\013UserBuilderb\006proto3"
+      "\035\014#team-growth\272\246\035\016#alerts-growth\"\251\005\n\025Use" +
+      "rActivityAggregate\022F\n\004user\030\001 \001(\0132\031.org.s" +
+      "chemata.schema.UserB\035\212\227\"\031\212\265\030\025User entity" +
+      " reference\022O\n\007product\030\002 \001(\0132\034.org.schema" +
+      "ta.schema.ProductB \212\227\"\034\212\265\030\030Product entit" +
+      "y reference\022Z\n\005count\030\003 \001(\003BK\212\227\"5\212\265\0301Aggr" +
+      "egated count of the user activity per pr" +
+      "oduct\242\227\"\016activity_count\022?\n\nwindowTime\030\004 " +
+      "\001(\005B+\212\227\"\'\212\265\030#Max window time for the agg" +
+      "regation\022g\n\020window_time_unit\030\005 \001(\0162\035.org" +
+      ".schemata.schema.TimeUnitB.\212\227\"*\212\265\030&TimeU" +
+      "nit of window for the aggregation\022P\n\ttim" +
+      "estamp\030\006 \001(\0132\032.google.protobuf.Timestamp" +
+      "B!\212\227\"\035\212\265\030\031Timestamp of the activity:\236\001\212\246" +
+      "\035[\212\265\030WThis is the aggregated user activi" +
+      "ty view count. The event aggregated by u" +
+      "ser & product\222\246\035\007Product\232\246\035\006Growth\240\246\035\002\300\246" +
+      "\035\003\262\246\035\014#team-growth\272\246\035\016#alerts-growth*C\n\020" +
+      "UserActivityType\022\010\n\004VIEW\020\000\022\017\n\013READ_REVIE" +
+      "W\020\001\022\024\n\020VIEW_DESCRIPTION\020\002B\"\n\023org.schemat" +
+      "a.schemaB\013UserBuilderb\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -4397,7 +4602,7 @@ public final class UserBuilder {
     internal_static_org_schemata_schema_UserActivityAggregate_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_org_schemata_schema_UserActivityAggregate_descriptor,
-        new java.lang.String[] { "Users", "Product", "Count", "WindowTime", "WindowTimeUnit", });
+        new java.lang.String[] { "User", "Product", "Count", "WindowTime", "WindowTimeUnit", "Timestamp", });
     com.google.protobuf.ExtensionRegistry registry =
         com.google.protobuf.ExtensionRegistry.newInstance();
     registry.add(org.schemata.schema.SchemataBuilder.alertChannel);

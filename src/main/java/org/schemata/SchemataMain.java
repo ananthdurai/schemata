@@ -40,7 +40,7 @@ public class SchemataMain {
       throw new IllegalArgumentException("Entity name is missing. Score command requires entity name to score");
     }
 
-    List<Schema> schemaList = new SchemaParser().parseSchema(registerSchema());
+    List<Schema> schemaList = new SchemaParser().parseSchema(SchemaRegistry.registerSchema());
 
     if (command.equalsIgnoreCase(VALIDATE_COMMAND)) {
       var schemaValidator = new SchemaValidator();
@@ -68,14 +68,5 @@ public class SchemataMain {
     if (command.equalsIgnoreCase(SCORE_COMMAND)) {
 
     }
-  }
-
-  private static List<GeneratedMessageV3> registerSchema() {
-    return List.of(UserBuilder.User.newBuilder().build(), UserBuilder.UserEvent.newBuilder().build(),
-        UserBuilder.UserActivityEvent.newBuilder().build(), UserBuilder.UserActivityAggregate.newBuilder().build(),
-        ProductBuilder.Product.newBuilder().build(), ProductBuilder.ProductEvent.newBuilder().build(),
-        CategoryBuilder.Category.newBuilder().build(), CategoryBuilder.CategoryEvent.newBuilder().build(),
-        BrandBuilder.Brand.newBuilder().build(), BrandBuilder.BrandEvent.newBuilder().build(),
-        CampaignBuilder.Campaign.newBuilder().build(), CategoryBuilder.CategoryEvent.newBuilder().build());
   }
 }
