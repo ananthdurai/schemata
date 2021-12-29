@@ -12,7 +12,7 @@ public class SchemaValidatorTest {
 
   @Test
   public void testEntityWithMissedPrimaryKey() {
-    Field.Builder fieldBuilder = new Field.Builder("SchemaName", "FieldName", "STRING");
+    Field.Builder fieldBuilder = new Field.Builder("SchemaName", "FieldName", "STRING", true);
     Schema.Builder builder = new Schema.Builder("SchemaName", List.of(fieldBuilder.build()));
     builder.description("Schema Description");
     builder.owner("Growth");
@@ -23,7 +23,7 @@ public class SchemaValidatorTest {
 
   @Test
   public void testEntityWithValidPrimaryKey() {
-    Field.Builder fieldBuilder = new Field.Builder("SchemaName", "FieldName", "STRING");
+    Field.Builder fieldBuilder = new Field.Builder("SchemaName", "FieldName", "STRING", true);
     fieldBuilder.primaryKey(true);
     Schema.Builder builder = new Schema.Builder("SchemaName", List.of(fieldBuilder.build()));
     builder.description("Schema Description");
@@ -35,7 +35,7 @@ public class SchemaValidatorTest {
 
   @Test
   public void testValidEvent() {
-    Field.Builder fieldBuilder = new Field.Builder("SchemaName", "FieldName", "STRING");
+    Field.Builder fieldBuilder = new Field.Builder("SchemaName", "FieldName", "STRING", true);
     Schema.Builder builder = new Schema.Builder("SchemaName", List.of(fieldBuilder.build()));
     builder.description("Schema Description");
     builder.owner("Growth");
@@ -46,7 +46,7 @@ public class SchemaValidatorTest {
 
   @Test
   public void testWithEmptyDescriptor() {
-    Field.Builder fieldBuilder = new Field.Builder("SchemaName", "FieldName", "STRING");
+    Field.Builder fieldBuilder = new Field.Builder("SchemaName", "FieldName", "STRING", true);
     Schema.Builder builder = new Schema.Builder("SchemaName", List.of(fieldBuilder.build()));
     builder.owner("Growth");
     builder.domain("Core");
@@ -56,7 +56,7 @@ public class SchemaValidatorTest {
 
   @Test
   public void testWithEmptyOwner() {
-    Field.Builder fieldBuilder = new Field.Builder("SchemaName", "FieldName", "STRING");
+    Field.Builder fieldBuilder = new Field.Builder("SchemaName", "FieldName", "STRING", true);
     Schema.Builder builder = new Schema.Builder("SchemaName", List.of(fieldBuilder.build()));
     builder.description("Schema Description");
     builder.domain("Core");
@@ -66,7 +66,7 @@ public class SchemaValidatorTest {
 
   @Test
   public void testWithEmptyDomain() {
-    Field.Builder fieldBuilder = new Field.Builder("SchemaName", "FieldName", "STRING");
+    Field.Builder fieldBuilder = new Field.Builder("SchemaName", "FieldName", "STRING", true);
     Schema.Builder builder = new Schema.Builder("SchemaName", List.of(fieldBuilder.build()));
     builder.description("Schema Description");
     builder.owner("Growth");

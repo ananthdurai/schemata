@@ -86,10 +86,11 @@ message UserActivityAggregate {
   option(team_channel) = "#team-growth";
   option(alert_channel) = "#alerts-growth";
 
-  User users = 1[(field_core).description = "User entity reference"];
+  User user = 1[(field_core).description = "User entity reference"];
   Product product = 2 [(field_core).description = "Product entity reference"];
   int64  count = 3 [(field_core).description = "Aggregated count of the user activity per product", (product_type) = "activity_count"];
   int32 windowTime = 4 [(field_core).description = "Max window time for the aggregation"];
   TimeUnit window_time_unit = 5 [(field_core).description = "TimeUnit of window for the aggregation"];
+  google.protobuf.Timestamp timestamp = 6 [(field_core).description = "Timestamp of the activity"];
 
 }

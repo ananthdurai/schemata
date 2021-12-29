@@ -1,12 +1,13 @@
 package org.schemata.domain;
 
-public record Field(String schema, String name, String dataType, String description, String comment, String seeAlso,
-                    String reference, boolean isClassified, String classificationLevel, boolean isPrimaryKey,
-                    String productType) {
+public record Field(String schema, String name, String dataType, boolean isPrimitiveType, String description,
+                    String comment, String seeAlso, String reference, boolean isClassified, String classificationLevel,
+                    boolean isPrimaryKey, String productType) {
 
   private Field(Builder builder) {
-    this(builder.schema, builder.name, builder.dataType, builder.description, builder.comment, builder.seeAlso,
-        builder.reference, builder.isClassified, builder.classificationLevel, builder.isPrimaryKey, builder.productType);
+    this(builder.schema, builder.name, builder.dataType, builder.isPrimitiveType, builder.description, builder.comment,
+        builder.seeAlso, builder.reference, builder.isClassified, builder.classificationLevel, builder.isPrimaryKey,
+        builder.productType);
   }
 
   public static class Builder {
@@ -14,6 +15,7 @@ public record Field(String schema, String name, String dataType, String descript
     String schema;
     String name;
     String dataType;
+    boolean isPrimitiveType;
     String description;
     String comment;
     String seeAlso;
@@ -23,10 +25,11 @@ public record Field(String schema, String name, String dataType, String descript
     boolean isPrimaryKey;
     String productType;
 
-    public Builder(String schema, String name, String dataType) {
+    public Builder(String schema, String name, String dataType, boolean isPrimitiveType) {
       this.schema = schema;
       this.name = name;
       this.dataType = dataType;
+      this.isPrimitiveType = isPrimitiveType;
     }
 
     public Builder description(String description) {

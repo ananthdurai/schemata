@@ -6,12 +6,15 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Set;
 import org.schemata.domain.Field;
 import org.schemata.domain.Schema;
 import org.schemata.schema.SchemataBuilder;
 
 
 public class SchemaParser {
+
+  private static final Set<String> INCLUDED_PRIMITIVE_TYPES = Set.of("google.protobuf.Timestamp");
 
   public List<Schema> parseSchema(List<GeneratedMessageV3> messages) {
     List<Schema> schemaList = new ArrayList<>();
@@ -41,6 +44,7 @@ public class SchemaParser {
         case "owner" -> builder.owner(Objects.toString(entry.getValue(), ""));
         case "domain" -> builder.domain(Objects.toString(entry.getValue(), ""));
         case "type" -> builder.type(entry.getValue().toString());
+        case "event_type" -> builder.eventType(entry.getValue().toString());
         case "status" -> builder.status(Objects.toString(entry.getValue(), ""));
         case "team_channel" -> builder.teamChannel(Objects.toString(entry.getValue(), ""));
         case "alert_channel" -> builder.alertChannel(Objects.toString(entry.getValue(), ""));
@@ -55,7 +59,7 @@ public class SchemaParser {
     for (Descriptors.FieldDescriptor entry : fieldDescriptorList) {
       String type = entry.getType() == Descriptors.FieldDescriptor.Type.MESSAGE ? entry.getMessageType().getFullName()
           : entry.getType().name();
-      Field.Builder builder = new Field.Builder(schema, entry.getName(), type);
+      Field.Builder builder = new Field.Builder(schema, entry.getName(), type, isPrimitiveType(entry.getType(), type));
 
       for (Map.Entry<Descriptors.FieldDescriptor, Object> fieldEntry : entry.getOptions().getAllFields().entrySet()) {
         switch (fieldEntry.getKey().getName()) {
@@ -78,5 +82,9 @@ public class SchemaParser {
     }
 
     return fields;
+  }
+
+  private boolean isPrimitiveType(Descriptors.FieldDescriptor.Type type, String typeName) {
+    return type != Descriptors.FieldDescriptor.Type.MESSAGE || INCLUDED_PRIMITIVE_TYPES.contains(typeName);
   }
 }
