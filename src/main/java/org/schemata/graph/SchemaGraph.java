@@ -1,5 +1,7 @@
 package org.schemata.graph;
 
+import java.math.BigDecimal;
+import java.math.MathContext;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -105,15 +107,12 @@ public final class SchemaGraph {
 
   public Double getSchemataScore(String vertex) {
     var schema = getSchema(vertex);
-    //double score = 0.0;
-    // for entity: number of incoming edges + number of outgoing edges / total number of edges
-
     double score = switch (schema.type().toUpperCase()) {
       case "ENTITY" -> computeEntityScore(vertex);
       case "EVENT" -> computeEventScore(vertex, schema.eventType());
       default -> 0.0;
     };
-    return score;
+    return roundUp(score);
   }
 
   private double computeEntityScore(String vertex) {
@@ -158,5 +157,9 @@ public final class SchemaGraph {
       return Optional.of(this.schemaMap.get(vertex));
     }
     return Optional.empty();
+  }
+
+  private double roundUp(double value) {
+    return new BigDecimal(value, new MathContext(3)).doubleValue();
   }
 }
