@@ -29,48 +29,11 @@ The metadata annotations enrich the context of the schema definitions.  It enfor
 
 A ranking function parses all the metadata and assigns a score for each  Schema definition to define how integrated the Schema design is and validate if all the Schema definition adheres to the Schemata metadata annotations.
 
-## Data Stream Classification
-
-<img src="./asset/ds_classification.png" alt="Data Stream Classification"/>
-
-At any point in time, the data producer should provide two types of data products.
-
-### Entity
-
-Entity streams represent the current state of the Entity. In the classical Data Warehouse concepts, Entities typically
-represent the dimensions. The Entity must have a primary key field.
-
-### Event
-
-Event streams are typically immutable. Event streams represent the state change of an Entity. In the classical data
-warehouse concepts, Event streams represent the facts. Event streams will not have a primary key field.
-
-Events classified further into three types.
-
-#### Type 1: Lifecycle
-
-Lifecycle event captures the state changes of an Entity. (e.g) User created, User deleted et al.
-
-#### Type 2: Interaction
-
-Interaction event captures the events that resulted from one Entity changing the state of another Entity.
-(e.g.) User A purchases Product B. The Interaction event is often the result of a business transaction.
-
-#### Type 3: Aggregated
-
-Aggregated event captures the computed metrics over a specified window of time. (e.g) Number of views by a User for a
-Product.
-
 ## Schema Metadata
 
 ### Core Metadata (shared across Schema and Fields)
 
 ```protobuf
-syntax = "proto3";
-
-package org.schemata.schema;
-
-import "google/protobuf/descriptor.proto";
 // CoreMetadata is the set of attribute apply to both the Message & Field
 message CoreMetadata {
   // Mandatory Metadata: description of the entity
@@ -88,12 +51,6 @@ message CoreMetadata {
 ### Schema Metadata
 
 ```protobuf
-syntax = "proto3";
-
-package org.schemata.schema;
-
-import "google/protobuf/descriptor.proto";
-
 extend google.protobuf.MessageOptions {
 
   // message.description is a Mandatory Metadata
@@ -119,12 +76,6 @@ extend google.protobuf.MessageOptions {
 ### Field Metadata
 
 ```protobuf
-syntax = "proto3";
-
-package org.schemata.schema;
-
-import "google/protobuf/descriptor.proto";
-
 extend google.protobuf.FieldOptions {
   // message.description is a Mandatory Metadata
   CoreMetadata field_core = 70001;
@@ -140,6 +91,150 @@ extend google.protobuf.FieldOptions {
 }
 ```
 
+
+## Data Stream Classification
+
+<img src="./asset/ds_classification.png" alt="Data Stream Classification"/>
+
+At any point in time, the data producer should provide two types of data products.
+
+### Entity
+
+Entity streams represent the current state of the Entity. In the classical Data Warehouse concepts, Entities typically
+represent the dimensions. The Entity must have a primary key field.
+
+**Sample Entity Definition**
+
+```protobuf
+message User {
+
+  option(message_core).description = "This is the description of the users table";
+  option(message_core).comment = "The comment added after thought";
+  option(message_core).see_also = "db.user MySQL table";
+  option(owner) = "Platform";
+  option(domain) = "Core";
+  option(type) = ENTITY;
+  option(team_channel) = "#team-platform";
+  option(alert_channel) = "#alerts-platform";
+
+  int32 id = 1
+  [(field_core).description = "Unique identifier for User", (is_primary_key) = true];
+
+  string name = 2
+  [(field_core).description = "Name of the user"] ;
+
+  string email = 3
+  [(field_core).description = "email id for the user", (product_type) = "username", (is_classified) = true, (classification_level) = "LEVEL1"] ;
+
+  bool is_active = 4
+  [(field_core).description = "define the active status of the user. `true` == active; `false` = inactive`", (field_core).comment = "should refactor to non-binary status"];
+
+  string timezone = 5
+  [(field_core).description = "preferred time zone for the user"] ;
+}
+```
+
+### Event
+
+Event streams are typically immutable. Event streams represent the state change of an Entity. In the classical data
+warehouse concepts, Event streams represent the facts. Event streams will not have a primary key field.
+
+Events classified further into three types.
+
+#### Type 1: Lifecycle
+
+Lifecycle event captures the state changes of an Entity. (e.g) User created, User deleted et al.
+
+**Sample Lifecycle Event**
+
+```protobuf
+
+enum ActivityType {
+  CREATED = 0;
+  DELETED = 1;
+  UPDATED = 2;
+}
+message UserEvent {
+  option(message_core).description = "This is the description of the users table";
+  option(owner) = "Platform";
+  option(domain) = "Core";
+  option(type) = EVENT;
+  option(event_type) = LIFECYCLE;
+  option(team_channel) = "#team-platform";
+  option(alert_channel) = "#alerts-platform";
+
+  User previous_user_state = 1
+  [(field_core).description = "Previous version of the user entity before the mutation"];
+
+  User current_user_state = 2
+  [(field_core).description = "Current version of the user entity before the mutation"];
+
+  ActivityType activity_type = 3
+  [(field_core).description = "Lifecycle event type for the Users table"];
+
+  google.protobuf.Timestamp timestamp = 4 [(field_core).description = "Timestamp of the activity"];
+}
+```
+
+#### Type 2: Interaction
+
+Interaction event captures the events that resulted from one Entity changing the state of another Entity.
+(e.g.) User A purchases Product B. The Interaction event is often the result of a business transaction.
+
+**Sample Interaction Event**
+
+```protobuf
+enum UserActivityType {
+  VIEW = 0;
+  READ_REVIEW = 1;
+  VIEW_DESCRIPTION = 2;
+}
+message UserActivityEvent {
+  option(message_core).description = "This is the description of the users table";
+  option(owner) = "Product";
+  option(domain) = "Growth";
+  option(type) = EVENT;
+  option(event_type) = INTERACTION;
+  option(team_channel) = "#team-growth";
+  option(alert_channel) = "#alerts-growth";
+  User user = 1 [(field_core).description = "User entity reference"];
+  Product product = 2 [(field_core).description = "Product entity reference"];
+  UserActivityType activity_type = 3 [(field_core).description = "Type of the user activity"];
+  google.protobuf.Timestamp timestamp = 4 [(field_core).description = "Timestamp of the activity"];
+}
+```
+
+#### Type 3: Aggregated
+
+Aggregated event captures the computed metrics over a specified window of time. (e.g) Number of views by a User for a
+Product.
+
+**Sample Aggregated Event**
+```protobuf
+enum TimeUnit {
+  SECONDS = 0;
+  MINUTES = 1;
+  HOURS = 2;
+}
+message UserActivityAggregate {
+
+  option(message_core).description = "This is the aggregated user activity view count. The event aggregated by user & product";
+  option(owner) = "Product";
+  option(domain) = "Growth";
+  option(type) = EVENT;
+  option(event_type) = AGGREGATED;
+  option(team_channel) = "#team-growth";
+  option(alert_channel) = "#alerts-growth";
+
+  User user = 1[(field_core).description = "User entity reference"];
+  Product product = 2 [(field_core).description = "Product entity reference"];
+  int64  count = 3 [(field_core).description = "Aggregated count of the user activity per product", (product_type) = "activity_count"];
+  int32 windowTime = 4 [(field_core).description = "Max window time for the aggregation"];
+  TimeUnit window_time_unit = 5 [(field_core).description = "TimeUnit of window for the aggregation"];
+  google.protobuf.Timestamp timestamp = 6 [(field_core).description = "Timestamp of the activity"];
+
+}
+```
 
 🚧 **TODO:** 
 
