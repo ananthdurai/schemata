@@ -21,13 +21,18 @@ enum Type {
 }
 
 enum EventType {
+  // Invalid Event Type. If the message type is event, set it either LIFECYCLE or INTERACTION or AGGREGATED
   NONE = 0;
+  // LIFECYCLE event captures the state changes of an Entity. (e.g) User created, User deleted et al.
   LIFECYCLE = 1;
+  // INTERACTION event captures the events that resulted from one Entity changing the state of another Entity.
+  // (e.g.) User A purchases Product B. The INTERACTION event is often the result of a business transaction.
   INTERACTION = 2;
+  // AGGREGATED event captures the computed metrics over a specified window of time. (e.g) Number of views by a User for a Product.
   AGGREGATED = 3;
 }
 
-// CommonMetadata is the set of attribute apply to both the Message & Field
+// CoreMetadata is the set of attribute apply to both the Message & Field
 message CoreMetadata {
   // Mandatory Metadata: description of the entity
   optional string description = 50001;
@@ -63,9 +68,15 @@ extend google.protobuf.MessageOptions {
 }
 
 extend google.protobuf.FieldOptions {
+  // message.description is a Mandatory Metadata
   CoreMetadata field_core = 70001;
+  // Set true if the field contains classified data (Optional).
   bool is_classified = 70002;
+  // Set the classification level if is_classified is true (This is Mandatory if is_classified set to true)
   string classification_level = 7003;
+  // Specify the product type. product_type is an useful annotation to represent a field in a business perspective.
+  // (e.g) user_id can be an INT field, but in the system design it could represent External Users rather than internal users.
   string product_type = 70004;
+  // Set true if the field is a primary key. This must be true if the Schema type is Entity
   bool is_primary_key = 70005;
 }
