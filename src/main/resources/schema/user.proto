@@ -60,6 +60,8 @@ message UserEvent {
 
   ActivityType activity_type = 3
   [(field_core).description = "Lifecycle event type for the Users table"];
+
+  google.protobuf.Timestamp timestamp = 4 [(field_core).description = "Timestamp of the activity"];
 }
 
 message UserActivityEvent {
