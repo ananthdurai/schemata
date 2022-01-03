@@ -23,7 +23,7 @@ Schemata frameworks contain two parts.
 
 📘 **Schema metadata annotations:**
 
-The metadata annotations enrich the context of the schema definitions.  It enforces a few mandatory metadata fields such as the owner of the schema, the domain it represents, and further classification of the data stream into Entity stream & event stream.
+The metadata annotations enrich the context of the schema definitions.  It enforces a few mandatory metadata fields such as the owner of the schema, the domain it represents, and further classification of the Schema into Entity stream & event stream.
 
 🎼 **Schemata Score:**
 
@@ -92,9 +92,9 @@ extend google.protobuf.FieldOptions {
 ```
 
 
-## Data Stream Classification
+## Schema Classification
 
-<img src="./asset/ds_classification.png" alt="Data Stream Classification"/>
+<img src="./asset/ds_classification.png" alt="Schema Classification"/>
 
 At any point in time, the data producer should provide two types of data products.
 
@@ -242,11 +242,73 @@ Write more documentation on how schema modeling works.
 
 # Schema Score:
 
-Schemata Score is the core part of establishing a feedback loop to maintain the integrity of the decentralized domain ownership to build data products. Schemata construct a DirectedWeightedMultigraph to represent the data stream definitions (both Entity & Events). The Graph walk algorithm derives the Schemata Score indicating how connected each entity is.
+Schemata Score is the core part of establishing a feedback loop to maintain the integrity of the decentralized domain ownership to build data products. Schemata construct a Directed Weighted MultiGraph to represent the Schema definitions (both Entity & Events). The Graph walk algorithm derives the Schemata Score indicating how connected each entity is.
 
-🚧 **TODO:** 
+Let's take a sample schema
 
-Write more documentation on how Schemata Score works
+<img src="./asset/sample_schema.png" alt="Schema Modeling"/>
+
+Every type of schema have its own unique properties. So we can't apply the same scoring technique to each type if schema.
+
+## How the schema score computed?
+
+### Entity Score:
+
+```math
+Score = 1 - ((Total Incoming Edges + Total Outgoing Edges)) / Total Edges in the Graph 
+```
+
+If you run the Schemata Score for User you'll get 0.222
+
+```shell
+./score.sh org.schemata.schema.User
+Schemata score for org.schemata.schema.User : 0.222
+```
+
+If you run the Schemata Score for Product you'll get 0.389
+
+```shell
+./score.sh org.schemata.schema.Product
+Schemata score for org.schemata.schema.Product : 0.389
+```
+
+The Schemata score indicates that Product Entity much more connected than User Entity
+
+### Lifecycle Score:
+
+```math
+Score = Total Outgoing Edges > 1 ? 1 : 0
+```
+
+User event captures the lifecycle of User Entity. So if you run Schemata Score for UserEvent, it will give you 1.0
+
+```shell
+./score.sh org.schemata.schema.UserEvent
+Schemata score for org.schemata.schema.UserEvent : 1.0
+```
+
+### Interaction & Aggregated Score
+
+```math
+Score = 1 - ((Total Outgoing Edges + Total Outgoing Edges of all Vertx Connected by Interaction or Aggregated Event) / Total Edges in the Graph) 
+```
+
+If you run schemata score for CampaignCategoryTrackerEvent you will get **0.167**
+
+```shell
+./score.sh org.schemata.schema.CampaignCategoryTrackerEvent
+Schemata score for org.schemata.schema.CampaignCategoryTrackerEvent : 0.167
+```
+
+if you run schema score for CampaignProductTrackerEvent you'll get **0.222**
+
+```shell
+./score.sh org.schemata.schema.CampaignProductTrackerEvent
+Schemata score for org.schemata.schema.CampaignProductTrackerEvent : 0.222
+```
+
+The CampaignProductTrackerEvent connect to Product, which has high connectivity with other dimensions such as Brand & Category where CampaignCategoryTrackerEvent is the leaf dimension. The score indicates a clear schema modeling issue.
+
 
 # Curious to Try?
 
@@ -291,7 +353,7 @@ make package or mvn clean package
 
 🚧 Support for Thrift.
 
-🚧 Add visualization layer to show the graph representation of the data stream.
+🚧 Add visualization layer to show the graph representation of the Schema.
 
 # Contributing
 
