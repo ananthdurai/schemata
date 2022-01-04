@@ -242,15 +242,25 @@ Write more documentation on how schema modeling works.
 
 # Schema Score:
 
-Schemata Score is the core part of establishing a feedback loop to maintain the integrity of the decentralized domain ownership to build data products. Schemata construct a Directed Weighted MultiGraph to represent the Schema definitions (both Entity & Events). The Graph walk algorithm derives the Schemata Score indicating how connected each entity is.
+## The goal of Schemata Score:
+Schemata Score is the core part of establishing a feedback loop to maintain the integrity of the decentralized domain ownership to build data products. In a decentralized data management world, The feature teams (domain owners) define the Schema to track the Events & Entities.
+Often it goes to a central schema group to validate the Schema since the feature team visibility is limited to its domain. It brings the human into the loop and kills the purpose of distributed data ownership.
+The workflow is also harder for a centralized team since it is hard for one human to keep the entire organization's Schema in their head.
 
-Let's take a sample schema
+The intuition behind the Score is to see if we can programmatically find out which event or entity is less connected in the Schema to improve the connectivity of Schema. Schemata Score provides schema abstraction and the feedback loop to help model the Schema with less communication overhead.
+
+Schemata construct a Directed Weighted MultiGraph to represent the Schema definitions (Entity & Events). The Graph walk algorithm derives the Schemata Score indicating how connected each entity is.
+
+## How it works?
+
+Let's take a sample schema and walk through how Schemata score is computed.
 
 <img src="./asset/sample_schema.png" alt="Schema Modeling"/>
 
+## How the Schemata score computed?
+
 Every type of schema have its own unique properties. So we can't apply the same scoring technique to each type if schema.
 
-## How the schema score computed?
 
 ### Entity Score:
 
@@ -290,24 +300,34 @@ Schemata score for org.schemata.schema.UserEvent : 1.0
 ### Interaction & Aggregated Score
 
 ```math
-Score = 1 - ((Total Outgoing Edges + Total Outgoing Edges of all Vertx Connected by Interaction or Aggregated Event) / Total Edges in the Graph) 
+Score = 1 - ((Total Outgoing Entity Vertex + Total Outgoing Vertex of all Entity Vertex Connected by Interaction or Aggregated Event) / Total Entity Vertex in the Graph) 
 ```
 
-If you run schemata score for CampaignCategoryTrackerEvent you will get **0.167**
+If you run schemata score for CampaignCategoryTrackerEvent you will get **0.4**
 
 ```shell
 ./score.sh org.schemata.schema.CampaignCategoryTrackerEvent
-Schemata score for org.schemata.schema.CampaignCategoryTrackerEvent : 0.167
+Schemata score for org.schemata.schema.CampaignCategoryTrackerEvent : 0.4
 ```
 
-if you run schema score for CampaignProductTrackerEvent you'll get **0.222**
+if you run schema score for CampaignProductTrackerEvent you'll get **0.8**
 
 ```shell
 ./score.sh org.schemata.schema.CampaignProductTrackerEvent
-Schemata score for org.schemata.schema.CampaignProductTrackerEvent : 0.222
+Schemata score for org.schemata.schema.CampaignProductTrackerEvent : 0.8
 ```
 
 The CampaignProductTrackerEvent connect to Product, which has high connectivity with other dimensions such as Brand & Category where CampaignCategoryTrackerEvent is the leaf dimension. The score indicates a clear schema modeling issue.
+
+## Schema Score Classification
+
+***Excellent:*** 0.75 to 1.00 is excellent. 
+
+***Good:*** 0.50 to 0.75 is good.
+
+***Requires Attention:*** 0.25 to 0.50 require attention
+
+***Blocker:*** less than 0.25 is a code blocker
 
 
 # Curious to Try?
