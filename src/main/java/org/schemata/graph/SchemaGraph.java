@@ -2,6 +2,7 @@ package org.schemata.graph;
 
 import java.math.BigDecimal;
 import java.math.MathContext;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -9,6 +10,7 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 import org.apache.commons.collections4.SetUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.jgrapht.alg.scoring.PageRank;
@@ -135,12 +137,13 @@ public final class SchemaGraph {
   }
 
   private double computeNonLifecycleScore(String vertex) {
-    double referenceEdgeCount =
-        outgoingEntityVertexOf(vertex).stream().map(v -> outgoingEdgesOf(v.name())).collect(Collectors.toSet()).size();
-    double outgoingEdgesCount = outgoingEdgesOf(vertex).size();
-    double vertexEdgeCount = referenceEdgeCount + outgoingEdgesCount;
-    double totalEdges = graph.edgeSet().size();
-    return 1 - ((totalEdges - vertexEdgeCount) / totalEdges);
+    Set<Schema> referenceVertex =
+        outgoingEntityVertexOf(vertex).stream().map(v -> outgoingEntityVertexOf(v.name())).flatMap(Collection::stream)
+            .collect(Collectors.toSet());
+    Set<Schema> outgoingVertex = outgoingEntityVertexOf(vertex);
+    double vertexCount = SetUtils.union(referenceVertex, outgoingVertex).size();
+    double totalVertex = getAllEntityVertex().size();
+    return 1 - ((totalVertex - vertexCount) / totalVertex);
   }
 
   public Schema getSchema(String vertex)
