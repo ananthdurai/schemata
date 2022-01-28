@@ -1,6 +1,9 @@
 package org.schemata.parser;
 
+import com.google.protobuf.DescriptorProtos;
 import com.google.protobuf.GeneratedMessageV3;
+
+import java.io.IOException;
 import java.util.List;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
@@ -18,12 +21,17 @@ public class SchemaParserTest {
 
   private static Schema userSchema;
 
+  private static DescriptorProtos.FileDescriptorSet descriptorSet;
+
   @BeforeAll
-  static void setUp() {
+  static void setUp() throws IOException {
     List<GeneratedMessageV3> messages = List.of(UserBuilder.User.newBuilder().build());
     var schemaList = new SchemaParser().parseSchema(messages);
     assertAll("User Schema Sanity Check", () -> assertNotNull(schemaList), () -> assertEquals(1, schemaList.size()));
     userSchema = schemaList.get(0);
+
+    var stream = SchemaParserTest.class.getClassLoader().getResourceAsStream("descriptors/entities.desc");
+    descriptorSet = DescriptorProtos.FileDescriptorSet.parseFrom(stream);
   }
 
   @Test
@@ -40,5 +48,12 @@ public class SchemaParserTest {
         () -> assertTrue(userSchema.fieldList().size() > 1));
     var fieldList = userSchema.fieldList();
     assertEquals(5, fieldList.size());
+  }
+
+  @Test
+  @DisplayName("Test loading FileDescriptorSet from disk")
+  public void checkDescriptorParser() {
+    var parser = new SchemaParser();
+    var schema = parser.parseSchema(descriptorSet);
   }
 }

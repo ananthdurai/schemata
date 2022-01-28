@@ -1,12 +1,15 @@
 package org.schemata.parser;
 
+import com.google.protobuf.DescriptorProtos;
 import com.google.protobuf.Descriptors;
 import com.google.protobuf.GeneratedMessageV3;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
-import java.util.Set;
+
+import java.io.FileDescriptor;
+import java.util.*;
+import java.util.stream.Collectors;
+
+import org.jgrapht.graph.DirectedAcyclicGraph;
+import org.jgrapht.util.SupplierUtil;
 import org.schemata.domain.Field;
 import org.schemata.domain.Schema;
 import org.schemata.schema.SchemataBuilder;
@@ -26,6 +29,81 @@ public class SchemaParser {
       var schema = this.extractSchema(descriptorType, descriptorType.getFullName(), fieldList);
       schemaList.add(schema);
     }
+    return schemaList;
+  }
+
+  public List<Schema> parseSchema(DescriptorProtos.FileDescriptorSet descriptorSet) {
+    // key files protos by name for easier lookup
+    var filesByName = descriptorSet
+            .getFileList()
+            .stream()
+            .collect(Collectors.toMap(DescriptorProtos.FileDescriptorProto::getName, file -> file));
+
+    // build new DAG of file dependencies
+    var dependencyFilenames = new DirectedAcyclicGraph<String, String>(
+            SupplierUtil.createSupplier(String.class),
+            SupplierUtil.createSupplier(String.class), false);
+
+    // populate the graph
+    descriptorSet
+            .getFileList()
+            .stream()
+            .forEach(file -> {
+              dependencyFilenames.addVertex(file.getName());
+
+              file.getDependencyList().stream().forEach(dependency -> {
+                // adding a vertex is idempotent
+                dependencyFilenames.addVertex(dependency);
+
+                // TODO: which direction should this be added to get the correct topological iterator?
+                dependencyFilenames.addEdge(dependency, file.getName());
+              });
+            });
+
+    HashMap<String, Descriptors.FileDescriptor> descriptors = new HashMap<>();
+    dependencyFilenames.forEach(filename -> {
+      var file = filesByName.get(filename);
+      var dependenciesForFile = file
+              .getDependencyList()
+              .stream()
+              .map(descriptors::get).toArray(size -> new Descriptors.FileDescriptor[size]);
+
+      try {
+        var descriptor = Descriptors.FileDescriptor.buildFrom(file, dependenciesForFile);
+        descriptors.put(filename, descriptor);
+      } catch (Descriptors.DescriptorValidationException e) {
+        e.printStackTrace();
+      }
+    });
+
+    descriptors.forEach((filename, fileDescriptor) -> {
+
+    });
+
+    // build each file into a FileDescriptor
+//    var allMessages = descriptorSet
+//            .getFileList()
+//            .stream()
+//            .map(file -> {
+//              var dependencies = file.getDependencyList()
+//                      .stream()
+//                      .map(fileName -> filesByName.get(fileName));
+//              return Descriptors.FileDescriptor.buildFrom(file,dependencies);
+//            });
+//
+//    for (var descriptor : allMessages.toList()) {
+////      descriptor.getFields)_;
+//    }
+
+
+    List<Schema> schemaList = new ArrayList<>();
+//    for (var descriptorType : descriptors) {
+//      String schemaName = descriptorType.getFullName();
+//      // Extract all the metadata for the fieldList
+//      var fieldList = extractFields(descriptorType.getFields(), schemaName);
+//      var schema = this.extractSchema(descriptorType, descriptorType.getFullName(), fieldList);
+//      schemaList.add(schema);
+//    }
     return schemaList;
   }
 

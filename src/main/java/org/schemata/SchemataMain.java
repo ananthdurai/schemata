@@ -9,7 +9,10 @@ import picocli.CommandLine;
 public class SchemataMain {
 
   public static void main(String... args) {
-    List<Schema> schemaList = new SchemaParser().parseSchema(SchemaRegistry.registerSchema());
+    var schemas = SchemaRegistry.registerSchema();
+
+
+    List<Schema> schemaList = new SchemaParser().parseSchema(schemas);
     int exitCode = new CommandLine(new SchemataExecutor(schemaList)).execute(args);
     System.exit(exitCode);
   }
