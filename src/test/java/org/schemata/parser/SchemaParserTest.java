@@ -1,6 +1,8 @@
 package org.schemata.parser;
 
 import com.google.protobuf.DescriptorProtos;
+import com.google.protobuf.Descriptors;
+import com.google.protobuf.ExtensionRegistry;
 import com.google.protobuf.GeneratedMessageV3;
 
 import java.io.IOException;
@@ -9,6 +11,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.schemata.domain.Schema;
+import org.schemata.schema.SchemataBuilder;
 import org.schemata.schema.UserBuilder;
 
 import static org.junit.jupiter.api.Assertions.assertAll;
@@ -26,12 +29,13 @@ public class SchemaParserTest {
   @BeforeAll
   static void setUp() throws IOException {
     List<GeneratedMessageV3> messages = List.of(UserBuilder.User.newBuilder().build());
-    var schemaList = new SchemaParser().parseSchema(messages);
+    var parser = new SchemaParser();
+    var schemaList = parser.parseSchema(messages);
     assertAll("User Schema Sanity Check", () -> assertNotNull(schemaList), () -> assertEquals(1, schemaList.size()));
     userSchema = schemaList.get(0);
 
     var stream = SchemaParserTest.class.getClassLoader().getResourceAsStream("descriptors/entities.desc");
-    descriptorSet = DescriptorProtos.FileDescriptorSet.parseFrom(stream);
+    descriptorSet = parser.loadDescriptorSet(stream);
   }
 
   @Test
@@ -52,8 +56,12 @@ public class SchemaParserTest {
 
   @Test
   @DisplayName("Test loading FileDescriptorSet from disk")
-  public void checkDescriptorParser() {
+  public void checkDescriptorParser() throws Descriptors.DescriptorValidationException {
     var parser = new SchemaParser();
-    var schema = parser.parseSchema(descriptorSet);
+    var schemas = parser.parseSchema(descriptorSet);
+
+    assertEquals(1, schemas.size(), "expected only a single schema");
+    var personSchema = schemas.get(0);
+    assertEquals("org.entities.Person", personSchema.name());
   }
 }

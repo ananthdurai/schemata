@@ -2,109 +2,89 @@ package org.schemata.parser;
 
 import com.google.protobuf.DescriptorProtos;
 import com.google.protobuf.Descriptors;
+import com.google.protobuf.ExtensionRegistry;
 import com.google.protobuf.GeneratedMessageV3;
-
-import java.io.FileDescriptor;
-import java.util.*;
-import java.util.stream.Collectors;
-
 import org.jgrapht.graph.DirectedAcyclicGraph;
 import org.jgrapht.util.SupplierUtil;
 import org.schemata.domain.Field;
 import org.schemata.domain.Schema;
 import org.schemata.schema.SchemataBuilder;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.*;
+import java.util.stream.Collectors;
+
 
 public class SchemaParser {
+  private final boolean debug = false;
 
   private static final Set<String> INCLUDED_PRIMITIVE_TYPES = Set.of("google.protobuf.Timestamp");
 
   public List<Schema> parseSchema(List<GeneratedMessageV3> messages) {
-    List<Schema> schemaList = new ArrayList<>();
-    for (GeneratedMessageV3 message : messages) {
-      Descriptors.Descriptor descriptorType = message.getDescriptorForType();
-      String schemaName = descriptorType.getFullName();
-      // Extract all the metadata for the fieldList
-      var fieldList = extractFields(descriptorType.getFields(), schemaName);
-      var schema = this.extractSchema(descriptorType, descriptorType.getFullName(), fieldList);
-      schemaList.add(schema);
-    }
-    return schemaList;
+    var descriptors = messages
+            .stream()
+            .map(GeneratedMessageV3::getDescriptorForType)
+            .toList();
+
+    return parseSchemaFromDescriptors(descriptors);
   }
 
-  public List<Schema> parseSchema(DescriptorProtos.FileDescriptorSet descriptorSet) {
-    // key files protos by name for easier lookup
-    var filesByName = descriptorSet
-            .getFileList()
-            .stream()
-            .collect(Collectors.toMap(DescriptorProtos.FileDescriptorProto::getName, file -> file));
-
+  public List<Schema> parseSchema(DescriptorProtos.FileDescriptorSet descriptorSet) throws Descriptors.DescriptorValidationException {
     // build new DAG of file dependencies
     var dependencyFilenames = new DirectedAcyclicGraph<String, String>(
             SupplierUtil.createSupplier(String.class),
             SupplierUtil.createSupplier(String.class), false);
 
     // populate the graph
-    descriptorSet
+    for (var fileDescriptorProto : descriptorSet.getFileList()) {
+      dependencyFilenames.addVertex(fileDescriptorProto.getName());
+      for (String dependency : fileDescriptorProto.getDependencyList()) {// adding a vertex is idempotent
+        dependencyFilenames.addVertex(dependency);
+        dependencyFilenames.addEdge(dependency, fileDescriptorProto.getName());
+      }
+    }
+
+    // key file protos by name for easier lookup when building descriptor objects
+    var fileDescriptorProtosByName = descriptorSet
             .getFileList()
             .stream()
-            .forEach(file -> {
-              dependencyFilenames.addVertex(file.getName());
+            .collect(Collectors.toMap(DescriptorProtos.FileDescriptorProto::getName, file -> file));
+    var descriptors = new HashMap<String, Descriptors.FileDescriptor>();
 
-              file.getDependencyList().stream().forEach(dependency -> {
-                // adding a vertex is idempotent
-                dependencyFilenames.addVertex(dependency);
-
-                // TODO: which direction should this be added to get the correct topological iterator?
-                dependencyFilenames.addEdge(dependency, file.getName());
-              });
-            });
-
-    HashMap<String, Descriptors.FileDescriptor> descriptors = new HashMap<>();
-    dependencyFilenames.forEach(filename -> {
-      var file = filesByName.get(filename);
+    // forEach for DAG is executed in topological sort order
+    for (String filename : dependencyFilenames) {
+      var file = fileDescriptorProtosByName.get(filename);
       var dependenciesForFile = file
               .getDependencyList()
               .stream()
               .map(descriptors::get).toArray(size -> new Descriptors.FileDescriptor[size]);
 
-      try {
-        var descriptor = Descriptors.FileDescriptor.buildFrom(file, dependenciesForFile);
-        descriptors.put(filename, descriptor);
-      } catch (Descriptors.DescriptorValidationException e) {
-        e.printStackTrace();
-      }
-    });
+      var descriptor = Descriptors.FileDescriptor.buildFrom(file, dependenciesForFile);
+      descriptors.put(filename, descriptor);
+    }
+    
+    var messageDescriptors = descriptors
+            .values()
+            .stream()
+            .flatMap(fileDescriptor -> fileDescriptor.getMessageTypes().stream());
 
-    descriptors.forEach((filename, fileDescriptor) -> {
+    return parseSchemaFromDescriptors(messageDescriptors.toList());
+  }
 
-    });
+  public Schema parseSingleSchema(Descriptors.Descriptor descriptor) {
+    String schemaName = descriptor.getFullName();
+    // Extract all the metadata for the fieldList
+    var fieldList = extractFields(descriptor.getFields(), schemaName);
+    var schema = this.extractSchema(descriptor, descriptor.getFullName(), fieldList);
+    return schema;
+  }
 
-    // build each file into a FileDescriptor
-//    var allMessages = descriptorSet
-//            .getFileList()
-//            .stream()
-//            .map(file -> {
-//              var dependencies = file.getDependencyList()
-//                      .stream()
-//                      .map(fileName -> filesByName.get(fileName));
-//              return Descriptors.FileDescriptor.buildFrom(file,dependencies);
-//            });
-//
-//    for (var descriptor : allMessages.toList()) {
-////      descriptor.getFields)_;
-//    }
+  public DescriptorProtos.FileDescriptorSet loadDescriptorSet(InputStream input) throws IOException {
+    var registry = ExtensionRegistry.newInstance();
+    SchemataBuilder.registerAllExtensions(registry);
 
-
-    List<Schema> schemaList = new ArrayList<>();
-//    for (var descriptorType : descriptors) {
-//      String schemaName = descriptorType.getFullName();
-//      // Extract all the metadata for the fieldList
-//      var fieldList = extractFields(descriptorType.getFields(), schemaName);
-//      var schema = this.extractSchema(descriptorType, descriptorType.getFullName(), fieldList);
-//      schemaList.add(schema);
-//    }
-    return schemaList;
+    return DescriptorProtos.FileDescriptorSet.parseFrom(input, registry);
   }
 
   public Schema extractSchema(Descriptors.Descriptor descriptorType, String schema, List<Field> fieldList) {
@@ -162,7 +142,26 @@ public class SchemaParser {
     return fields;
   }
 
+  private List<Schema> parseSchemaFromDescriptors(List<Descriptors.Descriptor> descriptors) {
+    return descriptors
+            .stream()
+            .filter(this::isAnnotated)
+            .map(this::parseSingleSchema)
+            .toList();
+  }
+
+  private boolean isAnnotated(Descriptors.Descriptor descriptor) {
+    return !descriptor.getOptions().getExtension(org.schemata.schema.SchemataBuilder.type)
+            .equals(SchemataBuilder.Type.UNKNOWN);
+  }
+
   private boolean isPrimitiveType(Descriptors.FieldDescriptor.Type type, String typeName) {
     return type != Descriptors.FieldDescriptor.Type.MESSAGE || INCLUDED_PRIMITIVE_TYPES.contains(typeName);
+  }
+
+  private void debug(String message, Object... params) {
+    if (debug) {
+      System.err.printf(message + "\n", params);
+    }
   }
 }
