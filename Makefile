@@ -21,7 +21,7 @@ package: check_java check_maven
 
 .PHONY: proto-gen
 proto-gen:
-	protoc -I=./src/main/resources/schema --java_out=./src/main/java ./src/main/resources/schema/*.proto
+	protoc --include_imports -I=./src/main/resources/schema --descriptor_set_out=./protos.desc --java_out=./src/main/java ./src/main/resources/schema/*.proto
 
 .PHONY:validate
 validate: proto-gen package
