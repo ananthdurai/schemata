@@ -12,9 +12,10 @@
     <maven.compiler.release>17</maven.compiler.release>
     <shadeSources>true</shadeSources>
     <maven-shade-plugin.version>3.1.1</maven-shade-plugin.version>
-    <protobuf.version>3.19.1</protobuf.version>
+    <protobuf.version>3.19.3</protobuf.version>
     <maven-compiler-plugin.version>3.8.0</maven-compiler-plugin.version>
     <protoc-jar-maven-plugin.version>3.11.4</protoc-jar-maven-plugin.version>
+    <protoc-jar.version>3.11.4</protoc-jar.version>
     <protoc.version>3.17.3</protoc.version>
     <junit.version>5.8.2</junit.version>
     <commons-lang.version>3.12.0</commons-lang.version>
@@ -60,6 +61,11 @@
       <artifactId>picocli</artifactId>
       <version>${picocli.version}</version>
     </dependency>
+    <dependency>
+      <groupId>com.github.os72</groupId>
+      <artifactId>protoc-jar</artifactId>
+      <version>${protoc-jar.version}</version>
+    </dependency>
   </dependencies>
   <build>
     <plugins>
@@ -77,14 +83,16 @@
         <version>${protoc-jar-maven-plugin.version}</version>
         <executions>
           <execution>
+            <id>generate-proto-java-source</id>
             <phase>generate-sources</phase>
             <goals>
               <goal>run</goal>
             </goals>
             <configuration>
               <protocVersion>${protoc.version}</protocVersion>
+              <includeStdTypes>true</includeStdTypes>
               <inputDirectories>
-                <include>src/proto</include>
+                <include>src/main/resources/schema</include>
               </inputDirectories>
               <outputDirectory>src/main/java</outputDirectory>
             </configuration>

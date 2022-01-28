@@ -1184,6 +1184,21 @@ public final class UserBuilder {
      * @return The activityType.
      */
     org.schemata.schema.ActivityStateBuilder.ActivityType getActivityType();
+
+    /**
+     * <code>.google.protobuf.Timestamp timestamp = 4 [(.org.schemata.schema.field_core) = { ... }</code>
+     * @return Whether the timestamp field is set.
+     */
+    boolean hasTimestamp();
+    /**
+     * <code>.google.protobuf.Timestamp timestamp = 4 [(.org.schemata.schema.field_core) = { ... }</code>
+     * @return The timestamp.
+     */
+    com.google.protobuf.Timestamp getTimestamp();
+    /**
+     * <code>.google.protobuf.Timestamp timestamp = 4 [(.org.schemata.schema.field_core) = { ... }</code>
+     */
+    com.google.protobuf.TimestampOrBuilder getTimestampOrBuilder();
   }
   /**
    * Protobuf type {@code org.schemata.schema.UserEvent}
@@ -1261,6 +1276,19 @@ public final class UserBuilder {
               int rawValue = input.readEnum();
 
               activityType_ = rawValue;
+              break;
+            }
+            case 34: {
+              com.google.protobuf.Timestamp.Builder subBuilder = null;
+              if (timestamp_ != null) {
+                subBuilder = timestamp_.toBuilder();
+              }
+              timestamp_ = input.readMessage(com.google.protobuf.Timestamp.parser(), extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(timestamp_);
+                timestamp_ = subBuilder.buildPartial();
+              }
+
               break;
             }
             default: {
@@ -1366,6 +1394,32 @@ public final class UserBuilder {
       return result == null ? org.schemata.schema.ActivityStateBuilder.ActivityType.UNRECOGNIZED : result;
     }
 
+    public static final int TIMESTAMP_FIELD_NUMBER = 4;
+    private com.google.protobuf.Timestamp timestamp_;
+    /**
+     * <code>.google.protobuf.Timestamp timestamp = 4 [(.org.schemata.schema.field_core) = { ... }</code>
+     * @return Whether the timestamp field is set.
+     */
+    @java.lang.Override
+    public boolean hasTimestamp() {
+      return timestamp_ != null;
+    }
+    /**
+     * <code>.google.protobuf.Timestamp timestamp = 4 [(.org.schemata.schema.field_core) = { ... }</code>
+     * @return The timestamp.
+     */
+    @java.lang.Override
+    public com.google.protobuf.Timestamp getTimestamp() {
+      return timestamp_ == null ? com.google.protobuf.Timestamp.getDefaultInstance() : timestamp_;
+    }
+    /**
+     * <code>.google.protobuf.Timestamp timestamp = 4 [(.org.schemata.schema.field_core) = { ... }</code>
+     */
+    @java.lang.Override
+    public com.google.protobuf.TimestampOrBuilder getTimestampOrBuilder() {
+      return getTimestamp();
+    }
+
     private byte memoizedIsInitialized = -1;
     @java.lang.Override
     public final boolean isInitialized() {
@@ -1389,6 +1443,9 @@ public final class UserBuilder {
       if (activityType_ != org.schemata.schema.ActivityStateBuilder.ActivityType.CREATED.getNumber()) {
         output.writeEnum(3, activityType_);
       }
+      if (timestamp_ != null) {
+        output.writeMessage(4, getTimestamp());
+      }
       unknownFields.writeTo(output);
     }
 
@@ -1409,6 +1466,10 @@ public final class UserBuilder {
       if (activityType_ != org.schemata.schema.ActivityStateBuilder.ActivityType.CREATED.getNumber()) {
         size += com.google.protobuf.CodedOutputStream
           .computeEnumSize(3, activityType_);
+      }
+      if (timestamp_ != null) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(4, getTimestamp());
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -1436,6 +1497,11 @@ public final class UserBuilder {
             .equals(other.getCurrentUserState())) return false;
       }
       if (activityType_ != other.activityType_) return false;
+      if (hasTimestamp() != other.hasTimestamp()) return false;
+      if (hasTimestamp()) {
+        if (!getTimestamp()
+            .equals(other.getTimestamp())) return false;
+      }
       if (!unknownFields.equals(other.unknownFields)) return false;
       return true;
     }
@@ -1457,6 +1523,10 @@ public final class UserBuilder {
       }
       hash = (37 * hash) + ACTIVITY_TYPE_FIELD_NUMBER;
       hash = (53 * hash) + activityType_;
+      if (hasTimestamp()) {
+        hash = (37 * hash) + TIMESTAMP_FIELD_NUMBER;
+        hash = (53 * hash) + getTimestamp().hashCode();
+      }
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
       return hash;
@@ -1604,6 +1674,12 @@ public final class UserBuilder {
         }
         activityType_ = 0;
 
+        if (timestampBuilder_ == null) {
+          timestamp_ = null;
+        } else {
+          timestamp_ = null;
+          timestampBuilder_ = null;
+        }
         return this;
       }
 
@@ -1641,6 +1717,11 @@ public final class UserBuilder {
           result.currentUserState_ = currentUserStateBuilder_.build();
         }
         result.activityType_ = activityType_;
+        if (timestampBuilder_ == null) {
+          result.timestamp_ = timestamp_;
+        } else {
+          result.timestamp_ = timestampBuilder_.build();
+        }
         onBuilt();
         return result;
       }
@@ -1697,6 +1778,9 @@ public final class UserBuilder {
         }
         if (other.activityType_ != 0) {
           setActivityTypeValue(other.getActivityTypeValue());
+        }
+        if (other.hasTimestamp()) {
+          mergeTimestamp(other.getTimestamp());
         }
         this.mergeUnknownFields(other.unknownFields);
         onChanged();
@@ -2017,6 +2101,125 @@ public final class UserBuilder {
         activityType_ = 0;
         onChanged();
         return this;
+      }
+
+      private com.google.protobuf.Timestamp timestamp_;
+      private com.google.protobuf.SingleFieldBuilderV3<
+          com.google.protobuf.Timestamp, com.google.protobuf.Timestamp.Builder, com.google.protobuf.TimestampOrBuilder> timestampBuilder_;
+      /**
+       * <code>.google.protobuf.Timestamp timestamp = 4 [(.org.schemata.schema.field_core) = { ... }</code>
+       * @return Whether the timestamp field is set.
+       */
+      public boolean hasTimestamp() {
+        return timestampBuilder_ != null || timestamp_ != null;
+      }
+      /**
+       * <code>.google.protobuf.Timestamp timestamp = 4 [(.org.schemata.schema.field_core) = { ... }</code>
+       * @return The timestamp.
+       */
+      public com.google.protobuf.Timestamp getTimestamp() {
+        if (timestampBuilder_ == null) {
+          return timestamp_ == null ? com.google.protobuf.Timestamp.getDefaultInstance() : timestamp_;
+        } else {
+          return timestampBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>.google.protobuf.Timestamp timestamp = 4 [(.org.schemata.schema.field_core) = { ... }</code>
+       */
+      public Builder setTimestamp(com.google.protobuf.Timestamp value) {
+        if (timestampBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          timestamp_ = value;
+          onChanged();
+        } else {
+          timestampBuilder_.setMessage(value);
+        }
+
+        return this;
+      }
+      /**
+       * <code>.google.protobuf.Timestamp timestamp = 4 [(.org.schemata.schema.field_core) = { ... }</code>
+       */
+      public Builder setTimestamp(
+          com.google.protobuf.Timestamp.Builder builderForValue) {
+        if (timestampBuilder_ == null) {
+          timestamp_ = builderForValue.build();
+          onChanged();
+        } else {
+          timestampBuilder_.setMessage(builderForValue.build());
+        }
+
+        return this;
+      }
+      /**
+       * <code>.google.protobuf.Timestamp timestamp = 4 [(.org.schemata.schema.field_core) = { ... }</code>
+       */
+      public Builder mergeTimestamp(com.google.protobuf.Timestamp value) {
+        if (timestampBuilder_ == null) {
+          if (timestamp_ != null) {
+            timestamp_ =
+              com.google.protobuf.Timestamp.newBuilder(timestamp_).mergeFrom(value).buildPartial();
+          } else {
+            timestamp_ = value;
+          }
+          onChanged();
+        } else {
+          timestampBuilder_.mergeFrom(value);
+        }
+
+        return this;
+      }
+      /**
+       * <code>.google.protobuf.Timestamp timestamp = 4 [(.org.schemata.schema.field_core) = { ... }</code>
+       */
+      public Builder clearTimestamp() {
+        if (timestampBuilder_ == null) {
+          timestamp_ = null;
+          onChanged();
+        } else {
+          timestamp_ = null;
+          timestampBuilder_ = null;
+        }
+
+        return this;
+      }
+      /**
+       * <code>.google.protobuf.Timestamp timestamp = 4 [(.org.schemata.schema.field_core) = { ... }</code>
+       */
+      public com.google.protobuf.Timestamp.Builder getTimestampBuilder() {
+        
+        onChanged();
+        return getTimestampFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>.google.protobuf.Timestamp timestamp = 4 [(.org.schemata.schema.field_core) = { ... }</code>
+       */
+      public com.google.protobuf.TimestampOrBuilder getTimestampOrBuilder() {
+        if (timestampBuilder_ != null) {
+          return timestampBuilder_.getMessageOrBuilder();
+        } else {
+          return timestamp_ == null ?
+              com.google.protobuf.Timestamp.getDefaultInstance() : timestamp_;
+        }
+      }
+      /**
+       * <code>.google.protobuf.Timestamp timestamp = 4 [(.org.schemata.schema.field_core) = { ... }</code>
+       */
+      private com.google.protobuf.SingleFieldBuilderV3<
+          com.google.protobuf.Timestamp, com.google.protobuf.Timestamp.Builder, com.google.protobuf.TimestampOrBuilder> 
+          getTimestampFieldBuilder() {
+        if (timestampBuilder_ == null) {
+          timestampBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+              com.google.protobuf.Timestamp, com.google.protobuf.Timestamp.Builder, com.google.protobuf.TimestampOrBuilder>(
+                  getTimestamp(),
+                  getParentForChildren(),
+                  isClean());
+          timestamp_ = null;
+        }
+        return timestampBuilder_;
       }
       @java.lang.Override
       public final Builder setUnknownFields(
@@ -4526,7 +4729,7 @@ public final class UserBuilder {
       "\265\030\037The comment added after thought\212\246\035\027\232\265" +
       "\030\023db.user MySQL table\222\246\035\010Platform\232\246\035\004Cor" +
       "e\240\246\035\001\262\246\035\016#team-platform\272\246\035\020#alerts-platf" +
-      "orm\"\335\003\n\tUserEvent\022w\n\023previous_user_state" +
+      "orm\"\257\004\n\tUserEvent\022w\n\023previous_user_state" +
       "\030\001 \001(\0132\031.org.schemata.schema.UserB?\212\227\";\212" +
       "\265\0307Previous version of the user entity b" +
       "efore the mutation\022u\n\022current_user_state" +
@@ -4535,41 +4738,43 @@ public final class UserBuilder {
       "fore the mutation\022j\n\ractivity_type\030\003 \001(\016" +
       "2!.org.schemata.schema.ActivityTypeB0\212\227\"" +
       ",\212\265\030(Lifecycle event type for the Users " +
-      "table:t\212\246\035.\212\265\030*This is the description o" +
-      "f the users table\222\246\035\010Platform\232\246\035\004Core\240\246\035" +
-      "\002\300\246\035\001\262\246\035\016#team-platform\272\246\035\020#alerts-platf" +
-      "orm\"\322\003\n\021UserActivityEvent\022F\n\004user\030\001 \001(\0132" +
-      "\031.org.schemata.schema.UserB\035\212\227\"\031\212\265\030\025User" +
-      " entity reference\022O\n\007product\030\002 \001(\0132\034.org" +
-      ".schemata.schema.ProductB \212\227\"\034\212\265\030\030Produc" +
-      "t entity reference\022_\n\ractivity_type\030\003 \001(" +
-      "\0162%.org.schemata.schema.UserActivityType" +
-      "B!\212\227\"\035\212\265\030\031Type of the user activity\022P\n\tt" +
-      "imestamp\030\004 \001(\0132\032.google.protobuf.Timesta" +
-      "mpB!\212\227\"\035\212\265\030\031Timestamp of the activity:q\212" +
-      "\246\035.\212\265\030*This is the description of the us" +
-      "ers table\222\246\035\007Product\232\246\035\006Growth\240\246\035\002\300\246\035\002\262\246" +
-      "\035\014#team-growth\272\246\035\016#alerts-growth\"\251\005\n\025Use" +
-      "rActivityAggregate\022F\n\004user\030\001 \001(\0132\031.org.s" +
-      "chemata.schema.UserB\035\212\227\"\031\212\265\030\025User entity" +
-      " reference\022O\n\007product\030\002 \001(\0132\034.org.schema" +
-      "ta.schema.ProductB \212\227\"\034\212\265\030\030Product entit" +
-      "y reference\022Z\n\005count\030\003 \001(\003BK\212\227\"5\212\265\0301Aggr" +
-      "egated count of the user activity per pr" +
-      "oduct\242\227\"\016activity_count\022?\n\nwindowTime\030\004 " +
-      "\001(\005B+\212\227\"\'\212\265\030#Max window time for the agg" +
-      "regation\022g\n\020window_time_unit\030\005 \001(\0162\035.org" +
-      ".schemata.schema.TimeUnitB.\212\227\"*\212\265\030&TimeU" +
-      "nit of window for the aggregation\022P\n\ttim" +
-      "estamp\030\006 \001(\0132\032.google.protobuf.Timestamp" +
-      "B!\212\227\"\035\212\265\030\031Timestamp of the activity:\236\001\212\246" +
-      "\035[\212\265\030WThis is the aggregated user activi" +
-      "ty view count. The event aggregated by u" +
-      "ser & product\222\246\035\007Product\232\246\035\006Growth\240\246\035\002\300\246" +
-      "\035\003\262\246\035\014#team-growth\272\246\035\016#alerts-growth*C\n\020" +
-      "UserActivityType\022\010\n\004VIEW\020\000\022\017\n\013READ_REVIE" +
-      "W\020\001\022\024\n\020VIEW_DESCRIPTION\020\002B\"\n\023org.schemat" +
-      "a.schemaB\013UserBuilderb\006proto3"
+      "table\022P\n\ttimestamp\030\004 \001(\0132\032.google.protob" +
+      "uf.TimestampB!\212\227\"\035\212\265\030\031Timestamp of the a" +
+      "ctivity:t\212\246\035.\212\265\030*This is the description" +
+      " of the users table\222\246\035\010Platform\232\246\035\004Core\240" +
+      "\246\035\002\300\246\035\001\262\246\035\016#team-platform\272\246\035\020#alerts-pla" +
+      "tform\"\322\003\n\021UserActivityEvent\022F\n\004user\030\001 \001(" +
+      "\0132\031.org.schemata.schema.UserB\035\212\227\"\031\212\265\030\025Us" +
+      "er entity reference\022O\n\007product\030\002 \001(\0132\034.o" +
+      "rg.schemata.schema.ProductB \212\227\"\034\212\265\030\030Prod" +
+      "uct entity reference\022_\n\ractivity_type\030\003 " +
+      "\001(\0162%.org.schemata.schema.UserActivityTy" +
+      "peB!\212\227\"\035\212\265\030\031Type of the user activity\022P\n" +
+      "\ttimestamp\030\004 \001(\0132\032.google.protobuf.Times" +
+      "tampB!\212\227\"\035\212\265\030\031Timestamp of the activity:" +
+      "q\212\246\035.\212\265\030*This is the description of the " +
+      "users table\222\246\035\007Product\232\246\035\006Growth\240\246\035\002\300\246\035\002" +
+      "\262\246\035\014#team-growth\272\246\035\016#alerts-growth\"\251\005\n\025U" +
+      "serActivityAggregate\022F\n\004user\030\001 \001(\0132\031.org" +
+      ".schemata.schema.UserB\035\212\227\"\031\212\265\030\025User enti" +
+      "ty reference\022O\n\007product\030\002 \001(\0132\034.org.sche" +
+      "mata.schema.ProductB \212\227\"\034\212\265\030\030Product ent" +
+      "ity reference\022Z\n\005count\030\003 \001(\003BK\212\227\"5\212\265\0301Ag" +
+      "gregated count of the user activity per " +
+      "product\242\227\"\016activity_count\022?\n\nwindowTime\030" +
+      "\004 \001(\005B+\212\227\"\'\212\265\030#Max window time for the a" +
+      "ggregation\022g\n\020window_time_unit\030\005 \001(\0162\035.o" +
+      "rg.schemata.schema.TimeUnitB.\212\227\"*\212\265\030&Tim" +
+      "eUnit of window for the aggregation\022P\n\tt" +
+      "imestamp\030\006 \001(\0132\032.google.protobuf.Timesta" +
+      "mpB!\212\227\"\035\212\265\030\031Timestamp of the activity:\236\001" +
+      "\212\246\035[\212\265\030WThis is the aggregated user acti" +
+      "vity view count. The event aggregated by" +
+      " user & product\222\246\035\007Product\232\246\035\006Growth\240\246\035\002" +
+      "\300\246\035\003\262\246\035\014#team-growth\272\246\035\016#alerts-growth*C" +
+      "\n\020UserActivityType\022\010\n\004VIEW\020\000\022\017\n\013READ_REV" +
+      "IEW\020\001\022\024\n\020VIEW_DESCRIPTION\020\002B\"\n\023org.schem" +
+      "ata.schemaB\013UserBuilderb\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -4590,7 +4795,7 @@ public final class UserBuilder {
     internal_static_org_schemata_schema_UserEvent_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_org_schemata_schema_UserEvent_descriptor,
-        new java.lang.String[] { "PreviousUserState", "CurrentUserState", "ActivityType", });
+        new java.lang.String[] { "PreviousUserState", "CurrentUserState", "ActivityType", "Timestamp", });
     internal_static_org_schemata_schema_UserActivityEvent_descriptor =
       getDescriptor().getMessageTypes().get(2);
     internal_static_org_schemata_schema_UserActivityEvent_fieldAccessorTable = new
