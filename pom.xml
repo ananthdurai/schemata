@@ -97,6 +97,24 @@
               <outputDirectory>src/main/java</outputDirectory>
             </configuration>
           </execution>
+
+          <execution>
+            <id>generate-proto-test-descriptors</id>
+            <phase>generate-test-sources</phase>
+            <goals><goal>run</goal></goals>
+            <configuration>
+              <protocVersion>${protoc.version}</protocVersion>
+              <includeStdTypes>true</includeStdTypes>
+              <includeDirectories>
+                <include>src/main/resources/schema</include>
+              </includeDirectories>
+              <inputDirectories>
+                <include>src/test/resources/schema</include>
+              </inputDirectories>
+              <type>descriptor</type>
+              <outputDirectory>src/test/resources/descriptors</outputDirectory>
+            </configuration>
+          </execution>
         </executions>
       </plugin>
 
