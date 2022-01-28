@@ -1,9 +1,6 @@
 package org.schemata.parser;
 
-import com.google.protobuf.DescriptorProtos;
-import com.google.protobuf.Descriptors;
-import com.google.protobuf.ExtensionRegistry;
-import com.google.protobuf.GeneratedMessageV3;
+import com.google.protobuf.*;
 import org.jgrapht.graph.DirectedAcyclicGraph;
 import org.jgrapht.util.SupplierUtil;
 import org.schemata.domain.Field;
@@ -14,6 +11,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 
 public class SchemaParser {
@@ -31,45 +29,26 @@ public class SchemaParser {
   }
 
   public List<Schema> parseSchema(DescriptorProtos.FileDescriptorSet descriptorSet) throws Descriptors.DescriptorValidationException {
-    // build new DAG of file dependencies
-    var dependencyFilenames = new DirectedAcyclicGraph<String, String>(
-            SupplierUtil.createSupplier(String.class),
-            SupplierUtil.createSupplier(String.class), false);
+    var dependencyFilenames = buildFileDependencyGraph(descriptorSet);
+    var fileDescriptorProtosByName = indexFileDescriptorProtosByFilename(descriptorSet);
 
-    // populate the graph
-    for (var fileDescriptorProto : descriptorSet.getFileList()) {
-      dependencyFilenames.addVertex(fileDescriptorProto.getName());
-      for (String dependency : fileDescriptorProto.getDependencyList()) {// adding a vertex is idempotent
-        dependencyFilenames.addVertex(dependency);
-        dependencyFilenames.addEdge(dependency, fileDescriptorProto.getName());
-      }
-    }
-
-    // key file protos by name for easier lookup when building descriptor objects
-    var fileDescriptorProtosByName = descriptorSet
-            .getFileList()
-            .stream()
-            .collect(Collectors.toMap(DescriptorProtos.FileDescriptorProto::getName, file -> file));
     var descriptors = new HashMap<String, Descriptors.FileDescriptor>();
-
     // forEach for DAG is executed in topological sort order
     for (String filename : dependencyFilenames) {
       var file = fileDescriptorProtosByName.get(filename);
       var dependenciesForFile = file
               .getDependencyList()
               .stream()
-              .map(descriptors::get).toArray(size -> new Descriptors.FileDescriptor[size]);
+              .map(descriptors::get)
+              .toArray(Descriptors.FileDescriptor[]::new);
 
       var descriptor = Descriptors.FileDescriptor.buildFrom(file, dependenciesForFile);
       descriptors.put(filename, descriptor);
     }
     
-    var messageDescriptors = descriptors
-            .values()
-            .stream()
-            .flatMap(fileDescriptor -> fileDescriptor.getMessageTypes().stream());
+    var messageDescriptors = collectAllMessageDescriptors(descriptors.values());
 
-    return parseSchemaFromDescriptors(messageDescriptors.toList());
+    return parseSchemaFromDescriptors(messageDescriptors);
   }
 
   public Schema parseSingleSchema(Descriptors.Descriptor descriptor) {
@@ -147,6 +126,36 @@ public class SchemaParser {
             .stream()
             .filter(this::isAnnotated)
             .map(this::parseSingleSchema)
+            .toList();
+  }
+
+  private DirectedAcyclicGraph<String, String> buildFileDependencyGraph(DescriptorProtos.FileDescriptorSet descriptorSet) {
+    var dependencyFilenames = new DirectedAcyclicGraph<String, String>(
+            SupplierUtil.createSupplier(String.class),
+            SupplierUtil.createSupplier(String.class), false);
+
+    // populate the graph
+    for (var fileDescriptorProto : descriptorSet.getFileList()) {
+      dependencyFilenames.addVertex(fileDescriptorProto.getName());
+      for (String dependency : fileDescriptorProto.getDependencyList()) {// adding a vertex is idempotent
+        dependencyFilenames.addVertex(dependency);
+        dependencyFilenames.addEdge(dependency, fileDescriptorProto.getName());
+      }
+    }
+    return dependencyFilenames;
+  }
+
+  private Map<String, DescriptorProtos.FileDescriptorProto> indexFileDescriptorProtosByFilename(DescriptorProtos.FileDescriptorSet descriptorSet) {
+    return descriptorSet
+            .getFileList()
+            .stream()
+            .collect(Collectors.toMap(DescriptorProtos.FileDescriptorProto::getName, file -> file));
+  }
+
+  private List<Descriptors.Descriptor> collectAllMessageDescriptors(Collection<Descriptors.FileDescriptor> descriptors) {
+    return descriptors
+            .stream()
+            .flatMap(fileDescriptor -> fileDescriptor.getMessageTypes().stream())
             .toList();
   }
 
