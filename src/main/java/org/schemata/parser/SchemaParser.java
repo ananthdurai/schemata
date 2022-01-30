@@ -1,6 +1,9 @@
 package org.schemata.parser;
 
-import com.google.protobuf.*;
+import com.google.protobuf.DescriptorProtos;
+import com.google.protobuf.Descriptors;
+import com.google.protobuf.ExtensionRegistry;
+import com.google.protobuf.GeneratedMessageV3;
 import org.jgrapht.graph.DirectedAcyclicGraph;
 import org.jgrapht.util.SupplierUtil;
 import org.schemata.domain.Field;
@@ -11,7 +14,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.*;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 
 public class SchemaParser {
@@ -55,8 +57,7 @@ public class SchemaParser {
     String schemaName = descriptor.getFullName();
     // Extract all the metadata for the fieldList
     var fieldList = extractFields(descriptor.getFields(), schemaName);
-    var schema = this.extractSchema(descriptor, descriptor.getFullName(), fieldList);
-    return schema;
+    return extractSchema(descriptor, descriptor.getFullName(), fieldList);
   }
 
   public DescriptorProtos.FileDescriptorSet loadDescriptorSet(InputStream input) throws IOException {
