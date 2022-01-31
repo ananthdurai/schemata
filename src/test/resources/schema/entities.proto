@@ -9,6 +9,7 @@ option java_package = "org.entities.proto";
 option java_outer_classname = "EntityBuilder";
 
 message Department {
+  option(org.schemata.schema.type) = ENTITY;
   int32 id = 1;
   string name = 2;
 }

@@ -60,8 +60,11 @@ public class SchemaParserTest {
     var parser = new SchemaParser();
     var schemas = parser.parseSchema(descriptorSet);
 
-    assertEquals(1, schemas.size(), "expected only a single schema");
-    var personSchema = schemas.get(0);
+    assertEquals(2, schemas.size(), "expected schema for both entities");
+    var departmentSchema = schemas.get(0);
+    assertEquals("org.entities.Department", departmentSchema.name());
+
+    var personSchema = schemas.get(1);
     assertEquals("org.entities.Person", personSchema.name());
   }
 }
