@@ -375,6 +375,16 @@ schemata validate --descriptor-path=src/test/resources/descriptors/entities.desc
 ./score.sh org.schemata.schema.CampaignCategoryTracker
 ```
 
+## Using protobuf descriptors for your own data model
+
+Compile the protobuf descriptors using `protoc` to output binary [google.protobuf.FileDescriptorSet](https://github.com/protocolbuffers/protobuf/blob/b48ba578dd01adfebeb4fac0887db1eeb163e00f/src/google/protobuf/descriptor.proto#L57-L59) files.
+
+```shell
+protoc --include-imports --descriptor_set_out=mymodel.desc -I path/to/schema -I path/to/schemata/schemas path/to/schema/**/*.proto
+
+./score.sh validate --descriptor-path=mymodel.desc
+```
+
 ## TODO:
 
 🚧 Write blog post explaining the concepts in detail. 
