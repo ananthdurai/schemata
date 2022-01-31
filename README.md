@@ -351,6 +351,18 @@ The project requires the following dependencies
 make package or mvn clean package
 ```
 
+### Directly via the packaged jar
+
+```
+alias schemata="java -jar target/schemata-1.0.jar"
+schemata --help
+schemata score org.schemata.schema.CampaignCategoryTracker
+schemata score --descriptor-path=src/test/resources/descriptors/entities.desc org.entities.Person
+schemata validate --descriptor-path=src/test/resources/descriptors/entities.desc # this has some validation errors you can inspect 
+```
+
+### Via convenience scripts
+
 🏃 To validate the schema definition
 
 ```shell
