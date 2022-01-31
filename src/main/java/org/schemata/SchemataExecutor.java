@@ -2,6 +2,7 @@ package org.schemata;
 
 import com.google.protobuf.Descriptors;
 import org.apache.commons.lang3.StringUtils;
+import org.schemata.app.DocumentApp;
 import org.schemata.app.SchemaScoreApp;
 import org.schemata.app.SchemaValidatorApp;
 import org.schemata.domain.Schema;
@@ -45,6 +46,12 @@ public class SchemataExecutor {
           throws Exception {
     loadSchema();
     return new SchemaScoreApp(schemaList, schema).call();
+  }
+
+  @Command(description = "Document a schema as JSON")
+  public int document() throws Exception {
+    loadSchema();
+    return new DocumentApp(schemaList).call();
   }
 
   private void loadSchema() throws IOException, Descriptors.DescriptorValidationException {

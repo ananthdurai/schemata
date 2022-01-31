@@ -358,7 +358,8 @@ alias schemata="java -jar target/schemata-1.0.jar"
 schemata --help
 schemata score org.schemata.schema.CampaignCategoryTracker
 schemata score --descriptor-path=src/test/resources/descriptors/entities.desc org.entities.Person
-schemata validate --descriptor-path=src/test/resources/descriptors/entities.desc # this has some validation errors you can inspect 
+schemata validate --descriptor-path=src/test/resources/descriptors/entities.desc # this has some validation errors you can inspect
+schemata document --descriptor-path=src/test/resources/descriptors/entities.desc # see JSON representation of schema
 ```
 
 ### Via convenience scripts
