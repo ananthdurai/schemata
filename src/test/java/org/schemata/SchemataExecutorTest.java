@@ -1,11 +1,9 @@
 package org.schemata;
 
 
-import java.util.List;
 import jdk.jfr.Description;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import org.schemata.domain.Schema;
 import org.schemata.parser.SchemaParser;
 import picocli.CommandLine;
 
@@ -41,6 +39,13 @@ public class SchemataExecutorTest {
   @Description("Test Schema score with an valid schema name")
   public void testScoreWithValidSchema() {
     int exitCode = cmd.execute("score", "org.schemata.schema.CampaignCategoryTrackerEvent");
+    assertEquals(0, exitCode);
+  }
+
+  @Test
+  @Description("Test Schema documentation")
+  public void testSchemaDocumentationCmd() {
+    int exitCode = cmd.execute("document");
     assertEquals(0, exitCode);
   }
 }

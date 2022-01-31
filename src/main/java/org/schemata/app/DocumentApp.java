@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.concurrent.Callable;
 
 public class DocumentApp implements Callable<Integer> {
+
     private final List<Schema> schemaList;
 
     public DocumentApp(List<Schema> schemaList) {
@@ -18,8 +19,8 @@ public class DocumentApp implements Callable<Integer> {
     public Integer call() throws Exception {
         var mapper = new ObjectMapper();
         mapper.enable(SerializationFeature.INDENT_OUTPUT); // pretty print
-
-        mapper.writeValue(System.out, schemaList);
+        var out = mapper.writeValueAsString(schemaList);
+        System.out.println(out);
 
         return 0;
     }
