@@ -1,0 +1,35 @@
+syntax = "proto3";
+
+package org.entities;
+
+import "google/protobuf/descriptor.proto";
+import "schemata_protocol.proto";
+
+option java_package = "org.entities.proto";
+option java_outer_classname = "EntityBuilder";
+
+message Department {
+  option(org.schemata.schema.type) = ENTITY;
+  int32 id = 1;
+  string name = 2;
+}
+
+message Person {
+  option(org.schemata.schema.message_core).description = "This is the description of the users table";
+  option(org.schemata.schema.message_core).comment = "The comment added after thought";
+  option(org.schemata.schema.owner) = "Growth";
+  option(org.schemata.schema.domain) = "Core";
+  option(org.schemata.schema.type) = ENTITY;
+
+  string name = 1
+  [(org.schemata.schema.field_core).description = "person name"];
+
+  int32 id = 2
+  [(org.schemata.schema.field_core).description = "unique identifier for a given person", (org.schemata.schema.is_primary_key) = true];
+
+  string email = 3
+  [(org.schemata.schema.field_core).description = "official email address", (org.schemata.schema.is_classified) = true, (org.schemata.schema.classification_level) = "HIGH", (org.schemata.schema.product_type) = "email"];
+
+  Department dept = 4
+  [(org.schemata.schema.field_core).description = "department name of the person"] ;
+}

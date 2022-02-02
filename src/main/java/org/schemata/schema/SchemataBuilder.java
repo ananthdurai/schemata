@@ -184,18 +184,35 @@ public final class SchemataBuilder {
   public enum EventType
       implements com.google.protobuf.ProtocolMessageEnum {
     /**
+     * <pre>
+     * Invalid Event Type. If the message type is event, set it either LIFECYCLE or INTERACTION or AGGREGATED
+     * </pre>
+     *
      * <code>NONE = 0;</code>
      */
     NONE(0),
     /**
+     * <pre>
+     * LIFECYCLE event captures the state changes of an Entity. (e.g) User created, User deleted et al.
+     * </pre>
+     *
      * <code>LIFECYCLE = 1;</code>
      */
     LIFECYCLE(1),
     /**
+     * <pre>
+     * INTERACTION event captures the events that resulted from one Entity changing the state of another Entity.
+     * (e.g.) User A purchases Product B. The INTERACTION event is often the result of a business transaction.
+     * </pre>
+     *
      * <code>INTERACTION = 2;</code>
      */
     INTERACTION(2),
     /**
+     * <pre>
+     * AGGREGATED event captures the computed metrics over a specified window of time. (e.g) Number of views by a User for a Product.
+     * </pre>
+     *
      * <code>AGGREGATED = 3;</code>
      */
     AGGREGATED(3),
@@ -203,18 +220,35 @@ public final class SchemataBuilder {
     ;
 
     /**
+     * <pre>
+     * Invalid Event Type. If the message type is event, set it either LIFECYCLE or INTERACTION or AGGREGATED
+     * </pre>
+     *
      * <code>NONE = 0;</code>
      */
     public static final int NONE_VALUE = 0;
     /**
+     * <pre>
+     * LIFECYCLE event captures the state changes of an Entity. (e.g) User created, User deleted et al.
+     * </pre>
+     *
      * <code>LIFECYCLE = 1;</code>
      */
     public static final int LIFECYCLE_VALUE = 1;
     /**
+     * <pre>
+     * INTERACTION event captures the events that resulted from one Entity changing the state of another Entity.
+     * (e.g.) User A purchases Product B. The INTERACTION event is often the result of a business transaction.
+     * </pre>
+     *
      * <code>INTERACTION = 2;</code>
      */
     public static final int INTERACTION_VALUE = 2;
     /**
+     * <pre>
+     * AGGREGATED event captures the computed metrics over a specified window of time. (e.g) Number of views by a User for a Product.
+     * </pre>
+     *
      * <code>AGGREGATED = 3;</code>
      */
     public static final int AGGREGATED_VALUE = 3;
@@ -429,7 +463,7 @@ public final class SchemataBuilder {
   }
   /**
    * <pre>
-   * CommonMetadata is the set of attribute apply to both the Message &amp; Field
+   * CoreMetadata is the set of attribute apply to both the Message &amp; Field
    * </pre>
    *
    * Protobuf type {@code org.schemata.schema.CoreMetadata}
@@ -979,7 +1013,7 @@ public final class SchemataBuilder {
     }
     /**
      * <pre>
-     * CommonMetadata is the set of attribute apply to both the Message &amp; Field
+     * CoreMetadata is the set of attribute apply to both the Message &amp; Field
      * </pre>
      *
      * Protobuf type {@code org.schemata.schema.CoreMetadata}
@@ -1779,6 +1813,10 @@ public final class SchemataBuilder {
         null);
   public static final int FIELD_CORE_FIELD_NUMBER = 70001;
   /**
+   * <pre>
+   * message.description is a Mandatory Metadata
+   * </pre>
+   *
    * <code>extend .google.protobuf.FieldOptions { ... }</code>
    */
   public static final
@@ -1790,6 +1828,10 @@ public final class SchemataBuilder {
         org.schemata.schema.SchemataBuilder.CoreMetadata.getDefaultInstance());
   public static final int IS_CLASSIFIED_FIELD_NUMBER = 70002;
   /**
+   * <pre>
+   * Set true if the field contains classified data (Optional).
+   * </pre>
+   *
    * <code>extend .google.protobuf.FieldOptions { ... }</code>
    */
   public static final
@@ -1801,6 +1843,10 @@ public final class SchemataBuilder {
         null);
   public static final int CLASSIFICATION_LEVEL_FIELD_NUMBER = 7003;
   /**
+   * <pre>
+   * Set the classification level if is_classified is true (This is Mandatory if is_classified set to true)
+   * </pre>
+   *
    * <code>extend .google.protobuf.FieldOptions { ... }</code>
    */
   public static final
@@ -1812,6 +1858,11 @@ public final class SchemataBuilder {
         null);
   public static final int PRODUCT_TYPE_FIELD_NUMBER = 70004;
   /**
+   * <pre>
+   * Specify the product type. product_type is an useful annotation to represent a field in a business perspective.
+   * (e.g) user_id can be an INT field, but in the system design it could represent External Users rather than internal users.
+   * </pre>
+   *
    * <code>extend .google.protobuf.FieldOptions { ... }</code>
    */
   public static final
@@ -1823,6 +1874,10 @@ public final class SchemataBuilder {
         null);
   public static final int IS_PRIMARY_KEY_FIELD_NUMBER = 70005;
   /**
+   * <pre>
+   * Set true if the field is a primary key. This must be true if the Schema type is Entity
+   * </pre>
+   *
    * <code>extend .google.protobuf.FieldOptions { ... }</code>
    */
   public static final

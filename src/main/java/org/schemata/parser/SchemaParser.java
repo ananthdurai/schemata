@@ -1,32 +1,33 @@
 package org.schemata.parser;
 
+import com.google.protobuf.DescriptorProtos;
 import com.google.protobuf.Descriptors;
-import com.google.protobuf.GeneratedMessageV3;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
-import java.util.Set;
 import org.schemata.domain.Field;
 import org.schemata.domain.Schema;
 import org.schemata.schema.SchemataBuilder;
 
+import java.util.*;
+
 
 public class SchemaParser {
+  private final boolean debug = false;
 
   private static final Set<String> INCLUDED_PRIMITIVE_TYPES = Set.of("google.protobuf.Timestamp");
 
-  public List<Schema> parseSchema(List<GeneratedMessageV3> messages) {
-    List<Schema> schemaList = new ArrayList<>();
-    for (GeneratedMessageV3 message : messages) {
-      Descriptors.Descriptor descriptorType = message.getDescriptorForType();
-      String schemaName = descriptorType.getFullName();
-      // Extract all the metadata for the fieldList
-      var fieldList = extractFields(descriptorType.getFields(), schemaName);
-      var schema = this.extractSchema(descriptorType, descriptorType.getFullName(), fieldList);
-      schemaList.add(schema);
-    }
-    return schemaList;
+  public List<Schema> parse(List<Descriptors.Descriptor> descriptors)
+  {
+    return descriptors
+            .stream()
+            .filter(this::isAnnotated)
+            .map(this::parseSingleSchema)
+            .toList();
+  }
+
+  public Schema parseSingleSchema(Descriptors.Descriptor descriptor) {
+    String schemaName = descriptor.getFullName();
+    // Extract all the metadata for the fieldList
+    var fieldList = extractFields(descriptor.getFields(), schemaName);
+    return extractSchema(descriptor, descriptor.getFullName(), fieldList);
   }
 
   public Schema extractSchema(Descriptors.Descriptor descriptorType, String schema, List<Field> fieldList) {
@@ -84,7 +85,18 @@ public class SchemaParser {
     return fields;
   }
 
+  private boolean isAnnotated(Descriptors.Descriptor descriptor) {
+    return !descriptor.getOptions().getExtension(org.schemata.schema.SchemataBuilder.type)
+            .equals(SchemataBuilder.Type.UNKNOWN);
+  }
+
   private boolean isPrimitiveType(Descriptors.FieldDescriptor.Type type, String typeName) {
     return type != Descriptors.FieldDescriptor.Type.MESSAGE || INCLUDED_PRIMITIVE_TYPES.contains(typeName);
+  }
+
+  private void debug(String message, Object... params) {
+    if (debug) {
+      System.err.printf(message + "\n", params);
+    }
   }
 }

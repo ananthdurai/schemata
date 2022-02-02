@@ -12,14 +12,16 @@
     <maven.compiler.release>17</maven.compiler.release>
     <shadeSources>true</shadeSources>
     <maven-shade-plugin.version>3.1.1</maven-shade-plugin.version>
-    <protobuf.version>3.19.1</protobuf.version>
+    <protobuf.version>3.19.3</protobuf.version>
     <maven-compiler-plugin.version>3.8.0</maven-compiler-plugin.version>
     <protoc-jar-maven-plugin.version>3.11.4</protoc-jar-maven-plugin.version>
+    <protoc-jar.version>3.11.4</protoc-jar.version>
     <protoc.version>3.17.3</protoc.version>
     <junit.version>5.8.2</junit.version>
     <commons-lang.version>3.12.0</commons-lang.version>
     <jgrapht.version>1.5.1</jgrapht.version>
     <picocli.version>4.6.2</picocli.version>
+    <jackson.version>2.13.1</jackson.version>
   </properties>
 
   <dependencies>
@@ -27,6 +29,11 @@
       <groupId>com.google.protobuf</groupId>
       <artifactId>protobuf-java</artifactId>
       <version>${protobuf.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>com.fasterxml.jackson.core</groupId>
+      <artifactId>jackson-databind</artifactId>
+      <version>${jackson.version}</version>
     </dependency>
     <dependency>
       <groupId>org.junit.jupiter</groupId>
@@ -60,6 +67,11 @@
       <artifactId>picocli</artifactId>
       <version>${picocli.version}</version>
     </dependency>
+    <dependency>
+      <groupId>com.github.os72</groupId>
+      <artifactId>protoc-jar</artifactId>
+      <version>${protoc-jar.version}</version>
+    </dependency>
   </dependencies>
   <build>
     <plugins>
@@ -69,24 +81,55 @@
         <version>${maven-compiler-plugin.version}</version>
         <configuration>
           <release>${maven.compiler.release}</release>
+          <annotationProcessorPaths>
+            <path>
+              <groupId>info.picocli</groupId>
+              <artifactId>picocli-codegen</artifactId>
+              <version>${picocli.version}</version>
+            </path>
+          </annotationProcessorPaths>
+          <compilerArgs>
+            <arg>-Aproject=${project.groupId}/${project.artifactId}</arg>
+          </compilerArgs>
         </configuration>
       </plugin>
+
       <plugin>
         <groupId>com.github.os72</groupId>
         <artifactId>protoc-jar-maven-plugin</artifactId>
         <version>${protoc-jar-maven-plugin.version}</version>
         <executions>
           <execution>
+            <id>generate-proto-java-source</id>
             <phase>generate-sources</phase>
             <goals>
               <goal>run</goal>
             </goals>
             <configuration>
               <protocVersion>${protoc.version}</protocVersion>
+              <includeStdTypes>true</includeStdTypes>
               <inputDirectories>
-                <include>src/proto</include>
+                <include>src/main/resources/schema</include>
               </inputDirectories>
               <outputDirectory>src/main/java</outputDirectory>
+            </configuration>
+          </execution>
+
+          <execution>
+            <id>generate-proto-test-descriptors</id>
+            <phase>generate-test-sources</phase>
+            <goals><goal>run</goal></goals>
+            <configuration>
+              <protocVersion>${protoc.version}</protocVersion>
+              <includeStdTypes>true</includeStdTypes>
+              <includeDirectories>
+                <include>src/main/resources/schema</include>
+              </includeDirectories>
+              <inputDirectories>
+                <include>src/test/resources/schema</include>
+              </inputDirectories>
+              <type>descriptor</type>
+              <outputDirectory>src/test/resources/descriptors</outputDirectory>
             </configuration>
           </execution>
         </executions>

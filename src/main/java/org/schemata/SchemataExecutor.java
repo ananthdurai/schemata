@@ -1,63 +1,69 @@
 package org.schemata;
 
-import java.util.List;
-import java.util.Set;
-import java.util.concurrent.Callable;
-import org.apache.commons.lang3.StringUtils;
+import com.google.protobuf.Descriptors;
+import org.schemata.app.DocumentApp;
 import org.schemata.app.SchemaScoreApp;
 import org.schemata.app.SchemaValidatorApp;
 import org.schemata.domain.Schema;
-import org.schemata.printer.Console;
-import picocli.CommandLine;
+import org.schemata.parser.Loader;
+import org.schemata.parser.PrecompiledLoader;
+import org.schemata.parser.ProtoFileDescriptorSetLoader;
+import org.schemata.parser.SchemaParser;
+import picocli.CommandLine.Option;
+import picocli.CommandLine.ScopeType;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.util.List;
+
+import static picocli.CommandLine.Command;
+import static picocli.CommandLine.Parameters;
 
 
-@CommandLine.Command(name = "schemata", mixinStandardHelpOptions = true, description = "Schemata commandline tool")
-public class SchemataExecutor implements Callable<Integer> {
+@Command(name = "schemata", mixinStandardHelpOptions = true, description = "Schemata commandline tool")
+public class SchemataExecutor {
 
   private List<Schema> schemaList;
-  private static final String VALIDATE_COMMAND = "validate";
-  private static final String SCORE_COMMAND = "score";
-  private static final Set<String> validCommands = Set.of(VALIDATE_COMMAND, SCORE_COMMAND);
+  private final SchemaParser parser;
 
-  @CommandLine.Option(names = "--cmd", description = "Type of the command to execute.", defaultValue = "validate", required = true)
-  String cmdType;
-
-  @CommandLine.Parameters()
-  private List<String> positionalParams;
-
-  public SchemataExecutor(List<Schema> schemaList) {
-    this.schemaList = schemaList;
+  public SchemataExecutor(SchemaParser parser) {
+    this.parser = parser;
   }
 
-  @Override
-  public Integer call()
-      throws Exception {
+  @Option(names = {"-p", "--descriptor-path"}, description = "Path to descriptor file", scope = ScopeType.INHERIT)
+  private File path;
 
-    if (StringUtils.isBlank(cmdType) || !validCommands.contains(cmdType.toLowerCase())) {
-      Console.printError("Given command:" + cmdType + " is invalid");
-      return -1;
-    }
-
-    if (schemaList == null || schemaList.size() == 0) {
-      Console.printError("Invalid Schema list:" + schemaList);
-      return -1;
-    }
-
-    int code = switch (cmdType.toLowerCase()) {
-      case VALIDATE_COMMAND -> new SchemaValidatorApp(schemaList).call();
-      case SCORE_COMMAND -> callScore();
-      default -> -1;
-    };
-    return code;
+  @Command(description = "Validate schema")
+  public int validate() throws Exception {
+    loadSchema();
+    return new SchemaValidatorApp(schemaList).call();
   }
 
-  private Integer callScore()
-      throws Exception {
-    if (positionalParams == null || positionalParams.size() < 2) {
-      Console.printError("Schema name not found in the positional argument:" + positionalParams);
-      return -1;
-    }
-    String schema = positionalParams.get(1);
+  @Command(description = "Calculate schemata score")
+  public int score(@Parameters(paramLabel = "<schema>", description = "fully qualified message name") String schema)
+          throws Exception {
+    loadSchema();
     return new SchemaScoreApp(schemaList, schema).call();
+  }
+
+  @Command(description = "Document a schema as JSON")
+  public int document() throws Exception {
+    loadSchema();
+    return new DocumentApp(schemaList).call();
+  }
+
+  private void loadSchema() throws IOException, Descriptors.DescriptorValidationException {
+    Loader loader;
+
+    if (path == null) {
+      loader = new PrecompiledLoader(SchemaRegistry.registerSchema());
+    } else {
+      var stream = new FileInputStream(path);
+      loader = new ProtoFileDescriptorSetLoader(stream);
+    }
+
+    var descriptors = loader.loadDescriptors();
+    schemaList = parser.parse(descriptors);
   }
 }

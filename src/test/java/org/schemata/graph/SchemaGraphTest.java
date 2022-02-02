@@ -3,6 +3,8 @@ package org.schemata.graph;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
+
+import com.google.protobuf.GeneratedMessageV3;
 import org.apache.commons.collections4.SetUtils;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
@@ -12,7 +14,9 @@ import org.schemata.SchemaRegistry;
 import org.schemata.domain.Field;
 import org.schemata.domain.Schema;
 import org.schemata.exception.SchemaNotFoundException;
+import org.schemata.parser.PrecompiledLoader;
 import org.schemata.parser.SchemaParser;
+import org.schemata.schema.UserBuilder;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -24,8 +28,9 @@ public class SchemaGraphTest {
 
   @BeforeAll
   static void setUp() {
-    SchemaParser schemaParser = new SchemaParser();
-    List<Schema> schemaList = schemaParser.parseSchema(SchemaRegistry.registerSchema());
+    var precompiledLoader = new PrecompiledLoader(SchemaRegistry.registerSchema());
+    var parser = new SchemaParser();
+    var schemaList = parser.parse(precompiledLoader.loadDescriptors());
     graph = new SchemaGraph(schemaList);
   }
 

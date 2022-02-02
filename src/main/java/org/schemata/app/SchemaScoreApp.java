@@ -20,8 +20,7 @@ public class SchemaScoreApp implements Callable<Integer> {
   }
 
   @Override
-  public Integer call()
-      throws Exception {
+  public Integer call() throws Exception {
 
     if (StringUtils.isBlank(schemaName)) {
       Console.printError("Invalid schema name:" + schemaName);

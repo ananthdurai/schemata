@@ -351,6 +351,19 @@ The project requires the following dependencies
 make package or mvn clean package
 ```
 
+### Directly via the packaged jar
+
+```
+alias schemata="java -jar target/schemata-1.0.jar"
+schemata --help
+schemata score org.schemata.schema.CampaignCategoryTracker
+schemata score --descriptor-path=src/test/resources/descriptors/entities.desc org.entities.Person
+schemata validate --descriptor-path=src/test/resources/descriptors/entities.desc # this has some validation errors you can inspect
+schemata document --descriptor-path=src/test/resources/descriptors/entities.desc # see JSON representation of schema
+```
+
+### Via convenience scripts
+
 🏃 To validate the schema definition
 
 ```shell
@@ -361,6 +374,16 @@ make package or mvn clean package
 
 ```shell
 ./score.sh org.schemata.schema.CampaignCategoryTracker
+```
+
+## Using protobuf descriptors for your own data model
+
+Compile the protobuf descriptors using `protoc` to output binary [google.protobuf.FileDescriptorSet](https://github.com/protocolbuffers/protobuf/blob/b48ba578dd01adfebeb4fac0887db1eeb163e00f/src/google/protobuf/descriptor.proto#L57-L59) files.
+
+```shell
+protoc --include-imports --descriptor_set_out=mymodel.desc -I path/to/schema -I path/to/schemata/schemas path/to/schema/**/*.proto
+
+./score.sh validate --descriptor-path=mymodel.desc
 ```
 
 ## TODO:
