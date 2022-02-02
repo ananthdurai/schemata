@@ -15,6 +15,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+/**
+ * Loads message descriptors from <code>DescriptorProtos.FileDescriptorSet</code> provided directly or by InputStream
+ */
 public class ProtoFileDescriptorSetLoader implements Loader {
 
     private final DescriptorProtos.FileDescriptorSet descriptorSet;
@@ -31,12 +34,20 @@ public class ProtoFileDescriptorSetLoader implements Loader {
     }
 
     @Override
-    public List<Descriptors.Descriptor> loadDescriptors() throws Descriptors.DescriptorValidationException {
+    public List<Descriptors.Descriptor> loadDescriptors() throws Descriptors.DescriptorValidationException {// we need to build a DAG of filenames so that we can build the Descriptors.Descriptor objects
+        // we need to build a DAG of filenames that import each other, so that we can build the Descriptors.Descriptor
+        // objects in the the correct order, providing each one with a Descriptor for each file it imports
         var dependencyFilenames = buildFileDependencyGraph(descriptorSet);
+
+        // we key the basic proto representations of the FileDescriptor by filename for simpler retrieval
         var fileDescriptorProtosByName = indexFileDescriptorProtosByFilename(descriptorSet);
 
+        // these be the parsed FileDescriptor objects (again keyed by filename) so that they can be passed back into
+        // the instantiation of any other files that import them
         var descriptors = new HashMap<String, Descriptors.FileDescriptor>();
-        // forEach for DAG is executed in topological sort order
+
+        // forEach for the DAG is executed in topological sort order so that we first create the
+        // FileDescriptors for the leaves in the dependency graph, working backwards to the roots
         for (String filename : dependencyFilenames) {
             var file = fileDescriptorProtosByName.get(filename);
             var dependenciesForFile = file
@@ -49,6 +60,7 @@ public class ProtoFileDescriptorSetLoader implements Loader {
             descriptors.put(filename, descriptor);
         }
 
+        // lastly, we collect out each of the message Descriptor objects from the FileDescriptors into a flat list
         return collectAllMessageDescriptors(descriptors.values());
     }
 
@@ -62,6 +74,8 @@ public class ProtoFileDescriptorSetLoader implements Loader {
             dependencyFilenames.addVertex(fileDescriptorProto.getName());
             for (String dependency : fileDescriptorProto.getDependencyList()) {// adding a vertex is idempotent
                 dependencyFilenames.addVertex(dependency);
+                // dependencies point to the file that imports them rather than the other way round
+                // to ensure we can traverse the graph in the correct order (depth first)
                 dependencyFilenames.addEdge(dependency, fileDescriptorProto.getName());
             }
         }

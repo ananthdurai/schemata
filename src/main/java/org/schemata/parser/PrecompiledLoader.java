@@ -5,6 +5,9 @@ import com.google.protobuf.GeneratedMessageV3;
 
 import java.util.List;
 
+/**
+ * Loads message Descriptors from pre-compiled classes provided by protoc --java_out
+ */
 public class PrecompiledLoader implements Loader {
 
     List<GeneratedMessageV3> messages;
