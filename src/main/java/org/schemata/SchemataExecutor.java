@@ -1,14 +1,14 @@
 package org.schemata;
 
 import com.google.protobuf.Descriptors;
-import org.apache.commons.lang3.StringUtils;
 import org.schemata.app.DocumentApp;
 import org.schemata.app.SchemaScoreApp;
 import org.schemata.app.SchemaValidatorApp;
 import org.schemata.domain.Schema;
+import org.schemata.parser.Loader;
+import org.schemata.parser.PrecompiledLoader;
+import org.schemata.parser.ProtoFileDescriptorSetLoader;
 import org.schemata.parser.SchemaParser;
-import org.schemata.printer.Console;
-import picocli.CommandLine;
 import picocli.CommandLine.Option;
 import picocli.CommandLine.ScopeType;
 
@@ -16,7 +16,6 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.List;
-import java.util.Set;
 
 import static picocli.CommandLine.Command;
 import static picocli.CommandLine.Parameters;
@@ -55,12 +54,16 @@ public class SchemataExecutor {
   }
 
   private void loadSchema() throws IOException, Descriptors.DescriptorValidationException {
+    Loader loader;
+
     if (path == null) {
-      schemaList = parser.parseSchema(SchemaRegistry.registerSchema());
+      loader = new PrecompiledLoader(SchemaRegistry.registerSchema());
     } else {
       var stream = new FileInputStream(path);
-      var descriptorSet = parser.loadDescriptorSet(stream);
-      schemaList = parser.parseSchema(descriptorSet);
+      loader = new ProtoFileDescriptorSetLoader(stream);
     }
+
+    var descriptors = loader.loadDescriptors();
+    schemaList = parser.parse(descriptors);
   }
 }

@@ -6,6 +6,7 @@ import com.google.protobuf.ExtensionRegistry;
 import com.google.protobuf.GeneratedMessageV3;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
@@ -24,18 +25,14 @@ public class SchemaParserTest {
 
   private static Schema userSchema;
 
-  private static DescriptorProtos.FileDescriptorSet descriptorSet;
-
   @BeforeAll
-  static void setUp() throws IOException {
+  static void setUp() {
     List<GeneratedMessageV3> messages = List.of(UserBuilder.User.newBuilder().build());
+    var precompiledLoader = new PrecompiledLoader(messages);
     var parser = new SchemaParser();
-    var schemaList = parser.parseSchema(messages);
+    var schemaList = parser.parse(precompiledLoader.loadDescriptors());
     assertAll("User Schema Sanity Check", () -> assertNotNull(schemaList), () -> assertEquals(1, schemaList.size()));
     userSchema = schemaList.get(0);
-
-    var stream = SchemaParserTest.class.getClassLoader().getResourceAsStream("descriptors/entities.desc");
-    descriptorSet = parser.loadDescriptorSet(stream);
   }
 
   @Test
@@ -56,9 +53,12 @@ public class SchemaParserTest {
 
   @Test
   @DisplayName("Test loading FileDescriptorSet from disk")
-  public void checkDescriptorParser() throws Descriptors.DescriptorValidationException {
+  public void checkDescriptorParser() throws Descriptors.DescriptorValidationException, IOException {
+    var stream = loadResourceStream("descriptors/entities.desc");
+    var protoFileLoader = new ProtoFileDescriptorSetLoader(stream);
     var parser = new SchemaParser();
-    var schemas = parser.parseSchema(descriptorSet);
+    var descriptors = protoFileLoader.loadDescriptors();
+    var schemas = parser.parse(descriptors);
 
     assertEquals(2, schemas.size(), "expected schema for both entities");
     var departmentSchema = schemas.get(0);
@@ -66,5 +66,9 @@ public class SchemaParserTest {
 
     var personSchema = schemas.get(1);
     assertEquals("org.entities.Person", personSchema.name());
+  }
+
+  private InputStream loadResourceStream(String path) {
+    return SchemaParserTest.class.getClassLoader().getResourceAsStream(path);
   }
 }
