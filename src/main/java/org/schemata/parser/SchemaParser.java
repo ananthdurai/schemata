@@ -48,6 +48,7 @@ public class SchemaParser {
         case "team_channel" -> builder.teamChannel(Objects.toString(entry.getValue(), ""));
         case "alert_channel" -> builder.alertChannel(Objects.toString(entry.getValue(), ""));
         case "compliance_owner" -> builder.complianceOwner(Objects.toString(entry.getValue(), ""));
+        case "compliance_channel" -> builder.complianceChannel(Objects.toString(entry.getValue(), ""));
       }
     }
     return builder.build();

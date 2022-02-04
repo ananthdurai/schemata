@@ -67,6 +67,8 @@ extend google.protobuf.MessageOptions {
   EventType event_type = 60008;
   // Compliance Owner approves which team should have access to this Schema.
   string compliance_owner = 60009;
+  // Compliance Owner Slack/ Teams Channel name
+  string compliance_channel = 600010;
 }
 
 extend google.protobuf.FieldOptions {
