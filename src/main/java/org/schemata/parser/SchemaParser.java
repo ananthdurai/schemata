@@ -1,6 +1,5 @@
 package org.schemata.parser;
 
-import com.google.protobuf.DescriptorProtos;
 import com.google.protobuf.Descriptors;
 import org.schemata.domain.Field;
 import org.schemata.domain.Schema;
@@ -14,13 +13,12 @@ public class SchemaParser {
 
   private static final Set<String> INCLUDED_PRIMITIVE_TYPES = Set.of("google.protobuf.Timestamp");
 
-  public List<Schema> parse(List<Descriptors.Descriptor> descriptors)
-  {
+  public List<Schema> parse(List<Descriptors.Descriptor> descriptors) {
     return descriptors
-            .stream()
-            .filter(this::isAnnotated)
-            .map(this::parseSingleSchema)
-            .toList();
+        .stream()
+        .filter(this::isAnnotated)
+        .map(this::parseSingleSchema)
+        .toList();
   }
 
   public Schema parseSingleSchema(Descriptors.Descriptor descriptor) {
@@ -49,6 +47,7 @@ public class SchemaParser {
         case "status" -> builder.status(Objects.toString(entry.getValue(), ""));
         case "team_channel" -> builder.teamChannel(Objects.toString(entry.getValue(), ""));
         case "alert_channel" -> builder.alertChannel(Objects.toString(entry.getValue(), ""));
+        case "compliance_owner" -> builder.complianceOwner(Objects.toString(entry.getValue(), ""));
       }
     }
     return builder.build();
@@ -87,7 +86,7 @@ public class SchemaParser {
 
   private boolean isAnnotated(Descriptors.Descriptor descriptor) {
     return !descriptor.getOptions().getExtension(org.schemata.schema.SchemataBuilder.type)
-            .equals(SchemataBuilder.Type.UNKNOWN);
+        .equals(SchemataBuilder.Type.UNKNOWN);
   }
 
   private boolean isPrimitiveType(Descriptors.FieldDescriptor.Type type, String typeName) {

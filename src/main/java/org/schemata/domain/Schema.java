@@ -6,12 +6,12 @@ import org.schemata.schema.SchemataBuilder;
 
 public record Schema(String name, String description, String comment, String seeAlso, String reference, String owner,
                      String domain, String status, String type, String eventType, String teamChannel,
-                     String alertChannel, List<Field> fieldList) {
+                     String alertChannel, String complianceOwner, List<Field> fieldList) {
 
   private Schema(Builder builder) {
     this(builder.name, builder.description, builder.comment, builder.seeAlso, builder.reference, builder.owner,
         builder.domain, builder.status, builder.type.name(), builder.eventType.name(), builder.teamChannel,
-        builder.alertChannel, builder.fieldList);
+        builder.alertChannel, builder.complianceOwner, builder.fieldList);
   }
 
   public static class Builder {
@@ -27,6 +27,7 @@ public record Schema(String name, String description, String comment, String see
     SchemataBuilder.EventType eventType;
     String teamChannel;
     String alertChannel;
+    String complianceOwner;
     List<Field> fieldList;
 
     public Builder(String name, List<Field> fieldList) {
@@ -87,6 +88,11 @@ public record Schema(String name, String description, String comment, String see
 
     public Builder alertChannel(String alertChannel) {
       this.alertChannel = alertChannel;
+      return this;
+    }
+
+    public Builder complianceOwner(String complianceOwner) {
+      this.complianceOwner = complianceOwner;
       return this;
     }
 

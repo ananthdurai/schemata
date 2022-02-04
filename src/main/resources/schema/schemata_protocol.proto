@@ -65,6 +65,8 @@ extend google.protobuf.MessageOptions {
   string alert_channel = 60007;
   // Type of the event. Set if the Type = 'EVENT'
   EventType event_type = 60008;
+  // Compliance Owner approves which team should have access to this Schema.
+  string compliance_owner = 60009;
 }
 
 extend google.protobuf.FieldOptions {
