@@ -15,6 +15,8 @@ public final class SchemataBuilder {
     registry.add(org.schemata.schema.SchemataBuilder.teamChannel);
     registry.add(org.schemata.schema.SchemataBuilder.alertChannel);
     registry.add(org.schemata.schema.SchemataBuilder.eventType);
+    registry.add(org.schemata.schema.SchemataBuilder.complianceOwner);
+    registry.add(org.schemata.schema.SchemataBuilder.complianceChannel);
     registry.add(org.schemata.schema.SchemataBuilder.fieldCore);
     registry.add(org.schemata.schema.SchemataBuilder.isClassified);
     registry.add(org.schemata.schema.SchemataBuilder.classificationLevel);
@@ -1811,6 +1813,36 @@ public final class SchemataBuilder {
           .newFileScopedGeneratedExtension(
         org.schemata.schema.SchemataBuilder.EventType.class,
         null);
+  public static final int COMPLIANCE_OWNER_FIELD_NUMBER = 60009;
+  /**
+   * <pre>
+   * Compliance Owner approves which team should have access to this Schema.
+   * </pre>
+   *
+   * <code>extend .google.protobuf.MessageOptions { ... }</code>
+   */
+  public static final
+    com.google.protobuf.GeneratedMessage.GeneratedExtension<
+      com.google.protobuf.DescriptorProtos.MessageOptions,
+      java.lang.String> complianceOwner = com.google.protobuf.GeneratedMessage
+          .newFileScopedGeneratedExtension(
+        java.lang.String.class,
+        null);
+  public static final int COMPLIANCE_CHANNEL_FIELD_NUMBER = 600010;
+  /**
+   * <pre>
+   * Compliance Owner Slack/ Teams Channel name
+   * </pre>
+   *
+   * <code>extend .google.protobuf.MessageOptions { ... }</code>
+   */
+  public static final
+    com.google.protobuf.GeneratedMessage.GeneratedExtension<
+      com.google.protobuf.DescriptorProtos.MessageOptions,
+      java.lang.String> complianceChannel = com.google.protobuf.GeneratedMessage
+          .newFileScopedGeneratedExtension(
+        java.lang.String.class,
+        null);
   public static final int FIELD_CORE_FIELD_NUMBER = 70001;
   /**
    * <pre>
@@ -1923,16 +1955,19 @@ public final class SchemataBuilder {
       "nnel\022\037.google.protobuf.MessageOptions\030\347\324" +
       "\003 \001(\t:U\n\nevent_type\022\037.google.protobuf.Me" +
       "ssageOptions\030\350\324\003 \001(\0162\036.org.schemata.sche" +
-      "ma.EventType:V\n\nfield_core\022\035.google.prot" +
-      "obuf.FieldOptions\030\361\242\004 \001(\0132!.org.schemata" +
-      ".schema.CoreMetadata:6\n\ris_classified\022\035." +
-      "google.protobuf.FieldOptions\030\362\242\004 \001(\010:<\n\024" +
-      "classification_level\022\035.google.protobuf.F" +
-      "ieldOptions\030\3336 \001(\t:5\n\014product_type\022\035.goo" +
-      "gle.protobuf.FieldOptions\030\364\242\004 \001(\t:7\n\016is_" +
-      "primary_key\022\035.google.protobuf.FieldOptio" +
-      "ns\030\365\242\004 \001(\010B&\n\023org.schemata.schemaB\017Schem" +
-      "ataBuilderb\006proto3"
+      "ma.EventType:;\n\020compliance_owner\022\037.googl" +
+      "e.protobuf.MessageOptions\030\351\324\003 \001(\t:=\n\022com" +
+      "pliance_channel\022\037.google.protobuf.Messag" +
+      "eOptions\030\312\317$ \001(\t:V\n\nfield_core\022\035.google." +
+      "protobuf.FieldOptions\030\361\242\004 \001(\0132!.org.sche" +
+      "mata.schema.CoreMetadata:6\n\ris_classifie" +
+      "d\022\035.google.protobuf.FieldOptions\030\362\242\004 \001(\010" +
+      ":<\n\024classification_level\022\035.google.protob" +
+      "uf.FieldOptions\030\3336 \001(\t:5\n\014product_type\022\035" +
+      ".google.protobuf.FieldOptions\030\364\242\004 \001(\t:7\n" +
+      "\016is_primary_key\022\035.google.protobuf.FieldO" +
+      "ptions\030\365\242\004 \001(\010B&\n\023org.schemata.schemaB\017S" +
+      "chemataBuilderb\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -1953,11 +1988,13 @@ public final class SchemataBuilder {
     teamChannel.internalInit(descriptor.getExtensions().get(5));
     alertChannel.internalInit(descriptor.getExtensions().get(6));
     eventType.internalInit(descriptor.getExtensions().get(7));
-    fieldCore.internalInit(descriptor.getExtensions().get(8));
-    isClassified.internalInit(descriptor.getExtensions().get(9));
-    classificationLevel.internalInit(descriptor.getExtensions().get(10));
-    productType.internalInit(descriptor.getExtensions().get(11));
-    isPrimaryKey.internalInit(descriptor.getExtensions().get(12));
+    complianceOwner.internalInit(descriptor.getExtensions().get(8));
+    complianceChannel.internalInit(descriptor.getExtensions().get(9));
+    fieldCore.internalInit(descriptor.getExtensions().get(10));
+    isClassified.internalInit(descriptor.getExtensions().get(11));
+    classificationLevel.internalInit(descriptor.getExtensions().get(12));
+    productType.internalInit(descriptor.getExtensions().get(13));
+    isPrimaryKey.internalInit(descriptor.getExtensions().get(14));
     com.google.protobuf.DescriptorProtos.getDescriptor();
   }
 
