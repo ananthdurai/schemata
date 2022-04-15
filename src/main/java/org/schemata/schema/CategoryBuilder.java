@@ -766,7 +766,7 @@ public final class CategoryBuilder {
      * <code>.org.schemata.schema.ActivityType activity_type = 3 [(.org.schemata.schema.field_core) = { ... }</code>
      * @return The activityType.
      */
-    org.schemata.schema.ActivityStateBuilder.ActivityType getActivityType();
+    org.schemata.schema.SchemataBuilder.ActivityType getActivityType();
   }
   /**
    * Protobuf type {@code org.schemata.schema.CategoryEvent}
@@ -943,10 +943,10 @@ public final class CategoryBuilder {
      * <code>.org.schemata.schema.ActivityType activity_type = 3 [(.org.schemata.schema.field_core) = { ... }</code>
      * @return The activityType.
      */
-    @java.lang.Override public org.schemata.schema.ActivityStateBuilder.ActivityType getActivityType() {
+    @java.lang.Override public org.schemata.schema.SchemataBuilder.ActivityType getActivityType() {
       @SuppressWarnings("deprecation")
-      org.schemata.schema.ActivityStateBuilder.ActivityType result = org.schemata.schema.ActivityStateBuilder.ActivityType.valueOf(activityType_);
-      return result == null ? org.schemata.schema.ActivityStateBuilder.ActivityType.UNRECOGNIZED : result;
+      org.schemata.schema.SchemataBuilder.ActivityType result = org.schemata.schema.SchemataBuilder.ActivityType.valueOf(activityType_);
+      return result == null ? org.schemata.schema.SchemataBuilder.ActivityType.UNRECOGNIZED : result;
     }
 
     private byte memoizedIsInitialized = -1;
@@ -969,7 +969,7 @@ public final class CategoryBuilder {
       if (currentCategoryState_ != null) {
         output.writeMessage(2, getCurrentCategoryState());
       }
-      if (activityType_ != org.schemata.schema.ActivityStateBuilder.ActivityType.CREATED.getNumber()) {
+      if (activityType_ != org.schemata.schema.SchemataBuilder.ActivityType.CREATED.getNumber()) {
         output.writeEnum(3, activityType_);
       }
       unknownFields.writeTo(output);
@@ -989,7 +989,7 @@ public final class CategoryBuilder {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(2, getCurrentCategoryState());
       }
-      if (activityType_ != org.schemata.schema.ActivityStateBuilder.ActivityType.CREATED.getNumber()) {
+      if (activityType_ != org.schemata.schema.SchemataBuilder.ActivityType.CREATED.getNumber()) {
         size += com.google.protobuf.CodedOutputStream
           .computeEnumSize(3, activityType_);
       }
@@ -1572,17 +1572,17 @@ public final class CategoryBuilder {
        * @return The activityType.
        */
       @java.lang.Override
-      public org.schemata.schema.ActivityStateBuilder.ActivityType getActivityType() {
+      public org.schemata.schema.SchemataBuilder.ActivityType getActivityType() {
         @SuppressWarnings("deprecation")
-        org.schemata.schema.ActivityStateBuilder.ActivityType result = org.schemata.schema.ActivityStateBuilder.ActivityType.valueOf(activityType_);
-        return result == null ? org.schemata.schema.ActivityStateBuilder.ActivityType.UNRECOGNIZED : result;
+        org.schemata.schema.SchemataBuilder.ActivityType result = org.schemata.schema.SchemataBuilder.ActivityType.valueOf(activityType_);
+        return result == null ? org.schemata.schema.SchemataBuilder.ActivityType.UNRECOGNIZED : result;
       }
       /**
        * <code>.org.schemata.schema.ActivityType activity_type = 3 [(.org.schemata.schema.field_core) = { ... }</code>
        * @param value The activityType to set.
        * @return This builder for chaining.
        */
-      public Builder setActivityType(org.schemata.schema.ActivityStateBuilder.ActivityType value) {
+      public Builder setActivityType(org.schemata.schema.SchemataBuilder.ActivityType value) {
         if (value == null) {
           throw new NullPointerException();
         }
@@ -1674,39 +1674,38 @@ public final class CategoryBuilder {
   static {
     java.lang.String[] descriptorData = {
       "\n\016category.proto\022\023org.schemata.schema\032\027s" +
-      "chemata_protocol.proto\032\014common.proto\"\304\003\n" +
-      "\010Category\0226\n\002id\030\001 \001(\005B*\212\227\"\"\212\265\030\036Unique id" +
-      "entifier for Category\250\227\"\001\022*\n\004name\030\002 \001(\tB" +
-      "\034\212\227\"\030\212\265\030\024Name of the Category\022\227\001\n\tis_act" +
-      "ive\030\003 \001(\010B\203\001\212\227\"S\212\265\030Odefine the active st" +
-      "atus of the Category. `true` == active; " +
-      "`false` = inactive`\212\227\"(\222\265\030$should refact" +
-      "or to non-binary status:\271\001\212\246\0351\212\265\030-This i" +
-      "s the description of the Category table\212" +
-      "\246\035#\222\265\030\037The comment added after thought\212\246" +
-      "\035\033\232\265\030\027db.category MySQL table\222\246\035\010Platfor" +
-      "m\232\246\035\004Core\240\246\035\001\262\246\035\016#team-platform\272\246\035\020#aler" +
-      "ts-platform\"\213\004\n\rCategoryEvent\022\203\001\n\027previo" +
-      "us_category_state\030\001 \001(\0132\035.org.schemata.s" +
-      "chema.CategoryBC\212\227\"?\212\265\030;Previous version" +
-      " of the Category entity before the mutat" +
-      "ion\022\201\001\n\026current_category_state\030\002 \001(\0132\035.o" +
-      "rg.schemata.schema.CategoryBB\212\227\">\212\265\030:Cur" +
-      "rent version of the Category entity befo" +
-      "re the mutation\022m\n\ractivity_type\030\003 \001(\0162!" +
-      ".org.schemata.schema.ActivityTypeB3\212\227\"/\212" +
-      "\265\030+Lifecycle event type for the Category" +
-      " table:\200\001\212\246\035:\212\265\0306This is the description" +
-      " of the Category activity table\222\246\035\010Platf" +
-      "orm\232\246\035\004Core\240\246\035\002\300\246\035\001\262\246\035\016#team-platform\272\246\035" +
-      "\020#alerts-platformB&\n\023org.schemata.schema" +
-      "B\017CategoryBuilderb\006proto3"
+      "chemata_protocol.proto\"\304\003\n\010Category\0226\n\002i" +
+      "d\030\001 \001(\005B*\212\227\"\"\212\265\030\036Unique identifier for C" +
+      "ategory\250\227\"\001\022*\n\004name\030\002 \001(\tB\034\212\227\"\030\212\265\030\024Name " +
+      "of the Category\022\227\001\n\tis_active\030\003 \001(\010B\203\001\212\227" +
+      "\"S\212\265\030Odefine the active status of the Ca" +
+      "tegory. `true` == active; `false` = inac" +
+      "tive`\212\227\"(\222\265\030$should refactor to non-bina" +
+      "ry status:\271\001\212\246\0351\212\265\030-This is the descript" +
+      "ion of the Category table\212\246\035#\222\265\030\037The com" +
+      "ment added after thought\212\246\035\033\232\265\030\027db.categ" +
+      "ory MySQL table\222\246\035\010Platform\232\246\035\004Core\240\246\035\001\262" +
+      "\246\035\016#team-platform\272\246\035\020#alerts-platform\"\213\004" +
+      "\n\rCategoryEvent\022\203\001\n\027previous_category_st" +
+      "ate\030\001 \001(\0132\035.org.schemata.schema.Category" +
+      "BC\212\227\"?\212\265\030;Previous version of the Catego" +
+      "ry entity before the mutation\022\201\001\n\026curren" +
+      "t_category_state\030\002 \001(\0132\035.org.schemata.sc" +
+      "hema.CategoryBB\212\227\">\212\265\030:Current version o" +
+      "f the Category entity before the mutatio" +
+      "n\022m\n\ractivity_type\030\003 \001(\0162!.org.schemata." +
+      "schema.ActivityTypeB3\212\227\"/\212\265\030+Lifecycle e" +
+      "vent type for the Category table:\200\001\212\246\035:\212" +
+      "\265\0306This is the description of the Catego" +
+      "ry activity table\222\246\035\010Platform\232\246\035\004Core\240\246\035" +
+      "\002\300\246\035\001\262\246\035\016#team-platform\272\246\035\020#alerts-platf" +
+      "ormB&\n\023org.schemata.schemaB\017CategoryBuil" +
+      "derb\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
           org.schemata.schema.SchemataBuilder.getDescriptor(),
-          org.schemata.schema.ActivityStateBuilder.getDescriptor(),
         });
     internal_static_org_schemata_schema_Category_descriptor =
       getDescriptor().getMessageTypes().get(0);
@@ -1734,7 +1733,6 @@ public final class CategoryBuilder {
     com.google.protobuf.Descriptors.FileDescriptor
         .internalUpdateFileDescriptor(descriptor, registry);
     org.schemata.schema.SchemataBuilder.getDescriptor();
-    org.schemata.schema.ActivityStateBuilder.getDescriptor();
   }
 
   // @@protoc_insertion_point(outer_class_scope)

@@ -2,7 +2,6 @@ syntax = "proto3";
 package org.schemata.schema;
 
 import "schemata_protocol.proto";
-import "common.proto";
 import "product.proto";
 import "google/protobuf/timestamp.proto";
 import "category.proto";

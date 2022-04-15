@@ -2,7 +2,6 @@ syntax = "proto3";
 package org.schemata.schema;
 
 import "schemata_protocol.proto";
-import "common.proto";
 import "category.proto";
 import "brand.proto";
 

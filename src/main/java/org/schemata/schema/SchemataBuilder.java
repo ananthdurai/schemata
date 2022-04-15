@@ -340,6 +340,240 @@ public final class SchemataBuilder {
     // @@protoc_insertion_point(enum_scope:org.schemata.schema.EventType)
   }
 
+  /**
+   * Protobuf enum {@code org.schemata.schema.ActivityType}
+   */
+  public enum ActivityType
+      implements com.google.protobuf.ProtocolMessageEnum {
+    /**
+     * <code>CREATED = 0;</code>
+     */
+    CREATED(0),
+    /**
+     * <code>DELETED = 1;</code>
+     */
+    DELETED(1),
+    /**
+     * <code>UPDATED = 2;</code>
+     */
+    UPDATED(2),
+    UNRECOGNIZED(-1),
+    ;
+
+    /**
+     * <code>CREATED = 0;</code>
+     */
+    public static final int CREATED_VALUE = 0;
+    /**
+     * <code>DELETED = 1;</code>
+     */
+    public static final int DELETED_VALUE = 1;
+    /**
+     * <code>UPDATED = 2;</code>
+     */
+    public static final int UPDATED_VALUE = 2;
+
+
+    public final int getNumber() {
+      if (this == UNRECOGNIZED) {
+        throw new java.lang.IllegalArgumentException(
+            "Can't get the number of an unknown enum value.");
+      }
+      return value;
+    }
+
+    /**
+     * @param value The numeric wire value of the corresponding enum entry.
+     * @return The enum associated with the given numeric wire value.
+     * @deprecated Use {@link #forNumber(int)} instead.
+     */
+    @java.lang.Deprecated
+    public static ActivityType valueOf(int value) {
+      return forNumber(value);
+    }
+
+    /**
+     * @param value The numeric wire value of the corresponding enum entry.
+     * @return The enum associated with the given numeric wire value.
+     */
+    public static ActivityType forNumber(int value) {
+      switch (value) {
+        case 0: return CREATED;
+        case 1: return DELETED;
+        case 2: return UPDATED;
+        default: return null;
+      }
+    }
+
+    public static com.google.protobuf.Internal.EnumLiteMap<ActivityType>
+        internalGetValueMap() {
+      return internalValueMap;
+    }
+    private static final com.google.protobuf.Internal.EnumLiteMap<
+        ActivityType> internalValueMap =
+          new com.google.protobuf.Internal.EnumLiteMap<ActivityType>() {
+            public ActivityType findValueByNumber(int number) {
+              return ActivityType.forNumber(number);
+            }
+          };
+
+    public final com.google.protobuf.Descriptors.EnumValueDescriptor
+        getValueDescriptor() {
+      if (this == UNRECOGNIZED) {
+        throw new java.lang.IllegalStateException(
+            "Can't get the descriptor of an unrecognized enum value.");
+      }
+      return getDescriptor().getValues().get(ordinal());
+    }
+    public final com.google.protobuf.Descriptors.EnumDescriptor
+        getDescriptorForType() {
+      return getDescriptor();
+    }
+    public static final com.google.protobuf.Descriptors.EnumDescriptor
+        getDescriptor() {
+      return org.schemata.schema.SchemataBuilder.getDescriptor().getEnumTypes().get(2);
+    }
+
+    private static final ActivityType[] VALUES = values();
+
+    public static ActivityType valueOf(
+        com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
+      if (desc.getType() != getDescriptor()) {
+        throw new java.lang.IllegalArgumentException(
+          "EnumValueDescriptor is not for this type.");
+      }
+      if (desc.getIndex() == -1) {
+        return UNRECOGNIZED;
+      }
+      return VALUES[desc.getIndex()];
+    }
+
+    private final int value;
+
+    private ActivityType(int value) {
+      this.value = value;
+    }
+
+    // @@protoc_insertion_point(enum_scope:org.schemata.schema.ActivityType)
+  }
+
+  /**
+   * Protobuf enum {@code org.schemata.schema.TimeUnit}
+   */
+  public enum TimeUnit
+      implements com.google.protobuf.ProtocolMessageEnum {
+    /**
+     * <code>SECONDS = 0;</code>
+     */
+    SECONDS(0),
+    /**
+     * <code>MINUTES = 1;</code>
+     */
+    MINUTES(1),
+    /**
+     * <code>HOURS = 2;</code>
+     */
+    HOURS(2),
+    UNRECOGNIZED(-1),
+    ;
+
+    /**
+     * <code>SECONDS = 0;</code>
+     */
+    public static final int SECONDS_VALUE = 0;
+    /**
+     * <code>MINUTES = 1;</code>
+     */
+    public static final int MINUTES_VALUE = 1;
+    /**
+     * <code>HOURS = 2;</code>
+     */
+    public static final int HOURS_VALUE = 2;
+
+
+    public final int getNumber() {
+      if (this == UNRECOGNIZED) {
+        throw new java.lang.IllegalArgumentException(
+            "Can't get the number of an unknown enum value.");
+      }
+      return value;
+    }
+
+    /**
+     * @param value The numeric wire value of the corresponding enum entry.
+     * @return The enum associated with the given numeric wire value.
+     * @deprecated Use {@link #forNumber(int)} instead.
+     */
+    @java.lang.Deprecated
+    public static TimeUnit valueOf(int value) {
+      return forNumber(value);
+    }
+
+    /**
+     * @param value The numeric wire value of the corresponding enum entry.
+     * @return The enum associated with the given numeric wire value.
+     */
+    public static TimeUnit forNumber(int value) {
+      switch (value) {
+        case 0: return SECONDS;
+        case 1: return MINUTES;
+        case 2: return HOURS;
+        default: return null;
+      }
+    }
+
+    public static com.google.protobuf.Internal.EnumLiteMap<TimeUnit>
+        internalGetValueMap() {
+      return internalValueMap;
+    }
+    private static final com.google.protobuf.Internal.EnumLiteMap<
+        TimeUnit> internalValueMap =
+          new com.google.protobuf.Internal.EnumLiteMap<TimeUnit>() {
+            public TimeUnit findValueByNumber(int number) {
+              return TimeUnit.forNumber(number);
+            }
+          };
+
+    public final com.google.protobuf.Descriptors.EnumValueDescriptor
+        getValueDescriptor() {
+      if (this == UNRECOGNIZED) {
+        throw new java.lang.IllegalStateException(
+            "Can't get the descriptor of an unrecognized enum value.");
+      }
+      return getDescriptor().getValues().get(ordinal());
+    }
+    public final com.google.protobuf.Descriptors.EnumDescriptor
+        getDescriptorForType() {
+      return getDescriptor();
+    }
+    public static final com.google.protobuf.Descriptors.EnumDescriptor
+        getDescriptor() {
+      return org.schemata.schema.SchemataBuilder.getDescriptor().getEnumTypes().get(3);
+    }
+
+    private static final TimeUnit[] VALUES = values();
+
+    public static TimeUnit valueOf(
+        com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
+      if (desc.getType() != getDescriptor()) {
+        throw new java.lang.IllegalArgumentException(
+          "EnumValueDescriptor is not for this type.");
+      }
+      if (desc.getIndex() == -1) {
+        return UNRECOGNIZED;
+      }
+      return VALUES[desc.getIndex()];
+    }
+
+    private final int value;
+
+    private TimeUnit(int value) {
+      this.value = value;
+    }
+
+    // @@protoc_insertion_point(enum_scope:org.schemata.schema.TimeUnit)
+  }
+
   public interface CoreMetadataOrBuilder extends
       // @@protoc_insertion_point(interface_extends:org.schemata.schema.CoreMetadata)
       com.google.protobuf.MessageOrBuilder {
@@ -1942,32 +2176,35 @@ public final class SchemataBuilder {
       "oB\014\n\n_reference**\n\004Type\022\013\n\007UNKNOWN\020\000\022\n\n\006" +
       "ENTITY\020\001\022\t\n\005EVENT\020\002*B\n\tEventType\022\010\n\004NONE" +
       "\020\000\022\r\n\tLIFECYCLE\020\001\022\014\n\010ACTIVITY\020\002\022\016\n\nAGGRE" +
-      "GATED\020\003:Z\n\014message_core\022\037.google.protobu" +
-      "f.MessageOptions\030\341\324\003 \001(\0132!.org.schemata." +
-      "schema.CoreMetadata:0\n\005owner\022\037.google.pr" +
-      "otobuf.MessageOptions\030\342\324\003 \001(\t:1\n\006domain\022" +
-      "\037.google.protobuf.MessageOptions\030\343\324\003 \001(\t" +
-      ":J\n\004type\022\037.google.protobuf.MessageOption" +
-      "s\030\344\324\003 \001(\0162\031.org.schemata.schema.Type:1\n\006" +
-      "status\022\037.google.protobuf.MessageOptions\030" +
-      "\345\324\003 \001(\t:7\n\014team_channel\022\037.google.protobu" +
-      "f.MessageOptions\030\346\324\003 \001(\t:8\n\ralert_channe" +
-      "l\022\037.google.protobuf.MessageOptions\030\347\324\003 \001" +
-      "(\t:U\n\nevent_type\022\037.google.protobuf.Messa" +
-      "geOptions\030\350\324\003 \001(\0162\036.org.schemata.schema." +
-      "EventType:;\n\020compliance_owner\022\037.google.p" +
-      "rotobuf.MessageOptions\030\351\324\003 \001(\t:=\n\022compli" +
-      "ance_channel\022\037.google.protobuf.MessageOp" +
-      "tions\030\312\317$ \001(\t:V\n\nfield_core\022\035.google.pro" +
-      "tobuf.FieldOptions\030\361\242\004 \001(\0132!.org.schemat" +
-      "a.schema.CoreMetadata:6\n\ris_classified\022\035" +
-      ".google.protobuf.FieldOptions\030\362\242\004 \001(\010:<\n" +
-      "\024classification_level\022\035.google.protobuf." +
-      "FieldOptions\030\3336 \001(\t:5\n\014product_type\022\035.go" +
-      "ogle.protobuf.FieldOptions\030\364\242\004 \001(\t:7\n\016is" +
-      "_primary_key\022\035.google.protobuf.FieldOpti" +
-      "ons\030\365\242\004 \001(\010B&\n\023org.schemata.schemaB\017Sche" +
-      "mataBuilderb\006proto3"
+      "GATED\020\003*5\n\014ActivityType\022\013\n\007CREATED\020\000\022\013\n\007" +
+      "DELETED\020\001\022\013\n\007UPDATED\020\002*/\n\010TimeUnit\022\013\n\007SE" +
+      "CONDS\020\000\022\013\n\007MINUTES\020\001\022\t\n\005HOURS\020\002:Z\n\014messa" +
+      "ge_core\022\037.google.protobuf.MessageOptions" +
+      "\030\341\324\003 \001(\0132!.org.schemata.schema.CoreMetad" +
+      "ata:0\n\005owner\022\037.google.protobuf.MessageOp" +
+      "tions\030\342\324\003 \001(\t:1\n\006domain\022\037.google.protobu" +
+      "f.MessageOptions\030\343\324\003 \001(\t:J\n\004type\022\037.googl" +
+      "e.protobuf.MessageOptions\030\344\324\003 \001(\0162\031.org." +
+      "schemata.schema.Type:1\n\006status\022\037.google." +
+      "protobuf.MessageOptions\030\345\324\003 \001(\t:7\n\014team_" +
+      "channel\022\037.google.protobuf.MessageOptions" +
+      "\030\346\324\003 \001(\t:8\n\ralert_channel\022\037.google.proto" +
+      "buf.MessageOptions\030\347\324\003 \001(\t:U\n\nevent_type" +
+      "\022\037.google.protobuf.MessageOptions\030\350\324\003 \001(" +
+      "\0162\036.org.schemata.schema.EventType:;\n\020com" +
+      "pliance_owner\022\037.google.protobuf.MessageO" +
+      "ptions\030\351\324\003 \001(\t:=\n\022compliance_channel\022\037.g" +
+      "oogle.protobuf.MessageOptions\030\312\317$ \001(\t:V\n" +
+      "\nfield_core\022\035.google.protobuf.FieldOptio" +
+      "ns\030\361\242\004 \001(\0132!.org.schemata.schema.CoreMet" +
+      "adata:6\n\ris_classified\022\035.google.protobuf" +
+      ".FieldOptions\030\362\242\004 \001(\010:<\n\024classification_" +
+      "level\022\035.google.protobuf.FieldOptions\030\3336 " +
+      "\001(\t:5\n\014product_type\022\035.google.protobuf.Fi" +
+      "eldOptions\030\364\242\004 \001(\t:7\n\016is_primary_key\022\035.g" +
+      "oogle.protobuf.FieldOptions\030\365\242\004 \001(\010B&\n\023o" +
+      "rg.schemata.schemaB\017SchemataBuilderb\006pro" +
+      "to3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,

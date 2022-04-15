@@ -1172,7 +1172,7 @@ public final class ProductBuilder {
      * <code>.org.schemata.schema.ActivityType activity_type = 3 [(.org.schemata.schema.field_core) = { ... }</code>
      * @return The activityType.
      */
-    org.schemata.schema.ActivityStateBuilder.ActivityType getActivityType();
+    org.schemata.schema.SchemataBuilder.ActivityType getActivityType();
   }
   /**
    * Protobuf type {@code org.schemata.schema.ProductEvent}
@@ -1349,10 +1349,10 @@ public final class ProductBuilder {
      * <code>.org.schemata.schema.ActivityType activity_type = 3 [(.org.schemata.schema.field_core) = { ... }</code>
      * @return The activityType.
      */
-    @java.lang.Override public org.schemata.schema.ActivityStateBuilder.ActivityType getActivityType() {
+    @java.lang.Override public org.schemata.schema.SchemataBuilder.ActivityType getActivityType() {
       @SuppressWarnings("deprecation")
-      org.schemata.schema.ActivityStateBuilder.ActivityType result = org.schemata.schema.ActivityStateBuilder.ActivityType.valueOf(activityType_);
-      return result == null ? org.schemata.schema.ActivityStateBuilder.ActivityType.UNRECOGNIZED : result;
+      org.schemata.schema.SchemataBuilder.ActivityType result = org.schemata.schema.SchemataBuilder.ActivityType.valueOf(activityType_);
+      return result == null ? org.schemata.schema.SchemataBuilder.ActivityType.UNRECOGNIZED : result;
     }
 
     private byte memoizedIsInitialized = -1;
@@ -1375,7 +1375,7 @@ public final class ProductBuilder {
       if (currentBrandState_ != null) {
         output.writeMessage(2, getCurrentBrandState());
       }
-      if (activityType_ != org.schemata.schema.ActivityStateBuilder.ActivityType.CREATED.getNumber()) {
+      if (activityType_ != org.schemata.schema.SchemataBuilder.ActivityType.CREATED.getNumber()) {
         output.writeEnum(3, activityType_);
       }
       unknownFields.writeTo(output);
@@ -1395,7 +1395,7 @@ public final class ProductBuilder {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(2, getCurrentBrandState());
       }
-      if (activityType_ != org.schemata.schema.ActivityStateBuilder.ActivityType.CREATED.getNumber()) {
+      if (activityType_ != org.schemata.schema.SchemataBuilder.ActivityType.CREATED.getNumber()) {
         size += com.google.protobuf.CodedOutputStream
           .computeEnumSize(3, activityType_);
       }
@@ -1978,17 +1978,17 @@ public final class ProductBuilder {
        * @return The activityType.
        */
       @java.lang.Override
-      public org.schemata.schema.ActivityStateBuilder.ActivityType getActivityType() {
+      public org.schemata.schema.SchemataBuilder.ActivityType getActivityType() {
         @SuppressWarnings("deprecation")
-        org.schemata.schema.ActivityStateBuilder.ActivityType result = org.schemata.schema.ActivityStateBuilder.ActivityType.valueOf(activityType_);
-        return result == null ? org.schemata.schema.ActivityStateBuilder.ActivityType.UNRECOGNIZED : result;
+        org.schemata.schema.SchemataBuilder.ActivityType result = org.schemata.schema.SchemataBuilder.ActivityType.valueOf(activityType_);
+        return result == null ? org.schemata.schema.SchemataBuilder.ActivityType.UNRECOGNIZED : result;
       }
       /**
        * <code>.org.schemata.schema.ActivityType activity_type = 3 [(.org.schemata.schema.field_core) = { ... }</code>
        * @param value The activityType to set.
        * @return This builder for chaining.
        */
-      public Builder setActivityType(org.schemata.schema.ActivityStateBuilder.ActivityType value) {
+      public Builder setActivityType(org.schemata.schema.SchemataBuilder.ActivityType value) {
         if (value == null) {
           throw new NullPointerException();
         }
@@ -2080,43 +2080,42 @@ public final class ProductBuilder {
   static {
     java.lang.String[] descriptorData = {
       "\n\rproduct.proto\022\023org.schemata.schema\032\027sc" +
-      "hemata_protocol.proto\032\014common.proto\032\016cat" +
-      "egory.proto\032\013brand.proto\"\343\004\n\007Product\0225\n\002" +
-      "id\030\001 \001(\005B)\212\227\"!\212\265\030\035Unique identifier for " +
-      "Product\250\227\"\001\022)\n\004name\030\002 \001(\tB\033\212\227\"\027\212\265\030\023Name " +
-      "of the Product\022U\n\010category\030\003 \001(\0132\035.org.s" +
-      "chemata.schema.CategoryB$\212\227\" \212\265\030\034Categor" +
-      "y name of the product\022L\n\005brand\030\004 \001(\0132\032.o" +
-      "rg.schemata.schema.BrandB!\212\227\"\035\212\265\030\031Brand " +
-      "name of the product\022\226\001\n\tis_active\030\005 \001(\010B" +
-      "\202\001\212\227\"R\212\265\030Ndefine the active status of th" +
-      "e Product. `true` == active; `false` = i" +
-      "nactive`\212\227\"(\222\265\030$should refactor to non-b" +
-      "inary status:\267\001\212\246\0350\212\265\030,This is the descr" +
-      "iption of the Product table\212\246\035#\222\265\030\037The c" +
-      "omment added after thought\212\246\035\032\232\265\030\026db.pro" +
-      "duct MySQL table\222\246\035\010Platform\232\246\035\004Core\240\246\035\001" +
-      "\262\246\035\016#team-platform\272\246\035\020#alerts-platform\"\373" +
-      "\003\n\014ProductEvent\022~\n\024previous_brand_state\030" +
-      "\001 \001(\0132\034.org.schemata.schema.ProductBB\212\227\"" +
-      ">\212\265\030:Previous version of the Product ent" +
-      "ity before the mutation\022|\n\023current_brand" +
-      "_state\030\002 \001(\0132\034.org.schemata.schema.Produ" +
-      "ctBA\212\227\"=\212\265\0309Current version of the Produ" +
-      "ct entity before the mutation\022l\n\ractivit" +
-      "y_type\030\003 \001(\0162!.org.schemata.schema.Activ" +
-      "ityTypeB2\212\227\".\212\265\030*Lifecycle event type fo" +
-      "r the Product table:\177\212\246\0359\212\265\0305This is the" +
-      " description of the Product activity tab" +
-      "le\222\246\035\010Platform\232\246\035\004Core\240\246\035\002\300\246\035\001\262\246\035\016#team-" +
-      "platform\272\246\035\020#alerts-platformB%\n\023org.sche" +
-      "mata.schemaB\016ProductBuilderb\006proto3"
+      "hemata_protocol.proto\032\016category.proto\032\013b" +
+      "rand.proto\"\343\004\n\007Product\0225\n\002id\030\001 \001(\005B)\212\227\"!" +
+      "\212\265\030\035Unique identifier for Product\250\227\"\001\022)\n" +
+      "\004name\030\002 \001(\tB\033\212\227\"\027\212\265\030\023Name of the Product" +
+      "\022U\n\010category\030\003 \001(\0132\035.org.schemata.schema" +
+      ".CategoryB$\212\227\" \212\265\030\034Category name of the " +
+      "product\022L\n\005brand\030\004 \001(\0132\032.org.schemata.sc" +
+      "hema.BrandB!\212\227\"\035\212\265\030\031Brand name of the pr" +
+      "oduct\022\226\001\n\tis_active\030\005 \001(\010B\202\001\212\227\"R\212\265\030Ndefi" +
+      "ne the active status of the Product. `tr" +
+      "ue` == active; `false` = inactive`\212\227\"(\222\265" +
+      "\030$should refactor to non-binary status:\267" +
+      "\001\212\246\0350\212\265\030,This is the description of the " +
+      "Product table\212\246\035#\222\265\030\037The comment added a" +
+      "fter thought\212\246\035\032\232\265\030\026db.product MySQL tab" +
+      "le\222\246\035\010Platform\232\246\035\004Core\240\246\035\001\262\246\035\016#team-plat" +
+      "form\272\246\035\020#alerts-platform\"\373\003\n\014ProductEven" +
+      "t\022~\n\024previous_brand_state\030\001 \001(\0132\034.org.sc" +
+      "hemata.schema.ProductBB\212\227\">\212\265\030:Previous " +
+      "version of the Product entity before the" +
+      " mutation\022|\n\023current_brand_state\030\002 \001(\0132\034" +
+      ".org.schemata.schema.ProductBA\212\227\"=\212\265\0309Cu" +
+      "rrent version of the Product entity befo" +
+      "re the mutation\022l\n\ractivity_type\030\003 \001(\0162!" +
+      ".org.schemata.schema.ActivityTypeB2\212\227\".\212" +
+      "\265\030*Lifecycle event type for the Product " +
+      "table:\177\212\246\0359\212\265\0305This is the description o" +
+      "f the Product activity table\222\246\035\010Platform" +
+      "\232\246\035\004Core\240\246\035\002\300\246\035\001\262\246\035\016#team-platform\272\246\035\020#a" +
+      "lerts-platformB%\n\023org.schemata.schemaB\016P" +
+      "roductBuilderb\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
           org.schemata.schema.SchemataBuilder.getDescriptor(),
-          org.schemata.schema.ActivityStateBuilder.getDescriptor(),
           org.schemata.schema.CategoryBuilder.getDescriptor(),
           org.schemata.schema.BrandBuilder.getDescriptor(),
         });
@@ -2146,7 +2145,6 @@ public final class ProductBuilder {
     com.google.protobuf.Descriptors.FileDescriptor
         .internalUpdateFileDescriptor(descriptor, registry);
     org.schemata.schema.SchemataBuilder.getDescriptor();
-    org.schemata.schema.ActivityStateBuilder.getDescriptor();
     org.schemata.schema.CategoryBuilder.getDescriptor();
     org.schemata.schema.BrandBuilder.getDescriptor();
   }
