@@ -130,7 +130,7 @@ public final class SchemaGraph {
   private double computeEventScore(String vertex, String eventType) {
     double score = switch (eventType) {
       case "LIFECYCLE" -> outgoingEntityVertexOf(vertex).size() > 0 ? 1.0 : 0.0;
-      case "INTERACTION", "AGGREGATED" -> computeNonLifecycleScore(vertex);
+      case "ACTIVITY", "AGGREGATED" -> computeNonLifecycleScore(vertex);
       default -> 0.0;
     };
     return score;

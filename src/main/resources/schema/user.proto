@@ -69,7 +69,7 @@ message UserActivityEvent {
   option(owner) = "Product";
   option(domain) = "Growth";
   option(type) = EVENT;
-  option(event_type) = INTERACTION;
+  option(event_type) = ACTIVITY;
   option(team_channel) = "#team-growth";
   option(alert_channel) = "#alerts-growth";
   User user = 1 [(field_core).description = "User entity reference"];

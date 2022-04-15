@@ -187,7 +187,7 @@ public final class SchemataBuilder {
       implements com.google.protobuf.ProtocolMessageEnum {
     /**
      * <pre>
-     * Invalid Event Type. If the message type is event, set it either LIFECYCLE or INTERACTION or AGGREGATED
+     * Invalid Event Type. If the message type is event, set it either LIFECYCLE or ACTIVITY or AGGREGATED
      * </pre>
      *
      * <code>NONE = 0;</code>
@@ -203,13 +203,13 @@ public final class SchemataBuilder {
     LIFECYCLE(1),
     /**
      * <pre>
-     * INTERACTION event captures the events that resulted from one Entity changing the state of another Entity.
-     * (e.g.) User A purchases Product B. The INTERACTION event is often the result of a business transaction.
+     * ACTIVITY event captures the events that resulted from one Entity changing the state of another Entity.
+     * (e.g.) User A purchases Product B. The ACTIVITY event is often the result of a business transaction.
      * </pre>
      *
-     * <code>INTERACTION = 2;</code>
+     * <code>ACTIVITY = 2;</code>
      */
-    INTERACTION(2),
+    ACTIVITY(2),
     /**
      * <pre>
      * AGGREGATED event captures the computed metrics over a specified window of time. (e.g) Number of views by a User for a Product.
@@ -223,7 +223,7 @@ public final class SchemataBuilder {
 
     /**
      * <pre>
-     * Invalid Event Type. If the message type is event, set it either LIFECYCLE or INTERACTION or AGGREGATED
+     * Invalid Event Type. If the message type is event, set it either LIFECYCLE or ACTIVITY or AGGREGATED
      * </pre>
      *
      * <code>NONE = 0;</code>
@@ -239,13 +239,13 @@ public final class SchemataBuilder {
     public static final int LIFECYCLE_VALUE = 1;
     /**
      * <pre>
-     * INTERACTION event captures the events that resulted from one Entity changing the state of another Entity.
-     * (e.g.) User A purchases Product B. The INTERACTION event is often the result of a business transaction.
+     * ACTIVITY event captures the events that resulted from one Entity changing the state of another Entity.
+     * (e.g.) User A purchases Product B. The ACTIVITY event is often the result of a business transaction.
      * </pre>
      *
-     * <code>INTERACTION = 2;</code>
+     * <code>ACTIVITY = 2;</code>
      */
-    public static final int INTERACTION_VALUE = 2;
+    public static final int ACTIVITY_VALUE = 2;
     /**
      * <pre>
      * AGGREGATED event captures the computed metrics over a specified window of time. (e.g) Number of views by a User for a Product.
@@ -282,7 +282,7 @@ public final class SchemataBuilder {
       switch (value) {
         case 0: return NONE;
         case 1: return LIFECYCLE;
-        case 2: return INTERACTION;
+        case 2: return ACTIVITY;
         case 3: return AGGREGATED;
         default: return null;
       }
@@ -1940,34 +1940,34 @@ public final class SchemataBuilder {
       "o\030\323\206\003 \001(\tH\002\210\001\001\022\030\n\treference\030\324\206\003 \001(\tH\003\210\001\001" +
       "B\016\n\014_descriptionB\n\n\010_commentB\013\n\t_see_als" +
       "oB\014\n\n_reference**\n\004Type\022\013\n\007UNKNOWN\020\000\022\n\n\006" +
-      "ENTITY\020\001\022\t\n\005EVENT\020\002*E\n\tEventType\022\010\n\004NONE" +
-      "\020\000\022\r\n\tLIFECYCLE\020\001\022\017\n\013INTERACTION\020\002\022\016\n\nAG" +
-      "GREGATED\020\003:Z\n\014message_core\022\037.google.prot" +
-      "obuf.MessageOptions\030\341\324\003 \001(\0132!.org.schema" +
-      "ta.schema.CoreMetadata:0\n\005owner\022\037.google" +
-      ".protobuf.MessageOptions\030\342\324\003 \001(\t:1\n\006doma" +
-      "in\022\037.google.protobuf.MessageOptions\030\343\324\003 " +
-      "\001(\t:J\n\004type\022\037.google.protobuf.MessageOpt" +
-      "ions\030\344\324\003 \001(\0162\031.org.schemata.schema.Type:" +
-      "1\n\006status\022\037.google.protobuf.MessageOptio" +
-      "ns\030\345\324\003 \001(\t:7\n\014team_channel\022\037.google.prot" +
-      "obuf.MessageOptions\030\346\324\003 \001(\t:8\n\ralert_cha" +
-      "nnel\022\037.google.protobuf.MessageOptions\030\347\324" +
-      "\003 \001(\t:U\n\nevent_type\022\037.google.protobuf.Me" +
-      "ssageOptions\030\350\324\003 \001(\0162\036.org.schemata.sche" +
-      "ma.EventType:;\n\020compliance_owner\022\037.googl" +
-      "e.protobuf.MessageOptions\030\351\324\003 \001(\t:=\n\022com" +
-      "pliance_channel\022\037.google.protobuf.Messag" +
-      "eOptions\030\312\317$ \001(\t:V\n\nfield_core\022\035.google." +
-      "protobuf.FieldOptions\030\361\242\004 \001(\0132!.org.sche" +
-      "mata.schema.CoreMetadata:6\n\ris_classifie" +
-      "d\022\035.google.protobuf.FieldOptions\030\362\242\004 \001(\010" +
-      ":<\n\024classification_level\022\035.google.protob" +
-      "uf.FieldOptions\030\3336 \001(\t:5\n\014product_type\022\035" +
-      ".google.protobuf.FieldOptions\030\364\242\004 \001(\t:7\n" +
-      "\016is_primary_key\022\035.google.protobuf.FieldO" +
-      "ptions\030\365\242\004 \001(\010B&\n\023org.schemata.schemaB\017S" +
-      "chemataBuilderb\006proto3"
+      "ENTITY\020\001\022\t\n\005EVENT\020\002*B\n\tEventType\022\010\n\004NONE" +
+      "\020\000\022\r\n\tLIFECYCLE\020\001\022\014\n\010ACTIVITY\020\002\022\016\n\nAGGRE" +
+      "GATED\020\003:Z\n\014message_core\022\037.google.protobu" +
+      "f.MessageOptions\030\341\324\003 \001(\0132!.org.schemata." +
+      "schema.CoreMetadata:0\n\005owner\022\037.google.pr" +
+      "otobuf.MessageOptions\030\342\324\003 \001(\t:1\n\006domain\022" +
+      "\037.google.protobuf.MessageOptions\030\343\324\003 \001(\t" +
+      ":J\n\004type\022\037.google.protobuf.MessageOption" +
+      "s\030\344\324\003 \001(\0162\031.org.schemata.schema.Type:1\n\006" +
+      "status\022\037.google.protobuf.MessageOptions\030" +
+      "\345\324\003 \001(\t:7\n\014team_channel\022\037.google.protobu" +
+      "f.MessageOptions\030\346\324\003 \001(\t:8\n\ralert_channe" +
+      "l\022\037.google.protobuf.MessageOptions\030\347\324\003 \001" +
+      "(\t:U\n\nevent_type\022\037.google.protobuf.Messa" +
+      "geOptions\030\350\324\003 \001(\0162\036.org.schemata.schema." +
+      "EventType:;\n\020compliance_owner\022\037.google.p" +
+      "rotobuf.MessageOptions\030\351\324\003 \001(\t:=\n\022compli" +
+      "ance_channel\022\037.google.protobuf.MessageOp" +
+      "tions\030\312\317$ \001(\t:V\n\nfield_core\022\035.google.pro" +
+      "tobuf.FieldOptions\030\361\242\004 \001(\0132!.org.schemat" +
+      "a.schema.CoreMetadata:6\n\ris_classified\022\035" +
+      ".google.protobuf.FieldOptions\030\362\242\004 \001(\010:<\n" +
+      "\024classification_level\022\035.google.protobuf." +
+      "FieldOptions\030\3336 \001(\t:5\n\014product_type\022\035.go" +
+      "ogle.protobuf.FieldOptions\030\364\242\004 \001(\t:7\n\016is" +
+      "_primary_key\022\035.google.protobuf.FieldOpti" +
+      "ons\030\365\242\004 \001(\010B&\n\023org.schemata.schemaB\017Sche" +
+      "mataBuilderb\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
