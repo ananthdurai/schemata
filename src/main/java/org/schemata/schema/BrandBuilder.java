@@ -766,7 +766,7 @@ public final class BrandBuilder {
      * <code>.org.schemata.schema.ActivityType activity_type = 3 [(.org.schemata.schema.field_core) = { ... }</code>
      * @return The activityType.
      */
-    org.schemata.schema.ActivityStateBuilder.ActivityType getActivityType();
+    org.schemata.schema.SchemataBuilder.ActivityType getActivityType();
   }
   /**
    * Protobuf type {@code org.schemata.schema.BrandEvent}
@@ -943,10 +943,10 @@ public final class BrandBuilder {
      * <code>.org.schemata.schema.ActivityType activity_type = 3 [(.org.schemata.schema.field_core) = { ... }</code>
      * @return The activityType.
      */
-    @java.lang.Override public org.schemata.schema.ActivityStateBuilder.ActivityType getActivityType() {
+    @java.lang.Override public org.schemata.schema.SchemataBuilder.ActivityType getActivityType() {
       @SuppressWarnings("deprecation")
-      org.schemata.schema.ActivityStateBuilder.ActivityType result = org.schemata.schema.ActivityStateBuilder.ActivityType.valueOf(activityType_);
-      return result == null ? org.schemata.schema.ActivityStateBuilder.ActivityType.UNRECOGNIZED : result;
+      org.schemata.schema.SchemataBuilder.ActivityType result = org.schemata.schema.SchemataBuilder.ActivityType.valueOf(activityType_);
+      return result == null ? org.schemata.schema.SchemataBuilder.ActivityType.UNRECOGNIZED : result;
     }
 
     private byte memoizedIsInitialized = -1;
@@ -969,7 +969,7 @@ public final class BrandBuilder {
       if (currentBrandState_ != null) {
         output.writeMessage(2, getCurrentBrandState());
       }
-      if (activityType_ != org.schemata.schema.ActivityStateBuilder.ActivityType.CREATED.getNumber()) {
+      if (activityType_ != org.schemata.schema.SchemataBuilder.ActivityType.CREATED.getNumber()) {
         output.writeEnum(3, activityType_);
       }
       unknownFields.writeTo(output);
@@ -989,7 +989,7 @@ public final class BrandBuilder {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(2, getCurrentBrandState());
       }
-      if (activityType_ != org.schemata.schema.ActivityStateBuilder.ActivityType.CREATED.getNumber()) {
+      if (activityType_ != org.schemata.schema.SchemataBuilder.ActivityType.CREATED.getNumber()) {
         size += com.google.protobuf.CodedOutputStream
           .computeEnumSize(3, activityType_);
       }
@@ -1572,17 +1572,17 @@ public final class BrandBuilder {
        * @return The activityType.
        */
       @java.lang.Override
-      public org.schemata.schema.ActivityStateBuilder.ActivityType getActivityType() {
+      public org.schemata.schema.SchemataBuilder.ActivityType getActivityType() {
         @SuppressWarnings("deprecation")
-        org.schemata.schema.ActivityStateBuilder.ActivityType result = org.schemata.schema.ActivityStateBuilder.ActivityType.valueOf(activityType_);
-        return result == null ? org.schemata.schema.ActivityStateBuilder.ActivityType.UNRECOGNIZED : result;
+        org.schemata.schema.SchemataBuilder.ActivityType result = org.schemata.schema.SchemataBuilder.ActivityType.valueOf(activityType_);
+        return result == null ? org.schemata.schema.SchemataBuilder.ActivityType.UNRECOGNIZED : result;
       }
       /**
        * <code>.org.schemata.schema.ActivityType activity_type = 3 [(.org.schemata.schema.field_core) = { ... }</code>
        * @param value The activityType to set.
        * @return This builder for chaining.
        */
-      public Builder setActivityType(org.schemata.schema.ActivityStateBuilder.ActivityType value) {
+      public Builder setActivityType(org.schemata.schema.SchemataBuilder.ActivityType value) {
         if (value == null) {
           throw new NullPointerException();
         }
@@ -1674,38 +1674,36 @@ public final class BrandBuilder {
   static {
     java.lang.String[] descriptorData = {
       "\n\013brand.proto\022\023org.schemata.schema\032\027sche" +
-      "mata_protocol.proto\032\014common.proto\"\262\003\n\005Br" +
-      "and\0223\n\002id\030\001 \001(\005B\'\212\227\"\037\212\265\030\033Unique identifi" +
-      "er for Brand\250\227\"\001\022\'\n\004name\030\002 \001(\tB\031\212\227\"\025\212\265\030\021" +
-      "Name of the Brand\022\224\001\n\tis_active\030\003 \001(\010B\200\001" +
-      "\212\227\"P\212\265\030Ldefine the active status of the " +
-      "Brand. `true` == active; `false` = inact" +
-      "ive`\212\227\"(\222\265\030$should refactor to non-binar" +
-      "y status:\263\001\212\246\035.\212\265\030*This is the descripti" +
-      "on of the Brand table\212\246\035#\222\265\030\037The comment" +
-      " added after thought\212\246\035\030\232\265\030\024db.brand MyS" +
-      "QL table\222\246\035\010Platform\232\246\035\004Core\240\246\035\001\262\246\035\016#tea" +
-      "m-platform\272\246\035\020#alerts-platform\"\355\003\n\nBrand" +
-      "Event\022z\n\024previous_brand_state\030\001 \001(\0132\032.or" +
-      "g.schemata.schema.BrandB@\212\227\"<\212\265\0308Previou" +
-      "s version of the Brand entity before the" +
-      " mutation\022x\n\023current_brand_state\030\002 \001(\0132\032" +
-      ".org.schemata.schema.BrandB?\212\227\";\212\265\0307Curr" +
-      "ent version of the Brand entity before t" +
-      "he mutation\022j\n\ractivity_type\030\003 \001(\0162!.org" +
-      ".schemata.schema.ActivityTypeB0\212\227\",\212\265\030(L" +
-      "ifecycle event type for the Brand table:" +
-      "}\212\246\0357\212\265\0303This is the description of the " +
-      "brand activity table\222\246\035\010Platform\232\246\035\004Core" +
-      "\240\246\035\002\300\246\035\001\262\246\035\016#team-platform\272\246\035\020#alerts-pl" +
-      "atformB#\n\023org.schemata.schemaB\014BrandBuil" +
-      "derb\006proto3"
+      "mata_protocol.proto\"\262\003\n\005Brand\0223\n\002id\030\001 \001(" +
+      "\005B\'\212\227\"\037\212\265\030\033Unique identifier for Brand\250\227" +
+      "\"\001\022\'\n\004name\030\002 \001(\tB\031\212\227\"\025\212\265\030\021Name of the Br" +
+      "and\022\224\001\n\tis_active\030\003 \001(\010B\200\001\212\227\"P\212\265\030Ldefine" +
+      " the active status of the Brand. `true` " +
+      "== active; `false` = inactive`\212\227\"(\222\265\030$sh" +
+      "ould refactor to non-binary status:\263\001\212\246\035" +
+      ".\212\265\030*This is the description of the Bran" +
+      "d table\212\246\035#\222\265\030\037The comment added after t" +
+      "hought\212\246\035\030\232\265\030\024db.brand MySQL table\222\246\035\010Pl" +
+      "atform\232\246\035\004Core\240\246\035\001\262\246\035\016#team-platform\272\246\035\020" +
+      "#alerts-platform\"\355\003\n\nBrandEvent\022z\n\024previ" +
+      "ous_brand_state\030\001 \001(\0132\032.org.schemata.sch" +
+      "ema.BrandB@\212\227\"<\212\265\0308Previous version of t" +
+      "he Brand entity before the mutation\022x\n\023c" +
+      "urrent_brand_state\030\002 \001(\0132\032.org.schemata." +
+      "schema.BrandB?\212\227\";\212\265\0307Current version of" +
+      " the Brand entity before the mutation\022j\n" +
+      "\ractivity_type\030\003 \001(\0162!.org.schemata.sche" +
+      "ma.ActivityTypeB0\212\227\",\212\265\030(Lifecycle event" +
+      " type for the Brand table:}\212\246\0357\212\265\0303This " +
+      "is the description of the brand activity" +
+      " table\222\246\035\010Platform\232\246\035\004Core\240\246\035\002\300\246\035\001\262\246\035\016#t" +
+      "eam-platform\272\246\035\020#alerts-platformB#\n\023org." +
+      "schemata.schemaB\014BrandBuilderb\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
           org.schemata.schema.SchemataBuilder.getDescriptor(),
-          org.schemata.schema.ActivityStateBuilder.getDescriptor(),
         });
     internal_static_org_schemata_schema_Brand_descriptor =
       getDescriptor().getMessageTypes().get(0);
@@ -1733,7 +1731,6 @@ public final class BrandBuilder {
     com.google.protobuf.Descriptors.FileDescriptor
         .internalUpdateFileDescriptor(descriptor, registry);
     org.schemata.schema.SchemataBuilder.getDescriptor();
-    org.schemata.schema.ActivityStateBuilder.getDescriptor();
   }
 
   // @@protoc_insertion_point(outer_class_scope)

@@ -32,6 +32,18 @@ enum EventType {
   AGGREGATED = 3;
 }
 
+enum ActivityType {
+  CREATED = 0;
+  DELETED = 1;
+  UPDATED = 2;
+}
+
+enum TimeUnit {
+  SECONDS = 0;
+  MINUTES = 1;
+  HOURS = 2;
+}
+
 // CoreMetadata is the set of attribute apply to both the Message & Field
 message CoreMetadata {
   // Mandatory Metadata: description of the entity

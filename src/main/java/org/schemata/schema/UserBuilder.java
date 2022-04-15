@@ -1183,7 +1183,7 @@ public final class UserBuilder {
      * <code>.org.schemata.schema.ActivityType activity_type = 3 [(.org.schemata.schema.field_core) = { ... }</code>
      * @return The activityType.
      */
-    org.schemata.schema.ActivityStateBuilder.ActivityType getActivityType();
+    org.schemata.schema.SchemataBuilder.ActivityType getActivityType();
 
     /**
      * <code>.google.protobuf.Timestamp timestamp = 4 [(.org.schemata.schema.field_core) = { ... }</code>
@@ -1388,10 +1388,10 @@ public final class UserBuilder {
      * <code>.org.schemata.schema.ActivityType activity_type = 3 [(.org.schemata.schema.field_core) = { ... }</code>
      * @return The activityType.
      */
-    @java.lang.Override public org.schemata.schema.ActivityStateBuilder.ActivityType getActivityType() {
+    @java.lang.Override public org.schemata.schema.SchemataBuilder.ActivityType getActivityType() {
       @SuppressWarnings("deprecation")
-      org.schemata.schema.ActivityStateBuilder.ActivityType result = org.schemata.schema.ActivityStateBuilder.ActivityType.valueOf(activityType_);
-      return result == null ? org.schemata.schema.ActivityStateBuilder.ActivityType.UNRECOGNIZED : result;
+      org.schemata.schema.SchemataBuilder.ActivityType result = org.schemata.schema.SchemataBuilder.ActivityType.valueOf(activityType_);
+      return result == null ? org.schemata.schema.SchemataBuilder.ActivityType.UNRECOGNIZED : result;
     }
 
     public static final int TIMESTAMP_FIELD_NUMBER = 4;
@@ -1440,7 +1440,7 @@ public final class UserBuilder {
       if (currentUserState_ != null) {
         output.writeMessage(2, getCurrentUserState());
       }
-      if (activityType_ != org.schemata.schema.ActivityStateBuilder.ActivityType.CREATED.getNumber()) {
+      if (activityType_ != org.schemata.schema.SchemataBuilder.ActivityType.CREATED.getNumber()) {
         output.writeEnum(3, activityType_);
       }
       if (timestamp_ != null) {
@@ -1463,7 +1463,7 @@ public final class UserBuilder {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(2, getCurrentUserState());
       }
-      if (activityType_ != org.schemata.schema.ActivityStateBuilder.ActivityType.CREATED.getNumber()) {
+      if (activityType_ != org.schemata.schema.SchemataBuilder.ActivityType.CREATED.getNumber()) {
         size += com.google.protobuf.CodedOutputStream
           .computeEnumSize(3, activityType_);
       }
@@ -2073,17 +2073,17 @@ public final class UserBuilder {
        * @return The activityType.
        */
       @java.lang.Override
-      public org.schemata.schema.ActivityStateBuilder.ActivityType getActivityType() {
+      public org.schemata.schema.SchemataBuilder.ActivityType getActivityType() {
         @SuppressWarnings("deprecation")
-        org.schemata.schema.ActivityStateBuilder.ActivityType result = org.schemata.schema.ActivityStateBuilder.ActivityType.valueOf(activityType_);
-        return result == null ? org.schemata.schema.ActivityStateBuilder.ActivityType.UNRECOGNIZED : result;
+        org.schemata.schema.SchemataBuilder.ActivityType result = org.schemata.schema.SchemataBuilder.ActivityType.valueOf(activityType_);
+        return result == null ? org.schemata.schema.SchemataBuilder.ActivityType.UNRECOGNIZED : result;
       }
       /**
        * <code>.org.schemata.schema.ActivityType activity_type = 3 [(.org.schemata.schema.field_core) = { ... }</code>
        * @param value The activityType to set.
        * @return This builder for chaining.
        */
-      public Builder setActivityType(org.schemata.schema.ActivityStateBuilder.ActivityType value) {
+      public Builder setActivityType(org.schemata.schema.SchemataBuilder.ActivityType value) {
         if (value == null) {
           throw new NullPointerException();
         }
@@ -3463,7 +3463,7 @@ public final class UserBuilder {
      * <code>.org.schemata.schema.TimeUnit window_time_unit = 5 [(.org.schemata.schema.field_core) = { ... }</code>
      * @return The windowTimeUnit.
      */
-    org.schemata.schema.ActivityStateBuilder.TimeUnit getWindowTimeUnit();
+    org.schemata.schema.SchemataBuilder.TimeUnit getWindowTimeUnit();
 
     /**
      * <code>.google.protobuf.Timestamp timestamp = 6 [(.org.schemata.schema.field_core) = { ... }</code>
@@ -3700,10 +3700,10 @@ public final class UserBuilder {
      * <code>.org.schemata.schema.TimeUnit window_time_unit = 5 [(.org.schemata.schema.field_core) = { ... }</code>
      * @return The windowTimeUnit.
      */
-    @java.lang.Override public org.schemata.schema.ActivityStateBuilder.TimeUnit getWindowTimeUnit() {
+    @java.lang.Override public org.schemata.schema.SchemataBuilder.TimeUnit getWindowTimeUnit() {
       @SuppressWarnings("deprecation")
-      org.schemata.schema.ActivityStateBuilder.TimeUnit result = org.schemata.schema.ActivityStateBuilder.TimeUnit.valueOf(windowTimeUnit_);
-      return result == null ? org.schemata.schema.ActivityStateBuilder.TimeUnit.UNRECOGNIZED : result;
+      org.schemata.schema.SchemataBuilder.TimeUnit result = org.schemata.schema.SchemataBuilder.TimeUnit.valueOf(windowTimeUnit_);
+      return result == null ? org.schemata.schema.SchemataBuilder.TimeUnit.UNRECOGNIZED : result;
     }
 
     public static final int TIMESTAMP_FIELD_NUMBER = 6;
@@ -3758,7 +3758,7 @@ public final class UserBuilder {
       if (windowTime_ != 0) {
         output.writeInt32(4, windowTime_);
       }
-      if (windowTimeUnit_ != org.schemata.schema.ActivityStateBuilder.TimeUnit.SECONDS.getNumber()) {
+      if (windowTimeUnit_ != org.schemata.schema.SchemataBuilder.TimeUnit.SECONDS.getNumber()) {
         output.writeEnum(5, windowTimeUnit_);
       }
       if (timestamp_ != null) {
@@ -3789,7 +3789,7 @@ public final class UserBuilder {
         size += com.google.protobuf.CodedOutputStream
           .computeInt32Size(4, windowTime_);
       }
-      if (windowTimeUnit_ != org.schemata.schema.ActivityStateBuilder.TimeUnit.SECONDS.getNumber()) {
+      if (windowTimeUnit_ != org.schemata.schema.SchemataBuilder.TimeUnit.SECONDS.getNumber()) {
         size += com.google.protobuf.CodedOutputStream
           .computeEnumSize(5, windowTimeUnit_);
       }
@@ -4482,17 +4482,17 @@ public final class UserBuilder {
        * @return The windowTimeUnit.
        */
       @java.lang.Override
-      public org.schemata.schema.ActivityStateBuilder.TimeUnit getWindowTimeUnit() {
+      public org.schemata.schema.SchemataBuilder.TimeUnit getWindowTimeUnit() {
         @SuppressWarnings("deprecation")
-        org.schemata.schema.ActivityStateBuilder.TimeUnit result = org.schemata.schema.ActivityStateBuilder.TimeUnit.valueOf(windowTimeUnit_);
-        return result == null ? org.schemata.schema.ActivityStateBuilder.TimeUnit.UNRECOGNIZED : result;
+        org.schemata.schema.SchemataBuilder.TimeUnit result = org.schemata.schema.SchemataBuilder.TimeUnit.valueOf(windowTimeUnit_);
+        return result == null ? org.schemata.schema.SchemataBuilder.TimeUnit.UNRECOGNIZED : result;
       }
       /**
        * <code>.org.schemata.schema.TimeUnit window_time_unit = 5 [(.org.schemata.schema.field_core) = { ... }</code>
        * @param value The windowTimeUnit to set.
        * @return This builder for chaining.
        */
-      public Builder setWindowTimeUnit(org.schemata.schema.ActivityStateBuilder.TimeUnit value) {
+      public Builder setWindowTimeUnit(org.schemata.schema.SchemataBuilder.TimeUnit value) {
         if (value == null) {
           throw new NullPointerException();
         }
@@ -4713,74 +4713,73 @@ public final class UserBuilder {
   static {
     java.lang.String[] descriptorData = {
       "\n\nuser.proto\022\023org.schemata.schema\032\027schem" +
-      "ata_protocol.proto\032\014common.proto\032\rproduc" +
-      "t.proto\032\037google/protobuf/timestamp.proto" +
-      "\"\260\004\n\004User\0222\n\002id\030\001 \001(\005B&\212\227\"\036\212\265\030\032Unique id" +
-      "entifier for User\250\227\"\001\022&\n\004name\030\002 \001(\tB\030\212\227\"" +
-      "\024\212\265\030\020Name of the user\022F\n\005email\030\003 \001(\tB7\212\227" +
-      "\"\031\212\265\030\025email id for the user\242\227\"\010username\220" +
-      "\227\"\001\332\265\003\006LEVEL1\022\222\001\n\tis_active\030\004 \001(\010B\177\212\227\"O\212" +
-      "\265\030Kdefine the active status of the user." +
-      " `true` == active; `false` = inactive`\212\227" +
-      "\"(\222\265\030$should refactor to non-binary stat" +
-      "us\022:\n\010timezone\030\005 \001(\tB(\212\227\"$\212\265\030 preferred " +
-      "time zone for the user:\262\001\212\246\035.\212\265\030*This is" +
-      " the description of the users table\212\246\035#\222" +
-      "\265\030\037The comment added after thought\212\246\035\027\232\265" +
-      "\030\023db.user MySQL table\222\246\035\010Platform\232\246\035\004Cor" +
-      "e\240\246\035\001\262\246\035\016#team-platform\272\246\035\020#alerts-platf" +
-      "orm\"\257\004\n\tUserEvent\022w\n\023previous_user_state" +
-      "\030\001 \001(\0132\031.org.schemata.schema.UserB?\212\227\";\212" +
-      "\265\0307Previous version of the user entity b" +
-      "efore the mutation\022u\n\022current_user_state" +
-      "\030\002 \001(\0132\031.org.schemata.schema.UserB>\212\227\":\212" +
-      "\265\0306Current version of the user entity be" +
-      "fore the mutation\022j\n\ractivity_type\030\003 \001(\016" +
-      "2!.org.schemata.schema.ActivityTypeB0\212\227\"" +
-      ",\212\265\030(Lifecycle event type for the Users " +
-      "table\022P\n\ttimestamp\030\004 \001(\0132\032.google.protob" +
-      "uf.TimestampB!\212\227\"\035\212\265\030\031Timestamp of the a" +
-      "ctivity:t\212\246\035.\212\265\030*This is the description" +
-      " of the users table\222\246\035\010Platform\232\246\035\004Core\240" +
-      "\246\035\002\300\246\035\001\262\246\035\016#team-platform\272\246\035\020#alerts-pla" +
-      "tform\"\322\003\n\021UserActivityEvent\022F\n\004user\030\001 \001(" +
-      "\0132\031.org.schemata.schema.UserB\035\212\227\"\031\212\265\030\025Us" +
-      "er entity reference\022O\n\007product\030\002 \001(\0132\034.o" +
-      "rg.schemata.schema.ProductB \212\227\"\034\212\265\030\030Prod" +
-      "uct entity reference\022_\n\ractivity_type\030\003 " +
-      "\001(\0162%.org.schemata.schema.UserActivityTy" +
-      "peB!\212\227\"\035\212\265\030\031Type of the user activity\022P\n" +
-      "\ttimestamp\030\004 \001(\0132\032.google.protobuf.Times" +
-      "tampB!\212\227\"\035\212\265\030\031Timestamp of the activity:" +
-      "q\212\246\035.\212\265\030*This is the description of the " +
-      "users table\222\246\035\007Product\232\246\035\006Growth\240\246\035\002\300\246\035\002" +
-      "\262\246\035\014#team-growth\272\246\035\016#alerts-growth\"\251\005\n\025U" +
-      "serActivityAggregate\022F\n\004user\030\001 \001(\0132\031.org" +
-      ".schemata.schema.UserB\035\212\227\"\031\212\265\030\025User enti" +
-      "ty reference\022O\n\007product\030\002 \001(\0132\034.org.sche" +
-      "mata.schema.ProductB \212\227\"\034\212\265\030\030Product ent" +
-      "ity reference\022Z\n\005count\030\003 \001(\003BK\212\227\"5\212\265\0301Ag" +
-      "gregated count of the user activity per " +
-      "product\242\227\"\016activity_count\022?\n\nwindowTime\030" +
-      "\004 \001(\005B+\212\227\"\'\212\265\030#Max window time for the a" +
-      "ggregation\022g\n\020window_time_unit\030\005 \001(\0162\035.o" +
-      "rg.schemata.schema.TimeUnitB.\212\227\"*\212\265\030&Tim" +
-      "eUnit of window for the aggregation\022P\n\tt" +
-      "imestamp\030\006 \001(\0132\032.google.protobuf.Timesta" +
-      "mpB!\212\227\"\035\212\265\030\031Timestamp of the activity:\236\001" +
-      "\212\246\035[\212\265\030WThis is the aggregated user acti" +
-      "vity view count. The event aggregated by" +
-      " user & product\222\246\035\007Product\232\246\035\006Growth\240\246\035\002" +
-      "\300\246\035\003\262\246\035\014#team-growth\272\246\035\016#alerts-growth*C" +
-      "\n\020UserActivityType\022\010\n\004VIEW\020\000\022\017\n\013READ_REV" +
-      "IEW\020\001\022\024\n\020VIEW_DESCRIPTION\020\002B\"\n\023org.schem" +
-      "ata.schemaB\013UserBuilderb\006proto3"
+      "ata_protocol.proto\032\rproduct.proto\032\037googl" +
+      "e/protobuf/timestamp.proto\"\260\004\n\004User\0222\n\002i" +
+      "d\030\001 \001(\005B&\212\227\"\036\212\265\030\032Unique identifier for U" +
+      "ser\250\227\"\001\022&\n\004name\030\002 \001(\tB\030\212\227\"\024\212\265\030\020Name of t" +
+      "he user\022F\n\005email\030\003 \001(\tB7\212\227\"\031\212\265\030\025email id" +
+      " for the user\242\227\"\010username\220\227\"\001\332\265\003\006LEVEL1\022" +
+      "\222\001\n\tis_active\030\004 \001(\010B\177\212\227\"O\212\265\030Kdefine the " +
+      "active status of the user. `true` == act" +
+      "ive; `false` = inactive`\212\227\"(\222\265\030$should r" +
+      "efactor to non-binary status\022:\n\010timezone" +
+      "\030\005 \001(\tB(\212\227\"$\212\265\030 preferred time zone for " +
+      "the user:\262\001\212\246\035.\212\265\030*This is the descripti" +
+      "on of the users table\212\246\035#\222\265\030\037The comment" +
+      " added after thought\212\246\035\027\232\265\030\023db.user MySQ" +
+      "L table\222\246\035\010Platform\232\246\035\004Core\240\246\035\001\262\246\035\016#team" +
+      "-platform\272\246\035\020#alerts-platform\"\257\004\n\tUserEv" +
+      "ent\022w\n\023previous_user_state\030\001 \001(\0132\031.org.s" +
+      "chemata.schema.UserB?\212\227\";\212\265\0307Previous ve" +
+      "rsion of the user entity before the muta" +
+      "tion\022u\n\022current_user_state\030\002 \001(\0132\031.org.s" +
+      "chemata.schema.UserB>\212\227\":\212\265\0306Current ver" +
+      "sion of the user entity before the mutat" +
+      "ion\022j\n\ractivity_type\030\003 \001(\0162!.org.schemat" +
+      "a.schema.ActivityTypeB0\212\227\",\212\265\030(Lifecycle" +
+      " event type for the Users table\022P\n\ttimes" +
+      "tamp\030\004 \001(\0132\032.google.protobuf.TimestampB!" +
+      "\212\227\"\035\212\265\030\031Timestamp of the activity:t\212\246\035.\212" +
+      "\265\030*This is the description of the users " +
+      "table\222\246\035\010Platform\232\246\035\004Core\240\246\035\002\300\246\035\001\262\246\035\016#te" +
+      "am-platform\272\246\035\020#alerts-platform\"\322\003\n\021User" +
+      "ActivityEvent\022F\n\004user\030\001 \001(\0132\031.org.schema" +
+      "ta.schema.UserB\035\212\227\"\031\212\265\030\025User entity refe" +
+      "rence\022O\n\007product\030\002 \001(\0132\034.org.schemata.sc" +
+      "hema.ProductB \212\227\"\034\212\265\030\030Product entity ref" +
+      "erence\022_\n\ractivity_type\030\003 \001(\0162%.org.sche" +
+      "mata.schema.UserActivityTypeB!\212\227\"\035\212\265\030\031Ty" +
+      "pe of the user activity\022P\n\ttimestamp\030\004 \001" +
+      "(\0132\032.google.protobuf.TimestampB!\212\227\"\035\212\265\030\031" +
+      "Timestamp of the activity:q\212\246\035.\212\265\030*This " +
+      "is the description of the users table\222\246\035" +
+      "\007Product\232\246\035\006Growth\240\246\035\002\300\246\035\002\262\246\035\014#team-grow" +
+      "th\272\246\035\016#alerts-growth\"\251\005\n\025UserActivityAgg" +
+      "regate\022F\n\004user\030\001 \001(\0132\031.org.schemata.sche" +
+      "ma.UserB\035\212\227\"\031\212\265\030\025User entity reference\022O" +
+      "\n\007product\030\002 \001(\0132\034.org.schemata.schema.Pr" +
+      "oductB \212\227\"\034\212\265\030\030Product entity reference\022" +
+      "Z\n\005count\030\003 \001(\003BK\212\227\"5\212\265\0301Aggregated count" +
+      " of the user activity per product\242\227\"\016act" +
+      "ivity_count\022?\n\nwindowTime\030\004 \001(\005B+\212\227\"\'\212\265\030" +
+      "#Max window time for the aggregation\022g\n\020" +
+      "window_time_unit\030\005 \001(\0162\035.org.schemata.sc" +
+      "hema.TimeUnitB.\212\227\"*\212\265\030&TimeUnit of windo" +
+      "w for the aggregation\022P\n\ttimestamp\030\006 \001(\013" +
+      "2\032.google.protobuf.TimestampB!\212\227\"\035\212\265\030\031Ti" +
+      "mestamp of the activity:\236\001\212\246\035[\212\265\030WThis i" +
+      "s the aggregated user activity view coun" +
+      "t. The event aggregated by user & produc" +
+      "t\222\246\035\007Product\232\246\035\006Growth\240\246\035\002\300\246\035\003\262\246\035\014#team-" +
+      "growth\272\246\035\016#alerts-growth*C\n\020UserActivity" +
+      "Type\022\010\n\004VIEW\020\000\022\017\n\013READ_REVIEW\020\001\022\024\n\020VIEW_" +
+      "DESCRIPTION\020\002B\"\n\023org.schemata.schemaB\013Us" +
+      "erBuilderb\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
           org.schemata.schema.SchemataBuilder.getDescriptor(),
-          org.schemata.schema.ActivityStateBuilder.getDescriptor(),
           org.schemata.schema.ProductBuilder.getDescriptor(),
           com.google.protobuf.TimestampProto.getDescriptor(),
         });
@@ -4825,7 +4824,6 @@ public final class UserBuilder {
     com.google.protobuf.Descriptors.FileDescriptor
         .internalUpdateFileDescriptor(descriptor, registry);
     org.schemata.schema.SchemataBuilder.getDescriptor();
-    org.schemata.schema.ActivityStateBuilder.getDescriptor();
     org.schemata.schema.ProductBuilder.getDescriptor();
     com.google.protobuf.TimestampProto.getDescriptor();
   }

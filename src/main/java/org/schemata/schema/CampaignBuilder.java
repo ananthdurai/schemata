@@ -874,7 +874,7 @@ public final class CampaignBuilder {
      * <code>.org.schemata.schema.ActivityType activity_type = 3 [(.org.schemata.schema.field_core) = { ... }</code>
      * @return The activityType.
      */
-    org.schemata.schema.ActivityStateBuilder.ActivityType getActivityType();
+    org.schemata.schema.SchemataBuilder.ActivityType getActivityType();
   }
   /**
    * Protobuf type {@code org.schemata.schema.CampaignEvent}
@@ -1051,10 +1051,10 @@ public final class CampaignBuilder {
      * <code>.org.schemata.schema.ActivityType activity_type = 3 [(.org.schemata.schema.field_core) = { ... }</code>
      * @return The activityType.
      */
-    @java.lang.Override public org.schemata.schema.ActivityStateBuilder.ActivityType getActivityType() {
+    @java.lang.Override public org.schemata.schema.SchemataBuilder.ActivityType getActivityType() {
       @SuppressWarnings("deprecation")
-      org.schemata.schema.ActivityStateBuilder.ActivityType result = org.schemata.schema.ActivityStateBuilder.ActivityType.valueOf(activityType_);
-      return result == null ? org.schemata.schema.ActivityStateBuilder.ActivityType.UNRECOGNIZED : result;
+      org.schemata.schema.SchemataBuilder.ActivityType result = org.schemata.schema.SchemataBuilder.ActivityType.valueOf(activityType_);
+      return result == null ? org.schemata.schema.SchemataBuilder.ActivityType.UNRECOGNIZED : result;
     }
 
     private byte memoizedIsInitialized = -1;
@@ -1077,7 +1077,7 @@ public final class CampaignBuilder {
       if (currentCampaignState_ != null) {
         output.writeMessage(2, getCurrentCampaignState());
       }
-      if (activityType_ != org.schemata.schema.ActivityStateBuilder.ActivityType.CREATED.getNumber()) {
+      if (activityType_ != org.schemata.schema.SchemataBuilder.ActivityType.CREATED.getNumber()) {
         output.writeEnum(3, activityType_);
       }
       unknownFields.writeTo(output);
@@ -1097,7 +1097,7 @@ public final class CampaignBuilder {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(2, getCurrentCampaignState());
       }
-      if (activityType_ != org.schemata.schema.ActivityStateBuilder.ActivityType.CREATED.getNumber()) {
+      if (activityType_ != org.schemata.schema.SchemataBuilder.ActivityType.CREATED.getNumber()) {
         size += com.google.protobuf.CodedOutputStream
           .computeEnumSize(3, activityType_);
       }
@@ -1680,17 +1680,17 @@ public final class CampaignBuilder {
        * @return The activityType.
        */
       @java.lang.Override
-      public org.schemata.schema.ActivityStateBuilder.ActivityType getActivityType() {
+      public org.schemata.schema.SchemataBuilder.ActivityType getActivityType() {
         @SuppressWarnings("deprecation")
-        org.schemata.schema.ActivityStateBuilder.ActivityType result = org.schemata.schema.ActivityStateBuilder.ActivityType.valueOf(activityType_);
-        return result == null ? org.schemata.schema.ActivityStateBuilder.ActivityType.UNRECOGNIZED : result;
+        org.schemata.schema.SchemataBuilder.ActivityType result = org.schemata.schema.SchemataBuilder.ActivityType.valueOf(activityType_);
+        return result == null ? org.schemata.schema.SchemataBuilder.ActivityType.UNRECOGNIZED : result;
       }
       /**
        * <code>.org.schemata.schema.ActivityType activity_type = 3 [(.org.schemata.schema.field_core) = { ... }</code>
        * @param value The activityType to set.
        * @return This builder for chaining.
        */
-      public Builder setActivityType(org.schemata.schema.ActivityStateBuilder.ActivityType value) {
+      public Builder setActivityType(org.schemata.schema.SchemataBuilder.ActivityType value) {
         if (value == null) {
           throw new NullPointerException();
         }
@@ -4060,67 +4060,65 @@ public final class CampaignBuilder {
   static {
     java.lang.String[] descriptorData = {
       "\n\016campaign.proto\022\023org.schemata.schema\032\027s" +
-      "chemata_protocol.proto\032\014common.proto\032\rpr" +
-      "oduct.proto\032\037google/protobuf/timestamp.p" +
-      "roto\032\016category.proto\"\303\003\n\010Campaign\0226\n\002id\030" +
-      "\001 \001(\005B*\212\227\"\"\212\265\030\036Unique identifier for Cam" +
-      "paign\250\227\"\001\022*\n\004name\030\002 \001(\tB\034\212\227\"\030\212\265\030\024Name of" +
-      " the Campaign\022\227\001\n\tis_active\030\003 \001(\010B\203\001\212\227\"S" +
-      "\212\265\030Odefine the active status of the Camp" +
-      "aign. `true` == active; `false` = inacti" +
-      "ve`\212\227\"(\222\265\030$should refactor to non-binary" +
-      " status:\270\001\212\246\0351\212\265\030-This is the descriptio" +
-      "n of the Campaign table\212\246\035#\222\265\030\037The comme" +
-      "nt added after thought\212\246\035\033\232\265\030\027db.campaig" +
-      "n MySQL table\222\246\035\tMarketing\232\246\035\006Growth\240\246\035\001" +
-      "\262\246\035\014#team-growth\272\246\035\016#alerts-growth\"\211\004\n\rC" +
-      "ampaignEvent\022\203\001\n\027previous_campaign_state" +
-      "\030\001 \001(\0132\035.org.schemata.schema.CampaignBC\212" +
-      "\227\"?\212\265\030;Previous version of the Campaign " +
-      "entity before the mutation\022\201\001\n\026current_c" +
-      "ampaign_state\030\002 \001(\0132\035.org.schemata.schem" +
-      "a.CampaignBB\212\227\">\212\265\030:Current version of t" +
-      "he Campaign entity before the mutation\022m" +
-      "\n\ractivity_type\030\003 \001(\0162!.org.schemata.sch" +
-      "ema.ActivityTypeB3\212\227\"/\212\265\030+Lifecycle even" +
-      "t type for the Campaign table:\177\212\246\035:\212\265\0306T" +
-      "his is the description of the Campaign a" +
-      "ctivity table\222\246\035\tMarketing\232\246\035\006Growth\240\246\035\002" +
-      "\300\246\035\001\262\246\035\014#team-growth\272\246\035\016#alerts-growth\"\363" +
-      "\003\n\034CampaignCategoryTrackerEvent\022H\n\010campa" +
-      "ign\030\001 \001(\0132\035.org.schemata.schema.Campaign" +
-      "B\027\212\227\"\023\212\265\030\017Campaign entity\022Z\n\010category\030\002 " +
-      "\001(\0132\035.org.schemata.schema.CategoryB)\212\227\"%" +
-      "\212\265\030!Category of the targeted campaign\022Z\n" +
-      "\006origin\030\003 \001(\0162#.org.schemata.schema.Camp" +
-      "aignOriginB%\212\227\"!\212\265\030\035origin source of the" +
-      " campaign\022P\n\ttimestamp\030\004 \001(\0132\032.google.pr" +
-      "otobuf.TimestampB!\212\227\"\035\212\265\030\031Timestamp of t" +
-      "he activity:\177\212\246\035:\212\265\0306This is the descrip" +
-      "tion of the Campaign activity table\222\246\035\tM" +
-      "arketing\232\246\035\006Growth\240\246\035\002\300\246\035\002\262\246\035\014#team-grow" +
-      "th\272\246\035\016#alerts-growth\"\357\003\n\033CampaignProduct" +
-      "TrackerEvent\022H\n\010campaign\030\001 \001(\0132\035.org.sch" +
-      "emata.schema.CampaignB\027\212\227\"\023\212\265\030\017Campaign " +
-      "entity\022W\n\007product\030\002 \001(\0132\034.org.schemata.s" +
-      "chema.ProductB(\212\227\"$\212\265\030 Product of the ta" +
-      "rgeted campaign\022Z\n\006origin\030\003 \001(\0162#.org.sc" +
-      "hemata.schema.CampaignOriginB%\212\227\"!\212\265\030\035or" +
-      "igin source of the campaign\022P\n\ttimestamp" +
-      "\030\004 \001(\0132\032.google.protobuf.TimestampB!\212\227\"\035" +
-      "\212\265\030\031Timestamp of the activity:\177\212\246\035:\212\265\0306T" +
-      "his is the description of the Campaign a" +
-      "ctivity table\222\246\035\tMarketing\232\246\035\006Growth\240\246\035\002" +
-      "\300\246\035\002\262\246\035\014#team-growth\272\246\035\016#alerts-growth*-" +
-      "\n\016CampaignOrigin\022\t\n\005EMAIL\020\000\022\020\n\014SOCIAL_ME" +
-      "DIA\020\001B&\n\023org.schemata.schemaB\017CampaignBu" +
-      "ilderb\006proto3"
+      "chemata_protocol.proto\032\rproduct.proto\032\037g" +
+      "oogle/protobuf/timestamp.proto\032\016category" +
+      ".proto\"\303\003\n\010Campaign\0226\n\002id\030\001 \001(\005B*\212\227\"\"\212\265\030" +
+      "\036Unique identifier for Campaign\250\227\"\001\022*\n\004n" +
+      "ame\030\002 \001(\tB\034\212\227\"\030\212\265\030\024Name of the Campaign\022" +
+      "\227\001\n\tis_active\030\003 \001(\010B\203\001\212\227\"S\212\265\030Odefine the" +
+      " active status of the Campaign. `true` =" +
+      "= active; `false` = inactive`\212\227\"(\222\265\030$sho" +
+      "uld refactor to non-binary status:\270\001\212\246\0351" +
+      "\212\265\030-This is the description of the Campa" +
+      "ign table\212\246\035#\222\265\030\037The comment added after" +
+      " thought\212\246\035\033\232\265\030\027db.campaign MySQL table\222" +
+      "\246\035\tMarketing\232\246\035\006Growth\240\246\035\001\262\246\035\014#team-grow" +
+      "th\272\246\035\016#alerts-growth\"\211\004\n\rCampaignEvent\022\203" +
+      "\001\n\027previous_campaign_state\030\001 \001(\0132\035.org.s" +
+      "chemata.schema.CampaignBC\212\227\"?\212\265\030;Previou" +
+      "s version of the Campaign entity before " +
+      "the mutation\022\201\001\n\026current_campaign_state\030" +
+      "\002 \001(\0132\035.org.schemata.schema.CampaignBB\212\227" +
+      "\">\212\265\030:Current version of the Campaign en" +
+      "tity before the mutation\022m\n\ractivity_typ" +
+      "e\030\003 \001(\0162!.org.schemata.schema.ActivityTy" +
+      "peB3\212\227\"/\212\265\030+Lifecycle event type for the" +
+      " Campaign table:\177\212\246\035:\212\265\0306This is the des" +
+      "cription of the Campaign activity table\222" +
+      "\246\035\tMarketing\232\246\035\006Growth\240\246\035\002\300\246\035\001\262\246\035\014#team-" +
+      "growth\272\246\035\016#alerts-growth\"\363\003\n\034CampaignCat" +
+      "egoryTrackerEvent\022H\n\010campaign\030\001 \001(\0132\035.or" +
+      "g.schemata.schema.CampaignB\027\212\227\"\023\212\265\030\017Camp" +
+      "aign entity\022Z\n\010category\030\002 \001(\0132\035.org.sche" +
+      "mata.schema.CategoryB)\212\227\"%\212\265\030!Category o" +
+      "f the targeted campaign\022Z\n\006origin\030\003 \001(\0162" +
+      "#.org.schemata.schema.CampaignOriginB%\212\227" +
+      "\"!\212\265\030\035origin source of the campaign\022P\n\tt" +
+      "imestamp\030\004 \001(\0132\032.google.protobuf.Timesta" +
+      "mpB!\212\227\"\035\212\265\030\031Timestamp of the activity:\177\212" +
+      "\246\035:\212\265\0306This is the description of the Ca" +
+      "mpaign activity table\222\246\035\tMarketing\232\246\035\006Gr" +
+      "owth\240\246\035\002\300\246\035\002\262\246\035\014#team-growth\272\246\035\016#alerts-" +
+      "growth\"\357\003\n\033CampaignProductTrackerEvent\022H" +
+      "\n\010campaign\030\001 \001(\0132\035.org.schemata.schema.C" +
+      "ampaignB\027\212\227\"\023\212\265\030\017Campaign entity\022W\n\007prod" +
+      "uct\030\002 \001(\0132\034.org.schemata.schema.ProductB" +
+      "(\212\227\"$\212\265\030 Product of the targeted campaig" +
+      "n\022Z\n\006origin\030\003 \001(\0162#.org.schemata.schema." +
+      "CampaignOriginB%\212\227\"!\212\265\030\035origin source of" +
+      " the campaign\022P\n\ttimestamp\030\004 \001(\0132\032.googl" +
+      "e.protobuf.TimestampB!\212\227\"\035\212\265\030\031Timestamp " +
+      "of the activity:\177\212\246\035:\212\265\0306This is the des" +
+      "cription of the Campaign activity table\222" +
+      "\246\035\tMarketing\232\246\035\006Growth\240\246\035\002\300\246\035\002\262\246\035\014#team-" +
+      "growth\272\246\035\016#alerts-growth*-\n\016CampaignOrig" +
+      "in\022\t\n\005EMAIL\020\000\022\020\n\014SOCIAL_MEDIA\020\001B&\n\023org.s" +
+      "chemata.schemaB\017CampaignBuilderb\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
           org.schemata.schema.SchemataBuilder.getDescriptor(),
-          org.schemata.schema.ActivityStateBuilder.getDescriptor(),
           org.schemata.schema.ProductBuilder.getDescriptor(),
           com.google.protobuf.TimestampProto.getDescriptor(),
           org.schemata.schema.CategoryBuilder.getDescriptor(),
@@ -4163,7 +4161,6 @@ public final class CampaignBuilder {
     com.google.protobuf.Descriptors.FileDescriptor
         .internalUpdateFileDescriptor(descriptor, registry);
     org.schemata.schema.SchemataBuilder.getDescriptor();
-    org.schemata.schema.ActivityStateBuilder.getDescriptor();
     org.schemata.schema.ProductBuilder.getDescriptor();
     com.google.protobuf.TimestampProto.getDescriptor();
     org.schemata.schema.CategoryBuilder.getDescriptor();
