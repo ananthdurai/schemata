@@ -21,13 +21,13 @@ enum Type {
 }
 
 enum EventType {
-  // Invalid Event Type. If the message type is event, set it either LIFECYCLE or INTERACTION or AGGREGATED
+  // Invalid Event Type. If the message type is event, set it either LIFECYCLE or ACTIVITY or AGGREGATED
   NONE = 0;
   // LIFECYCLE event captures the state changes of an Entity. (e.g) User created, User deleted et al.
   LIFECYCLE = 1;
-  // INTERACTION event captures the events that resulted from one Entity changing the state of another Entity.
-  // (e.g.) User A purchases Product B. The INTERACTION event is often the result of a business transaction.
-  INTERACTION = 2;
+  // ACTIVITY event captures the events that resulted from one Entity changing the state of another Entity.
+  // (e.g.) User A purchases Product B. The ACTIVITY event is often the result of a business transaction.
+  ACTIVITY = 2;
   // AGGREGATED event captures the computed metrics over a specified window of time. (e.g) Number of views by a User for a Product.
   AGGREGATED = 3;
 }

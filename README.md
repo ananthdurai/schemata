@@ -176,12 +176,12 @@ message UserEvent {
 }
 ```
 
-#### Type 2: Interaction
+#### Type 2: ACTIVITY
 
-Interaction event captures the events that resulted from one Entity changing the state of another Entity.
-(e.g.) User A purchases Product B. The Interaction event is often the result of a business transaction.
+ACTIVITY event captures the events that resulted from one Entity changing the state of another Entity.
+(e.g.) User A purchases Product B. The ACTIVITY event is often the result of a business transaction.
 
-**Sample Interaction Event**
+**Sample ACTIVITY Event**
 
 ```protobuf
 enum UserActivityType {
@@ -194,7 +194,7 @@ message UserActivityEvent {
   option(owner) = "Product";
   option(domain) = "Growth";
   option(type) = EVENT;
-  option(event_type) = INTERACTION;
+  option(event_type) = ACTIVITY;
   option(team_channel) = "#team-growth";
   option(alert_channel) = "#alerts-growth";
   User user = 1 [(field_core).description = "User entity reference"];
@@ -297,10 +297,10 @@ User event captures the lifecycle of User Entity. So if you run Schemata Score f
 Schemata score for org.schemata.schema.UserEvent : 1.0
 ```
 
-### Interaction & Aggregated Score
+### ACTIVITY & Aggregated Score
 
 ```math
-Score = 1 - ((Total Outgoing Entity Vertex + Total Outgoing Vertex of all Entity Vertex Connected by Interaction or Aggregated Event) / Total Entity Vertex in the Graph) 
+Score = 1 - ((Total Outgoing Entity Vertex + Total Outgoing Vertex of all Entity Vertex Connected by ACTIVITY or Aggregated Event) / Total Entity Vertex in the Graph) 
 ```
 
 If you run schemata score for CampaignCategoryTrackerEvent you will get **0.4**
