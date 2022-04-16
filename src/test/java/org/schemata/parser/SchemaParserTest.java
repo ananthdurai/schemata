@@ -7,7 +7,7 @@ import java.io.IOException;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.schemata.TestResourceLoader;
+import org.schemata.ResourceLoader;
 import org.schemata.domain.Schema;
 
 import static org.junit.jupiter.api.Assertions.assertAll;
@@ -24,7 +24,7 @@ public class SchemaParserTest {
   static void setUp()
       throws IOException, Descriptors.DescriptorValidationException {
 
-    var stream = new FileInputStream(TestResourceLoader.getDescriptorsPath());
+    var stream = new FileInputStream(ResourceLoader.getDescriptorsPath());
     var protoFileDescriptorLoader = new ProtoFileDescriptorSetLoader(stream);
     var parser = new SchemaParser();
     var schemaList = parser.parse(protoFileDescriptorLoader.loadDescriptors());

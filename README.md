@@ -356,8 +356,7 @@ make package or mvn clean package
 ```
 alias schemata="java -jar target/schemata-1.0.jar"
 schemata --help
-schemata score org.schemata.schema.CampaignCategoryTracker
-schemata score --descriptor-path=src/test/resources/descriptors/entities.desc org.entities.Person
+schemata score --descriptor-path=src/test/resources/descriptors/entities.desc org.schemata.schema.CampaignCategoryTrackerEvent
 schemata validate --descriptor-path=src/test/resources/descriptors/entities.desc # this has some validation errors you can inspect
 schemata document --descriptor-path=src/test/resources/descriptors/entities.desc # see JSON representation of schema
 ```
@@ -374,6 +373,11 @@ schemata document --descriptor-path=src/test/resources/descriptors/entities.desc
 
 ```shell
 ./score.sh org.protocol.schema.CampaignCategoryTracker
+```
+
+🏃 To see the JSON documentation
+```shell
+./document.sh
 ```
 
 ## Using protobuf descriptors for your own data model
