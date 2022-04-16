@@ -94,7 +94,7 @@ extend google.protobuf.FieldOptions {
 
 ## Schema Classification
 
-<img src="../asset/ds_classification.png" alt="Schema Classification"/>
+<img src="ds_classification.png" alt="Schema Classification"/>
 
 At any point in time, the data producer should provide two types of data products.
 
@@ -255,7 +255,7 @@ Schemata construct a Directed Weighted MultiGraph to represent the Schema defini
 
 Let's take a sample schema and walk through how Schemata score is computed.
 
-<img src="../asset/sample_schema.png" alt="Schema Modeling"/>
+<img src="sample_schema.png" alt="Schema Modeling"/>
 
 ## How the Schemata score computed?
 
