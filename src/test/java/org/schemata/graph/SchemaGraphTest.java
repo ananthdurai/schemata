@@ -1,22 +1,22 @@
 package org.schemata.graph;
 
-import java.util.List;
+import com.google.protobuf.Descriptors;
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import com.google.protobuf.GeneratedMessageV3;
 import org.apache.commons.collections4.SetUtils;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-import org.schemata.SchemaRegistry;
+import org.schemata.TestResourceLoader;
 import org.schemata.domain.Field;
 import org.schemata.domain.Schema;
 import org.schemata.exception.SchemaNotFoundException;
-import org.schemata.parser.PrecompiledLoader;
+import org.schemata.parser.ProtoFileDescriptorSetLoader;
 import org.schemata.parser.SchemaParser;
-import org.schemata.schema.UserBuilder;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -27,10 +27,12 @@ public class SchemaGraphTest {
   static SchemaGraph graph;
 
   @BeforeAll
-  static void setUp() {
-    var precompiledLoader = new PrecompiledLoader(SchemaRegistry.registerSchema());
+  static void setUp()
+      throws IOException, Descriptors.DescriptorValidationException {
+    var stream = new FileInputStream(TestResourceLoader.getDescriptorsPath());
+    var protoFileDescriptorLoader = new ProtoFileDescriptorSetLoader(stream);
     var parser = new SchemaParser();
-    var schemaList = parser.parse(precompiledLoader.loadDescriptors());
+    var schemaList = parser.parse(protoFileDescriptorLoader.loadDescriptors());
     graph = new SchemaGraph(schemaList);
   }
 

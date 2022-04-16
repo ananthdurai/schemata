@@ -1,11 +1,11 @@
 syntax = "proto3";
 package org.schemata.schema;
 
-import "schemata_protocol.proto";
+import "schemata/protobuf/schemata.proto";
 import "category.proto";
 import "brand.proto";
 
-option java_package = "org.schemata.schema";
+option java_package = "org.protocol.schema";
 option java_outer_classname = "ProductBuilder";
 
 

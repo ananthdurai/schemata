@@ -3,7 +3,7 @@ syntax = "proto3";
 package org.entities;
 
 import "google/protobuf/descriptor.proto";
-import "schemata_protocol.proto";
+import "protocol.proto";
 
 option java_package = "org.entities.proto";
 option java_outer_classname = "EntityBuilder";

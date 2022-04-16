@@ -93,7 +93,6 @@
           </compilerArgs>
         </configuration>
       </plugin>
-
       <plugin>
         <groupId>com.github.os72</groupId>
         <artifactId>protoc-jar-maven-plugin</artifactId>
@@ -109,7 +108,7 @@
               <protocVersion>${protoc.version}</protocVersion>
               <includeStdTypes>true</includeStdTypes>
               <inputDirectories>
-                <include>src/main/resources/schema</include>
+                <include>src/org/schemata/protobuf</include>
               </inputDirectories>
               <outputDirectory>src/main/java</outputDirectory>
             </configuration>
@@ -125,16 +124,12 @@
               <includeDirectories>
                 <include>src/main/resources/schema</include>
               </includeDirectories>
-              <inputDirectories>
-                <include>src/test/resources/schema</include>
-              </inputDirectories>
               <type>descriptor</type>
               <outputDirectory>src/test/resources/descriptors</outputDirectory>
             </configuration>
           </execution>
         </executions>
       </plugin>
-
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-shade-plugin</artifactId>

@@ -6,7 +6,6 @@ import org.schemata.app.SchemaScoreApp;
 import org.schemata.app.SchemaValidatorApp;
 import org.schemata.domain.Schema;
 import org.schemata.parser.Loader;
-import org.schemata.parser.PrecompiledLoader;
 import org.schemata.parser.ProtoFileDescriptorSetLoader;
 import org.schemata.parser.SchemaParser;
 import picocli.CommandLine.Option;
@@ -21,7 +20,7 @@ import static picocli.CommandLine.Command;
 import static picocli.CommandLine.Parameters;
 
 
-@Command(name = "schemata", mixinStandardHelpOptions = true, description = "Schemata commandline tool")
+@Command(name = "protocol", mixinStandardHelpOptions = true, description = "Schemata commandline tool")
 public class SchemataExecutor {
 
   private List<Schema> schemaList;
@@ -36,11 +35,12 @@ public class SchemataExecutor {
 
   @Command(description = "Validate schema")
   public int validate() throws Exception {
+    System.out.println("entered in validate");
     loadSchema();
     return new SchemaValidatorApp(schemaList).call();
   }
 
-  @Command(description = "Calculate schemata score")
+  @Command(description = "Calculate protocol score")
   public int score(@Parameters(paramLabel = "<schema>", description = "fully qualified message name") String schema)
           throws Exception {
     loadSchema();
@@ -57,7 +57,7 @@ public class SchemataExecutor {
     Loader loader;
 
     if (path == null) {
-      loader = new PrecompiledLoader(SchemaRegistry.registerSchema());
+      throw new IllegalArgumentException("Path can't be null");
     } else {
       var stream = new FileInputStream(path);
       loader = new ProtoFileDescriptorSetLoader(stream);

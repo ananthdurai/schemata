@@ -1,9 +1,9 @@
 syntax = "proto3";
 package org.schemata.schema;
 
-import "schemata_protocol.proto";
+import "schemata/protobuf/schemata.proto";
 
-option java_package = "org.schemata.schema";
+option java_package = "org.protocol.schema";
 option java_outer_classname = "CategoryBuilder";
 
 
