@@ -236,10 +236,6 @@ message UserActivityAggregate {
 }
 ```
 
-🚧 **TODO:** 
-
-Write more documentation on how schema modeling works.
-
 # Schema Score:
 
 ## The goal of Schemata Score:
@@ -284,7 +280,7 @@ Schemata score for org.protocol.schema.Product : 0.389
 
 The Schemata score indicates that Product Entity much more connected than User Entity
 
-### Lifecycle Score:
+### Lifecycle Events Score
 
 ```math
 Score = Total Outgoing Edges > 1 ? 1 : 0
@@ -297,7 +293,7 @@ User event captures the lifecycle of User Entity. So if you run Schemata Score f
 Schemata score for org.protocol.schema.UserEvent : 1.0
 ```
 
-### ACTIVITY & Aggregated Score
+### Activity & Aggregated Events Score
 
 ```math
 Score = 1 - ((Total Outgoing Entity Vertex + Total Outgoing Vertex of all Entity Vertex Connected by ACTIVITY or Aggregated Event) / Total Entity Vertex in the Graph) 
@@ -390,11 +386,13 @@ protoc --include-imports --descriptor_set_out=mymodel.desc -I path/to/schema -I 
 ./score.sh validate --descriptor-path=mymodel.desc
 ```
 
+## InProgress:
+
+🚧 Support for JSON schema.
+
 ## TODO:
 
 🚧 Write blog post explaining the concepts in detail. 
-
-🚧 The current code hardcoded the schema discovery. Make it more dynamic data discovery. 
 
 🚧 Support for Avro.
 
