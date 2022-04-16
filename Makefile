@@ -23,6 +23,5 @@ package: check_java check_maven
 proto-gen:
 	protoc  --proto_path=src/org --proto_path=src/main/resources/schema --descriptor_set_out=model.desc --include_imports --include_source_info ./src/main/resources/**/*.proto
 
-.PHONY:validate
-validate: proto-gen package
-	java -jar target/schemata-1.0.jar schemata --cmd validate
+.PHONY: build-all
+build-all: package proto-gen
