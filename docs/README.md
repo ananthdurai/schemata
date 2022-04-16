@@ -398,6 +398,8 @@ protoc --include-imports --descriptor_set_out=mymodel.desc -I path/to/schema -I 
 
 🚧 Support for Thrift.
 
+🚧 Support for dbt model.
+
 🚧 Add visualization layer to show the graph representation of the Schema.
 
 # Contributing
