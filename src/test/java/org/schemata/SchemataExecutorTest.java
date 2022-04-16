@@ -1,6 +1,7 @@
 package org.schemata;
 
-
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import jdk.jfr.Description;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -24,28 +25,29 @@ public class SchemataExecutorTest {
   @Test
   @Description("Run schema validate function to run all the schema and fields validation rules")
   public void testSchemaValidateCmd() {
-    int exitCode = cmd.execute("validate");
+    int exitCode = cmd.execute("validate", "-p=" + TestResourceLoader.getDescriptorsPath());
     assertEquals(0, exitCode);
   }
 
   @Test
   @Description("Test Schema score with an invalid schema name")
   public void testScoreWithInvalidSchema() {
-    int exitCode = cmd.execute("score", "User");
+    int exitCode = cmd.execute("score", "-p=" + TestResourceLoader.getDescriptorsPath(), "User");
     assertEquals(-1, exitCode);
   }
 
   @Test
   @Description("Test Schema score with an valid schema name")
   public void testScoreWithValidSchema() {
-    int exitCode = cmd.execute("score", "org.schemata.schema.CampaignCategoryTrackerEvent");
+    int exitCode = cmd.execute("score", "-p=" + TestResourceLoader.getDescriptorsPath(),
+        "org.schemata.schema.CampaignCategoryTrackerEvent");
     assertEquals(0, exitCode);
   }
 
   @Test
   @Description("Test Schema documentation")
   public void testSchemaDocumentationCmd() {
-    int exitCode = cmd.execute("document");
+    int exitCode = cmd.execute("document", "-p=" + TestResourceLoader.getDescriptorsPath());
     assertEquals(0, exitCode);
   }
 }

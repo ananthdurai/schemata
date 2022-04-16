@@ -271,15 +271,15 @@ Score = 1 - ((Total Incoming Edges + Total Outgoing Edges)) / Total Edges in the
 If you run the Schemata Score for User you'll get 0.222
 
 ```shell
-./score.sh org.schemata.schema.User
-Schemata score for org.schemata.schema.User : 0.222
+./score.sh org.protocol.schema.User
+Schemata score for org.protocol.schema.User : 0.222
 ```
 
 If you run the Schemata Score for Product you'll get 0.389
 
 ```shell
-./score.sh org.schemata.schema.Product
-Schemata score for org.schemata.schema.Product : 0.389
+./score.sh org.protocol.schema.Product
+Schemata score for org.protocol.schema.Product : 0.389
 ```
 
 The Schemata score indicates that Product Entity much more connected than User Entity
@@ -293,8 +293,8 @@ Score = Total Outgoing Edges > 1 ? 1 : 0
 User event captures the lifecycle of User Entity. So if you run Schemata Score for UserEvent, it will give you 1.0
 
 ```shell
-./score.sh org.schemata.schema.UserEvent
-Schemata score for org.schemata.schema.UserEvent : 1.0
+./score.sh org.protocol.schema.UserEvent
+Schemata score for org.protocol.schema.UserEvent : 1.0
 ```
 
 ### ACTIVITY & Aggregated Score
@@ -306,15 +306,15 @@ Score = 1 - ((Total Outgoing Entity Vertex + Total Outgoing Vertex of all Entity
 If you run schemata score for CampaignCategoryTrackerEvent you will get **0.4**
 
 ```shell
-./score.sh org.schemata.schema.CampaignCategoryTrackerEvent
-Schemata score for org.schemata.schema.CampaignCategoryTrackerEvent : 0.4
+./score.sh org.protocol.schema.CampaignCategoryTrackerEvent
+Schemata score for org.protocol.schema.CampaignCategoryTrackerEvent : 0.4
 ```
 
 if you run schema score for CampaignProductTrackerEvent you'll get **0.8**
 
 ```shell
-./score.sh org.schemata.schema.CampaignProductTrackerEvent
-Schemata score for org.schemata.schema.CampaignProductTrackerEvent : 0.8
+./score.sh org.protocol.schema.CampaignProductTrackerEvent
+Schemata score for org.protocol.schema.CampaignProductTrackerEvent : 0.8
 ```
 
 The CampaignProductTrackerEvent connect to Product, which has high connectivity with other dimensions such as Brand & Category where CampaignCategoryTrackerEvent is the leaf dimension. The score indicates a clear schema modeling issue.
@@ -373,7 +373,7 @@ schemata document --descriptor-path=src/test/resources/descriptors/entities.desc
 🏃 To see of Schemata Score
 
 ```shell
-./score.sh org.schemata.schema.CampaignCategoryTracker
+./score.sh org.protocol.schema.CampaignCategoryTracker
 ```
 
 ## Using protobuf descriptors for your own data model
@@ -381,7 +381,7 @@ schemata document --descriptor-path=src/test/resources/descriptors/entities.desc
 Compile the protobuf descriptors using `protoc` to output binary [google.protobuf.FileDescriptorSet](https://github.com/protocolbuffers/protobuf/blob/b48ba578dd01adfebeb4fac0887db1eeb163e00f/src/google/protobuf/descriptor.proto#L57-L59) files.
 
 ```shell
-protoc --include-imports --descriptor_set_out=mymodel.desc -I path/to/schema -I path/to/schemata/schemas path/to/schema/**/*.proto
+protoc --include-imports --descriptor_set_out=mymodel.desc -I path/to/schema -I path/to/protocol/schemas path/to/schema/**/*.proto
 
 ./score.sh validate --descriptor-path=mymodel.desc
 ```
