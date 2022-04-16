@@ -1,4 +1,4 @@
-<img align="center" src="../asset/logo.png" alt="Schemata logo"/>
+<img align="center" src="https://github.com/ananthdurai/schemata/blob/main/asset/logo.png" alt="Schemata logo"/>
 
 # Schemata
 
