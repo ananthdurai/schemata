@@ -24,17 +24,16 @@ import static picocli.CommandLine.Parameters;
 public class SchemataExecutor {
 
   private List<Schema> schemaList;
-  private final SchemaParser parser;
 
-  public SchemataExecutor(SchemaParser parser) {
-    this.parser = parser;
+  public SchemataExecutor() {
   }
 
   @Option(names = {"-p", "--descriptor-path"}, description = "Path to descriptor file", scope = ScopeType.INHERIT)
   private File path;
 
   @Command(description = "Validate schema")
-  public int validate() throws Exception {
+  public int validate()
+      throws Exception {
     System.out.println("entered in validate");
     loadSchema();
     return new SchemaValidatorApp(schemaList).call();
@@ -42,18 +41,20 @@ public class SchemataExecutor {
 
   @Command(description = "Calculate protocol score")
   public int score(@Parameters(paramLabel = "<schema>", description = "fully qualified message name") String schema)
-          throws Exception {
+      throws Exception {
     loadSchema();
     return new SchemaScoreApp(schemaList, schema).call();
   }
 
   @Command(description = "Document a schema as JSON")
-  public int document() throws Exception {
+  public int document()
+      throws Exception {
     loadSchema();
     return new DocumentApp(schemaList).call();
   }
 
-  private void loadSchema() throws IOException, Descriptors.DescriptorValidationException {
+  private void loadSchema()
+      throws IOException, Descriptors.DescriptorValidationException {
     Loader loader;
 
     if (path == null) {
@@ -64,6 +65,6 @@ public class SchemataExecutor {
     }
 
     var descriptors = loader.loadDescriptors();
-    schemaList = parser.parse(descriptors);
+    schemaList = new SchemaParser().parse(descriptors);
   }
 }
