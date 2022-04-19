@@ -110,7 +110,6 @@
               <inputDirectories>
                 <include>src/org/schemata/protobuf</include>
               </inputDirectories>
-              <outputDirectory>src/main/java</outputDirectory>
             </configuration>
           </execution>
 
