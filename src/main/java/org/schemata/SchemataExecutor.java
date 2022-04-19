@@ -5,9 +5,9 @@ import org.schemata.app.DocumentApp;
 import org.schemata.app.SchemaScoreApp;
 import org.schemata.app.SchemaValidatorApp;
 import org.schemata.domain.Schema;
-import org.schemata.parser.Loader;
-import org.schemata.parser.ProtoFileDescriptorSetLoader;
-import org.schemata.parser.SchemaParser;
+import org.schemata.parser.proto.Loader;
+import org.schemata.parser.proto.ProtoFileDescriptorSetLoader;
+import org.schemata.parser.proto.SchemaParser;
 import picocli.CommandLine.Option;
 import picocli.CommandLine.ScopeType;
 

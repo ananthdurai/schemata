@@ -9,6 +9,8 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.schemata.ResourceLoader;
 import org.schemata.domain.Schema;
+import org.schemata.parser.proto.ProtoFileDescriptorSetLoader;
+import org.schemata.parser.proto.SchemaParser;
 
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
