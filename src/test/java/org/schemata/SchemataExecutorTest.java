@@ -16,7 +16,7 @@ public class SchemataExecutorTest {
   @BeforeAll
   static void setup() {
     var parser = new SchemaParser();
-    var executor = new SchemataExecutor(parser);
+    var executor = new SchemataExecutor();
     cmd = new CommandLine(executor);
   }
 
