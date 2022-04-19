@@ -15,8 +15,8 @@ import org.schemata.ResourceLoader;
 import org.schemata.domain.Field;
 import org.schemata.domain.Schema;
 import org.schemata.exception.SchemaNotFoundException;
-import org.schemata.parser.ProtoFileDescriptorSetLoader;
-import org.schemata.parser.SchemaParser;
+import org.schemata.parser.proto.ProtoFileDescriptorSetLoader;
+import org.schemata.parser.proto.SchemaParser;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;

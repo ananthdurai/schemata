@@ -1,10 +1,11 @@
-package org.schemata.parser;
+package org.schemata.parser.proto;
 
 import com.google.protobuf.DescriptorProtos;
 import com.google.protobuf.Descriptors;
 import com.google.protobuf.ExtensionRegistry;
 import org.jgrapht.graph.DirectedAcyclicGraph;
 import org.jgrapht.util.SupplierUtil;
+import org.schemata.parser.proto.Loader;
 import org.schemata.schema.SchemataBuilder;
 
 import java.io.IOException;

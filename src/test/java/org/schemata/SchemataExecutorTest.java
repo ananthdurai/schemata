@@ -3,7 +3,7 @@ package org.schemata;
 import jdk.jfr.Description;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import org.schemata.parser.SchemaParser;
+import org.schemata.parser.proto.SchemaParser;
 import picocli.CommandLine;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;

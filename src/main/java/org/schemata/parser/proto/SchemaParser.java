@@ -1,4 +1,4 @@
-package org.schemata.parser;
+package org.schemata.parser.proto;
 
 import com.google.protobuf.Descriptors;
 import org.schemata.domain.Field;
