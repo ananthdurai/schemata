@@ -1,4 +1,4 @@
-package org.schemata.parser;
+package org.schemata.provider.protobuf;
 
 import com.google.protobuf.Descriptors;
 
@@ -9,8 +9,6 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.schemata.ResourceLoader;
 import org.schemata.domain.Schema;
-import org.schemata.parser.proto.ProtoFileDescriptorSetLoader;
-import org.schemata.parser.proto.SchemaParser;
 
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -18,7 +16,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 
-public class SchemaParserTest {
+public class ProtoProcessorTest {
 
   private static Schema userSchema;
 
@@ -28,7 +26,7 @@ public class SchemaParserTest {
 
     var stream = new FileInputStream(ResourceLoader.getDescriptorsPath());
     var protoFileDescriptorLoader = new ProtoFileDescriptorSetLoader(stream);
-    var parser = new SchemaParser();
+    var parser = new ProtoProcessor();
     var schemaList = parser.parse(protoFileDescriptorLoader.loadDescriptors());
     assertAll("User Schema Sanity Check", () -> assertNotNull(schemaList), () -> assertEquals(14, schemaList.size()));
     userSchema = schemaList.stream().filter(s -> s.name().equalsIgnoreCase("org.schemata.schema.User")).toList().get(0);

@@ -1,4 +1,4 @@
-package org.schemata.parser.proto;
+package org.schemata.provider.protobuf;
 
 import com.google.protobuf.Descriptors;
 import org.schemata.domain.Field;
@@ -8,7 +8,7 @@ import org.schemata.schema.SchemataBuilder;
 import java.util.*;
 
 
-public class SchemaParser {
+public class ProtoProcessor {
   private final boolean debug = false;
 
   private static final Set<String> INCLUDED_PRIMITIVE_TYPES = Set.of("google.protobuf.Timestamp");

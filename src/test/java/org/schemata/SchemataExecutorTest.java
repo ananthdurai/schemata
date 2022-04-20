@@ -3,7 +3,7 @@ package org.schemata;
 import jdk.jfr.Description;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import org.schemata.parser.proto.SchemaParser;
+import org.schemata.provider.protobuf.ProtoProcessor;
 import picocli.CommandLine;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -15,7 +15,7 @@ public class SchemataExecutorTest {
 
   @BeforeAll
   static void setup() {
-    var parser = new SchemaParser();
+    var parser = new ProtoProcessor();
     var executor = new SchemataExecutor();
     cmd = new CommandLine(executor);
   }
