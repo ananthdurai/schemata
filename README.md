@@ -352,9 +352,9 @@ make package or mvn clean package
 ```
 alias schemata="java -jar target/schemata-1.0.jar"
 schemata --help
-schemata score --descriptor-path=src/test/resources/descriptors/entities.desc org.schemata.schema.CampaignCategoryTrackerEvent
-schemata validate --descriptor-path=src/test/resources/descriptors/entities.desc # this has some validation errors you can inspect
-schemata document --descriptor-path=src/test/resources/descriptors/entities.desc # see JSON representation of schema
+schemata score --source=src/test/resources/descriptors/entities.desc --provider=PROTOBUF org.schemata.schema.CampaignCategoryTrackerEvent
+schemata validate --source=src/test/resources/descriptors/entities.desc --provider=PROTOBUF # this has some validation errors you can inspect
+schemata document --source=src/test/resources/descriptors/entities.desc --provider=PROTOBUF # see JSON representation of schema
 ```
 
 ### Via convenience scripts
@@ -383,7 +383,7 @@ Compile the protobuf descriptors using `protoc` to output binary [google.protobu
 ```shell
 protoc --include-imports --descriptor_set_out=mymodel.desc -I path/to/schema -I path/to/protocol/schemas path/to/schema/**/*.proto
 
-./score.sh validate --descriptor-path=mymodel.desc
+./score.sh validate -s=mymodel.desc -p=PROTOBUF
 ```
 
 ## InProgress:
