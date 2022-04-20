@@ -1,4 +1,4 @@
-package org.schemata.parser.proto;
+package org.schemata.provider.protobuf;
 
 import com.google.protobuf.Descriptors;
 import com.google.protobuf.Descriptors.Descriptor;

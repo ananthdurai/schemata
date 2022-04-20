@@ -15,8 +15,8 @@ import org.schemata.ResourceLoader;
 import org.schemata.domain.Field;
 import org.schemata.domain.Schema;
 import org.schemata.exception.SchemaNotFoundException;
-import org.schemata.parser.proto.ProtoFileDescriptorSetLoader;
-import org.schemata.parser.proto.SchemaParser;
+import org.schemata.provider.protobuf.ProtoFileDescriptorSetLoader;
+import org.schemata.provider.protobuf.ProtoProcessor;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -31,7 +31,7 @@ public class SchemaGraphTest {
       throws IOException, Descriptors.DescriptorValidationException {
     var stream = new FileInputStream(ResourceLoader.getDescriptorsPath());
     var protoFileDescriptorLoader = new ProtoFileDescriptorSetLoader(stream);
-    var parser = new SchemaParser();
+    var parser = new ProtoProcessor();
     var schemaList = parser.parse(protoFileDescriptorLoader.loadDescriptors());
     graph = new SchemaGraph(schemaList);
   }

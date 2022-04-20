@@ -22,6 +22,9 @@
     <jgrapht.version>1.5.1</jgrapht.version>
     <picocli.version>4.6.2</picocli.version>
     <jackson.version>2.13.1</jackson.version>
+    <commons-collections4.version>4.4</commons-collections4.version>
+    <logback.version>1.2.11</logback.version>
+    <slf4j.version>1.7.36</slf4j.version>
   </properties>
 
   <dependencies>
@@ -60,7 +63,7 @@
     <dependency>
       <groupId>org.apache.commons</groupId>
       <artifactId>commons-collections4</artifactId>
-      <version>4.4</version>
+      <version>${commons-collections4.version}</version>
     </dependency>
     <dependency>
       <groupId>info.picocli</groupId>
@@ -71,6 +74,22 @@
       <groupId>com.github.os72</groupId>
       <artifactId>protoc-jar</artifactId>
       <version>${protoc-jar.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>ch.qos.logback</groupId>
+      <artifactId>logback-classic</artifactId>
+      <version>${logback.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>ch.qos.logback</groupId>
+      <artifactId>logback-core</artifactId>
+      <version>${logback.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-api</artifactId>
+      <version>${slf4j.version}</version>
     </dependency>
   </dependencies>
   <build>
@@ -116,7 +135,9 @@
           <execution>
             <id>generate-proto-test-descriptors</id>
             <phase>generate-test-sources</phase>
-            <goals><goal>run</goal></goals>
+            <goals>
+              <goal>run</goal>
+            </goals>
             <configuration>
               <protocVersion>${protoc.version}</protocVersion>
               <includeStdTypes>true</includeStdTypes>
