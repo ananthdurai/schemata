@@ -1,2 +1,2 @@
 #!/bin/bash
-java -jar target/schemata-1.0.jar document --descriptor-path=src/test/resources/descriptors/entities.desc
+java -jar target/schemata-1.0.jar document --source=src/test/resources/descriptors/entities.desc -p=PROTOBUF
