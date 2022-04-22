@@ -13,7 +13,7 @@ import java.util.stream.Stream;
 import org.schemata.domain.EventType;
 import org.schemata.domain.Field;
 import org.schemata.domain.Schema;
-import org.schemata.domain.Type;
+import org.schemata.domain.SchemaType;
 import org.schemata.exception.SchemaParserException;
 import org.schemata.provider.SchemaParser;
 
@@ -85,7 +85,7 @@ public class AvroSchemaParser implements SchemaParser {
     builder.owner(schema.getProp(Schema.Prop.OWNER));
     builder.domain(schema.getProp(Schema.Prop.DOMAIN));
     builder.status(schema.getProp(Schema.Prop.STATUS));
-    builder.type(handleEmptySchemaType(schema));
+    builder.schemaType(handleEmptySchemaType(schema));
     builder.eventType(handleEmptyEventType(schema));
     builder.teamChannel(schema.getProp(Schema.Prop.TEAM_CHANNEL));
     builder.alertChannel(schema.getProp(Schema.Prop.ALERT_CHANNEL));
@@ -113,7 +113,7 @@ public class AvroSchemaParser implements SchemaParser {
   }
 
   private String handleEmptySchemaType(org.apache.avro.Schema schema) {
-    return schema.getProp(Schema.Prop.SCHEMA_TYPE) == null ? Type.UNKNOWN.name()
+    return schema.getProp(Schema.Prop.SCHEMA_TYPE) == null ? SchemaType.UNKNOWN.name()
         : schema.getProp(Schema.Prop.SCHEMA_TYPE);
   }
 

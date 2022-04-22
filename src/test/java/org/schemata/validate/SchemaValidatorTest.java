@@ -17,7 +17,7 @@ public class SchemaValidatorTest {
     builder.description("Schema Description");
     builder.owner("Growth");
     builder.domain("Core");
-    builder.type("ENTITY");
+    builder.schemaType("ENTITY");
     assertEquals(Status.ERROR, new SchemaValidator().apply(builder.build()).status());
   }
 
@@ -29,7 +29,7 @@ public class SchemaValidatorTest {
     builder.description("Schema Description");
     builder.owner("Growth");
     builder.domain("Core");
-    builder.type("ENTITY");
+    builder.schemaType("ENTITY");
     assertEquals(Status.SUCCESS, new SchemaValidator().apply(builder.build()).status());
   }
 
@@ -40,7 +40,7 @@ public class SchemaValidatorTest {
     builder.description("Schema Description");
     builder.owner("Growth");
     builder.domain("Core");
-    builder.type("EVENT");
+    builder.schemaType("EVENT");
     assertEquals(Status.SUCCESS, new SchemaValidator().apply(builder.build()).status());
   }
 
@@ -50,7 +50,7 @@ public class SchemaValidatorTest {
     Schema.Builder builder = new Schema.Builder("SchemaName", List.of(fieldBuilder.build()));
     builder.owner("Growth");
     builder.domain("Core");
-    builder.type("EVENT");
+    builder.schemaType("EVENT");
     assertEquals(Status.ERROR, new SchemaValidator().apply(builder.build()).status());
   }
 
@@ -60,7 +60,7 @@ public class SchemaValidatorTest {
     Schema.Builder builder = new Schema.Builder("SchemaName", List.of(fieldBuilder.build()));
     builder.description("Schema Description");
     builder.domain("Core");
-    builder.type("EVENT");
+    builder.schemaType("EVENT");
     assertEquals(Status.ERROR, new SchemaValidator().apply(builder.build()).status());
   }
 
@@ -70,7 +70,7 @@ public class SchemaValidatorTest {
     Schema.Builder builder = new Schema.Builder("SchemaName", List.of(fieldBuilder.build()));
     builder.description("Schema Description");
     builder.owner("Growth");
-    builder.type("EVENT");
+    builder.schemaType("EVENT");
     assertEquals(Status.ERROR, new SchemaValidator().apply(builder.build()).status());
   }
 }

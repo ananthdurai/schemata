@@ -4,7 +4,7 @@ import java.io.IOException;
 import org.junit.jupiter.api.Test;
 import org.schemata.ResourceLoader;
 import org.schemata.domain.EventType;
-import org.schemata.domain.Type;
+import org.schemata.domain.SchemaType;
 
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -57,7 +57,7 @@ public class AvroSchemaParserTest {
     assertAll("Assert schema properties",
         () -> assertEquals("org.schemata.schema.Brand", schema.name()),
         () -> assertEquals("This is the description of the Brand table", schema.description()),
-        () -> assertEquals(Type.ENTITY.name(), schema.type()),
+        () -> assertEquals(SchemaType.ENTITY.name(), schema.type()),
         () -> assertEquals(EventType.NONE.name(), schema.eventType()),
         () -> assertEquals(3, schema.fieldList().size())
     );

@@ -8,7 +8,7 @@ option java_package = "org.schemata.schema";
 option java_outer_classname = "SchemataBuilder";
 
 // MessageType captures the type of the stream. There are two types of stream.
-enum Type {
+enum SchemaType {
   // This is an invalid state. If the entity defined as unknown the validator should throw an exception.
   UNKNOWN = 0;
   //Entity streams can be mutated in the downstream services. Entity streams often used to represent the current
@@ -68,7 +68,7 @@ extend google.protobuf.MessageOptions {
   // Other possible domains are `sales`, `marketing`, `product` etc
   string domain = 60003;
   // Mandatory Metadata: define the type of the message.
-  Type type = 60004;
+  SchemaType schema_type = 60004;
   // Status of the entity. You can have `testing`, `production` or `staging` depends on the lifecycle of schema definition.
   string status = 60005;
   // Slack or Teams channel name to communicate with the team which owns ths entity
