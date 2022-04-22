@@ -22,7 +22,7 @@ message Campaign {
   option(message_core).see_also = "db.campaign MySQL table";
   option(owner) = "Marketing";
   option(domain) = "Growth";
-  option(type) = ENTITY;
+  option(schema_type) = ENTITY;
   option(team_channel) = "#team-growth";
   option(alert_channel) = "#alerts-growth";
 
@@ -41,7 +41,7 @@ message CampaignEvent {
   option(message_core).description = "This is the description of the Campaign activity table";
   option(owner) = "Marketing";
   option(domain) = "Growth";
-  option(type) = EVENT;
+  option(schema_type) = EVENT;
   option(event_type) = LIFECYCLE;
   option(team_channel) = "#team-growth";
   option(alert_channel) = "#alerts-growth";
@@ -60,7 +60,7 @@ message CampaignCategoryTrackerEvent {
   option(message_core).description = "This is the description of the Campaign activity table";
   option(owner) = "Marketing";
   option(domain) = "Growth";
-  option(type) = EVENT;
+  option(schema_type) = EVENT;
   option(event_type) = ACTIVITY;
   option(team_channel) = "#team-growth";
   option(alert_channel) = "#alerts-growth";
@@ -77,7 +77,7 @@ message CampaignProductTrackerEvent {
   option(message_core).description = "This is the description of the Campaign activity table";
   option(owner) = "Marketing";
   option(domain) = "Growth";
-  option(type) = EVENT;
+  option(schema_type) = EVENT;
   option(event_type) = ACTIVITY;
   option(team_channel) = "#team-growth";
   option(alert_channel) = "#alerts-growth";

@@ -1,5 +1,5 @@
 package org.schemata.domain;
 
-public enum Type {
+public enum SchemaType {
   ENTITY, EVENT, UNKNOWN
 }

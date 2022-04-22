@@ -42,7 +42,7 @@ public class ProtoProcessor {
         }
         case "owner" -> builder.owner(Objects.toString(entry.getValue(), ""));
         case "domain" -> builder.domain(Objects.toString(entry.getValue(), ""));
-        case "type" -> builder.type(entry.getValue().toString());
+        case "schema_type" -> builder.schemaType(entry.getValue().toString());
         case "event_type" -> builder.eventType(entry.getValue().toString());
         case "status" -> builder.status(Objects.toString(entry.getValue(), ""));
         case "team_channel" -> builder.teamChannel(Objects.toString(entry.getValue(), ""));
@@ -86,8 +86,8 @@ public class ProtoProcessor {
   }
 
   private boolean isAnnotated(Descriptors.Descriptor descriptor) {
-    return !descriptor.getOptions().getExtension(org.schemata.schema.SchemataBuilder.type)
-        .equals(SchemataBuilder.Type.UNKNOWN);
+    return !descriptor.getOptions().getExtension(org.schemata.schema.SchemataBuilder.schemaType)
+        .equals(SchemataBuilder.SchemaType.UNKNOWN);
   }
 
   private boolean isPrimitiveType(Descriptors.FieldDescriptor.Type type, String typeName) {

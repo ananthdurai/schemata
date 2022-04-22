@@ -9,7 +9,7 @@ public record Schema(String name, String description, String comment, String see
 
   private Schema(Builder builder) {
     this(builder.name, builder.description, builder.comment, builder.seeAlso, builder.reference, builder.owner,
-        builder.domain, builder.status, builder.type.name(), builder.eventType.name(), builder.teamChannel,
+        builder.domain, builder.status, builder.schemaType.name(), builder.eventType.name(), builder.teamChannel,
         builder.alertChannel, builder.complianceOwner, builder.complianceChannel, builder.fieldList);
   }
 
@@ -22,7 +22,7 @@ public record Schema(String name, String description, String comment, String see
     String owner;
     String domain;
     String status;
-    Type type;
+    SchemaType schemaType;
     EventType eventType;
     String teamChannel;
     String alertChannel;
@@ -71,8 +71,8 @@ public record Schema(String name, String description, String comment, String see
       return this;
     }
 
-    public Builder type(String typeValue) {
-      this.type = Type.valueOf(typeValue);
+    public Builder schemaType(String schemaTypeValue) {
+      this.schemaType = SchemaType.valueOf(schemaTypeValue);
       return this;
     }
 

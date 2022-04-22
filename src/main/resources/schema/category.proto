@@ -14,7 +14,7 @@ message Category {
   option(message_core).see_also = "db.category MySQL table";
   option(owner) = "Platform";
   option(domain) = "Core";
-  option(type) = ENTITY;
+  option(schema_type) = ENTITY;
   option(team_channel) = "#team-platform";
   option(alert_channel) = "#alerts-platform";
 
@@ -33,7 +33,7 @@ message CategoryEvent {
   option(message_core).description = "This is the description of the Category activity table";
   option(owner) = "Platform";
   option(domain) = "Core";
-  option(type) = EVENT;
+  option(schema_type) = EVENT;
   option(event_type) = LIFECYCLE;
   option(team_channel) = "#team-platform";
   option(alert_channel) = "#alerts-platform";
