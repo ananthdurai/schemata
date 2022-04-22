@@ -1,0 +1,9 @@
+{"namespace": "org.schemata.schema",
+  "type": "record",
+  "name": "Brand",
+  "fields": [
+    {"name": "id", "type": "int"},
+    {"name": "name",  "type": ["string", "null"]},
+    {"name": "is_active", "type": "boolean"}
+  ]
+}

@@ -1,7 +1,6 @@
 package org.schemata.domain;
 
 import java.util.List;
-import org.schemata.schema.SchemataBuilder;
 
 
 public record Schema(String name, String description, String comment, String seeAlso, String reference, String owner,
@@ -23,8 +22,8 @@ public record Schema(String name, String description, String comment, String see
     String owner;
     String domain;
     String status;
-    SchemataBuilder.Type type;
-    SchemataBuilder.EventType eventType;
+    Type type;
+    EventType eventType;
     String teamChannel;
     String alertChannel;
     String complianceOwner;
@@ -34,7 +33,7 @@ public record Schema(String name, String description, String comment, String see
     public Builder(String name, List<Field> fieldList) {
       this.name = name;
       this.fieldList = fieldList;
-      this.eventType = SchemataBuilder.EventType.NONE;
+      this.eventType = EventType.NONE;
     }
 
     public Builder description(String description) {
@@ -73,12 +72,12 @@ public record Schema(String name, String description, String comment, String see
     }
 
     public Builder type(String typeValue) {
-      this.type = SchemataBuilder.Type.valueOf(typeValue);
+      this.type = Type.valueOf(typeValue);
       return this;
     }
 
     public Builder eventType(String eventTypeValue) {
-      this.eventType = SchemataBuilder.EventType.valueOf(eventTypeValue);
+      this.eventType = EventType.valueOf(eventTypeValue);
       return this;
     }
 
@@ -105,5 +104,22 @@ public record Schema(String name, String description, String comment, String see
     public Schema build() {
       return new Schema(this);
     }
+  }
+
+  public static final class Prop {
+
+    public static final String DESC = "desc";
+    public static final String COMMENT = "comment";
+    public static final String SEE_ALSO = "see_also";
+    public static final String REFERENCE = "reference";
+    public static final String OWNER = "owner";
+    public static final String DOMAIN = "domain";
+    public static final String STATUS = "status";
+    public static final String SCHEMA_TYPE = "schema_type";
+    public static final String EVENT_TYPE = "event_type";
+    public static final String TEAM_CHANNEL = "team_channel";
+    public static final String ALERT_CHANNEL = "alert_channel";
+    public static final String COMPLIANCE_OWNER = "compliance_owner";
+    public static final String COMPLIANCE_CHANNEL = "compliance_channel";
   }
 }

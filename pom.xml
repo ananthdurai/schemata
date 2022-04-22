@@ -25,6 +25,7 @@
     <commons-collections4.version>4.4</commons-collections4.version>
     <logback.version>1.2.11</logback.version>
     <slf4j.version>1.7.36</slf4j.version>
+    <avro.version>1.11.0</avro.version>
   </properties>
 
   <dependencies>
@@ -91,6 +92,14 @@
       <artifactId>slf4j-api</artifactId>
       <version>${slf4j.version}</version>
     </dependency>
+
+    <dependency>
+      <groupId>org.apache.avro</groupId>
+      <artifactId>avro</artifactId>
+      <version>${avro.version}</version>
+    </dependency>
+
+
   </dependencies>
   <build>
     <plugins>

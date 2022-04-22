@@ -1,0 +1,35 @@
+{
+  "namespace": "org.schemata.schema",
+  "type": "record",
+  "name": "Brand",
+  "desc": "This is the description of the Brand table",
+  "comment": "The comment added after thought",
+  "see_also": "db.brand MySQL table",
+  "owner": "Platform",
+  "domain": "Core",
+  "schema_type": "ENTITY",
+  "team_channel": "#team-platform",
+  "alert_channel": "#alerts-platform",
+  "fields": [
+    {
+      "name": "id",
+      "type": "int",
+      "is_primary_key": "true",
+      "desc": "Unique identifier for Brand"
+    },
+    {
+      "name": "name",
+      "type": [
+        "string",
+        "null"
+      ],
+      "desc": "Name of the Brand"
+    },
+    {
+      "name": "is_active",
+      "type": "boolean",
+      "desc": "define the active status of the Brand. `true` == active; `false` = inactive`",
+      "comment": "should refactor to non-binary status"
+    }
+  ]
+}

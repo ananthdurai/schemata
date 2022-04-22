@@ -11,4 +11,19 @@ public class ResourceLoader {
     String absolutePath = resourceDirectory.toFile().getAbsolutePath();
     return absolutePath + "/descriptors/entities.desc";
   }
+
+  public static String getAvroSchemaPath() {
+    Path resourceDirectory = Paths.get("src", "test", "resources");
+    return resourceDirectory.toFile().getAbsolutePath();
+  }
+
+  public static String getBrandSchemaPath() {
+    Path resourceDirectory = Paths.get("src", "test", "resources");
+    return resourceDirectory.toFile().getAbsolutePath() + "/avro_schema/brand.avsc";
+  }
+
+  public static String getInValidBrandSchemaPath() {
+    Path resourceDirectory = Paths.get("src", "test", "resources");
+    return resourceDirectory.toFile().getAbsolutePath() + "/avro_schema/brand_dummy.avsc";
+  }
 }
