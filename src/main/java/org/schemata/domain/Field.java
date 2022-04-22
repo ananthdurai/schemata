@@ -76,4 +76,14 @@ public record Field(String schema, String name, String dataType, boolean isPrimi
       return new Field(this);
     }
   }
+
+  public static class Prop {
+    public static final String DESC = "desc";
+    public static final String COMMENT = "comment";
+    public static final String SEE_ALSO = "see_also";
+    public static final String REFERENCE = "reference";
+    public static final String IS_CLASSIFIED = "is_classified";
+    public static final String IS_PRIMARY_KEY = "is_primary_key";
+    public static final String PRODUCT_TYPE = "product_type";
+  }
 }
