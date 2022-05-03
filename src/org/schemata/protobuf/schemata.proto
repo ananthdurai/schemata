@@ -83,6 +83,476 @@ extend google.protobuf.MessageOptions {
   string compliance_channel = 600010;
 }
 
+enum ClassificationType {
+  //Identifiers used by developers to track users for advertising purposes. These include Google Play Advertising IDs,
+  // Amazon Advertising IDs, Apple's identifierForAdvertising (IDFA), and Apple's identifierForVendor (IDFV).
+  ADVERTISING_ID = 0;
+  // An age measured in months or years.
+  AGE = 1;
+  // A credit card number is 12 to 19 digits long. They are used for payment transactions globally.
+  CREDIT_CARD_NUMBER = 2;
+
+  // A credit card track number is a variable length alphanumeric string. It is used to store key cardholder information.
+  CREDIT_CARD_TRACK_NUMBER = 3;
+
+  // A date. This infoType includes most date formats, including the names of common world holidays.
+  DATE = 4;
+
+
+  // A date that is identified by context as a date of birth. Note: Not recommended for use during latency sensitive operations.
+  DATE_OF_BIRTH = 5;
+
+  // A domain name as defined by the DNS standard.
+  DOMAIN_NAME = 6;
+
+  // An email address identifies the mailbox that emails are sent to or from. The maximum length of the domain name is 255 characters, and the maximum length of the local-part is 64 characters.
+  EMAIL_ADDRESS = 7;
+
+  // A person’s ethnic group.
+  ETHNIC_GROUP = 8;
+
+  // A common female name. Note: Not recommended for use during latency sensitive operations.
+  FEMALE_NAME = 9;
+
+  // A first name is defined as the first part of a PERSON_NAME. Note: Not recommended for use during latency sensitive operations.
+  FIRST_NAME = 10;
+
+  // A person’s gender identity.
+  GENDER = 11;
+
+  // Alphanumeric and special character strings that may be personally identifying but do not belong to a well-defined category, such as user IDs or medical record numbers.
+  GENERIC_ID = 12;
+
+  // An International Bank Account Number (IBAN) is an internationally agreed-upon method for identifying bank accounts defined by the International Standard of Organization (ISO) 13616:2007 standard. The European Committee for Banking Standards (ECBS) created ISO 13616:2007. An IBAN consists of up to 34 alphanumeric characters, including elements such as a country code or account number.
+  IBAN_CODE = 13;
+
+  // An HTTP cookie is a standard way of storing data on a per website basis. This detector will find headers containing these cookies.
+  HTTP_COOKIE = 14;
+
+  // An Integrated Circuit Card Identifier (ICCID) is used to uniquely identify each SIM card. It includes information, such as the country the card is active in and the mobile network code.
+  ICCID_NUMBER = 15;
+
+  // The International Classification of Diseases, Ninth Revision, Clinical Modification (ICD-9-CM) lexicon is used to assign diagnostic and procedure codes associated with inpatient, outpatient, and physician office use in the United States. The US National Center for Health Statistics (NCHS) created the ICD-9-CM lexicon. It is based on the ICD-9 lexicon, but provides for more morbidity detail. The ICD-9-CM lexicon is updated annually on October 1.
+  ICD9_CODE = 16;
+
+  //  Like ICD-9-CM codes, the International Classification of Diseases, Tenth Revision, Clinical Modification (ICD-10-CM) lexicon is a series of diagnostic codes. The World Health Organization (WHO) publishes the ICD-10-CM lexicon to describe causes of morbidity and mortality.
+  ICD10_CODE = 17;
+
+  // An International Mobile Equipment Identity (IMEI) hardware identifier, used to identify mobile phones.
+  IMEI_HARDWARE_ID = 18;
+
+  // An International Mobile Subscriber Identity (IMEI) identifier, used to identify users on a mobile network.
+  IMSI_ID = 19;
+
+  // An Internet Protocol (IP) address (either IPv4 or IPv6).
+  IP_ADDRESS = 20;
+
+  // A last name is defined as the last part of a PERSON_NAME.
+  LAST_NAME = 21;
+
+
+  // A physical address or location.
+  LOCATION = 22;
+
+  // A media access control address (MAC address), which is an identifier for a network adapter.
+  MAC_ADDRESS = 23;
+  // A local media access control address (MAC address), which is an identifier for a network adapter.
+  MAC_ADDRESS_LOCAL = 24;
+  //A common male name.
+  MALE_NAME = 25;
+
+  // Terms that commonly refer to a person's medical condition or health.
+  MEDICAL_TERM = 26;
+
+  // A name of a chain store, business or organization.
+  ORGANIZATION_NAME = 27;
+
+
+  // A passport number that matches passport numbers for the following countries: Australia, Canada, China, France, Germany, Japan, Korea, Mexico, The Netherlands, Poland, Singapore, Spain, Sweden, Taiwan, United Kingdom, and the United States.
+  PASSPORT = 28;
+
+  //  A full person name, which can include first names, middle names or initials, and last names. Note: Not recommended for use during latency sensitive operations.
+  PERSON_NAME = 29;
+
+  // A telephone number.
+  PHONE_NUMBER = 30;
+
+  // A street address. Note: Not recommended for use during latency sensitive operations.
+  STREET_ADDRESS = 31;
+
+  // A SWIFT code is the same as a Bank Identifier Code (BIC). It's a unique identification code for a particular bank. These codes are used when transferring money between banks, particularly for international wire transfers. Banks also use the codes for exchanging other messages.
+  SWIFT_CODE = 32;
+  // A timestamp of a specific time of day.
+  TIME = 33;
+
+  // A Uniform Resource Locator (URL).
+  URL = 34;
+
+  // A vehicle identification number (VIN) is a unique 17-digit code assigned to every on-road motor vehicle.
+  VEHICLE_IDENTIFICATION_NUMBER = 35;
+
+  // The infoType detectors in this section detect credentials and other secret data.
+  Credentials_And_Secrets = 36;
+
+
+  // An authentication token is a machine-readable way of determining whether a particular request has been authorized for a user. This detector currently identifies tokens that comply with OAuth or Bearer authentication.
+  AUTH_TOKEN = 37;
+
+  // Amazon Web Services account access keys.
+  AWS_CREDENTIALS = 38;
+
+  // Microsoft Azure certificate credentials for application authentication.
+  AZURE_AUTH_TOKEN = 39;
+
+  // A basic authentication header is an HTTP header used to identify a user to a server. It is part of the HTTP specification in RFC 1945, section 11.
+  BASIC_AUTH_HEADER = 40;
+
+  // An encryption key within configuration, code, or log text.
+  ENCRYPTION_KEY = 41;
+
+  // Google Cloud API key. An encrypted string that is used when calling Google Cloud APIs that don't need to access private user data.
+  GCP_API_KEY = 42;
+
+  // Google Cloud service account credentials. Credentials that can be used to authenticate with Google API client libraries and service accounts.
+  GCP_CREDENTIALS = 43;
+
+  // JSON Web Token. JSON Web Token in compact form. Represents a set of claims as a JSON object that is digitally signed using JSON Web Signature.
+  JSON_WEB_TOKEN = 44;
+
+  // Clear text passwords in configs, code, and other text.
+  PASSWORD = 45;
+
+  //  A weakly hashed password is a method of storing a password that is easy to reverse engineer. The presence of such hashes often indicate that a system's security can be improved.
+  WEAK_PASSWORD_HASH = 46;
+
+  //  An XSRF token is an HTTP header that is commonly used to prevent cross-site scripting attacks. Cross-site scripting is a type of security vulnerability that can be exploited by malicious sites.
+  XSRF_TOKEN = 47;
+
+
+  // An Argentine Documento Nacional de Identidad (DNI), or national identity card, is used as the main identity document for citizens.
+  ARGENTINA_DNI_NUMBER = 100;
+
+
+  // An Australian driver's license number.
+  AUSTRALIA_DRIVERS_LICENSE_NUMBER = 200;
+
+  // A 9-digit Australian Medicare account number is issued to permanent residents of Australia (except for Norfolk island). The primary purpose of this number is to prove Medicare eligibility to receive subsidized care in Australia.
+  AUSTRALIA_MEDICARE_NUMBER = 201;
+
+  // An Australian passport number.
+  AUSTRALIA_PASSPORT = 202;
+
+  // An Australian tax file number (TFN) is a number issued by the Australian Tax Office for taxpayer identification. Every taxpaying entity, such as an individual or an organization, is assigned a unique number.
+  AUSTRALIA_TAX_FILE_NUMBER = 203;
+
+
+  // A 12-digit Belgian national identity card number.
+  BELGIUM_NATIONAL_ID_CARD_NUMBER = 300;
+
+
+  // The Brazilian Cadastro de Pessoas Físicas (CPF) number, or Natural Persons Register number, is an 11-digit number used in Brazil for taxpayer identification.
+  BRAZIL_CPF_NUMBER = 400;
+
+
+  // A Canadian bank account number.
+  CANADA_BANK_ACCOUNT = 500;
+
+  // The British Columbia Personal Health Number (PHN) is issued to citizens, permanent residents, temporary workers, students, and other individuals who are entitled to health care coverage in the Province of British Columbia.
+  CANADA_BC_PHN = 501;
+
+  // A driver's license number for each of the ten provinces in Canada (the three territories are currently not covered).
+  CANADA_DRIVERS_LICENSE_NUMBER = 502;
+
+  // The Ontario Health Insurance Plan (OHIP) number is issued to citizens, permanent residents, temporary workers, students, and other individuals who are entitled to health care coverage in the Province of Ontario.
+  CANADA_OHIP = 503;
+
+  // A Canadian passport number.
+  CANADA_PASSPORT = 504;
+
+  // The Québec Health Insurance Number (also known as the RAMQ number) is issued to citizens, permanent residents, temporary workers, students, and other individuals who are entitled to health care coverage in the Province of Québec.
+  CANADA_QUEBEC_HIN = 505;
+
+  // The Canadian Social Insurance Number (SIN) is the main identifier used in Canada for citizens, permanent residents, and people on work or study visas. With a Canadian SIN and mailing address, one can apply for health care coverage, driver's licenses, and other important services.
+  CANADA_SOCIAL_INSURANCE_NUMBER = 506;
+
+
+  // A Chilean Cédula de Identidad (CDI), or identity card, is used as the main identity document for citizens.
+  CHILE_CDI_NUMBER = 600;
+
+
+  // A Chinese resident identification number.
+  CHINA_RESIDENT_ID_NUMBER = 700;
+
+  // A Chinese passport number.
+  CHINA_PASSPORT = 701;
+
+  // A Colombian Cédula de Ciudadanía (CDC), or citizenship card, is used as the main identity document for citizens.
+  COLOMBIA_CDC_NUMBER = 800;
+
+
+  // A Personal Identification Number (CPR, Det Centrale Personregister) is a national ID number in Denmark. It is used with public agencies such as health care and tax authorities. Banks and insurance companies also use it as a customer number. The CPR number is required for people who reside in Denmark, pay tax or own property there.
+  DENMARK_CPR_NUMBER = 900;
+
+
+  // The French Carte Nationale d'Identité Sécurisée (CNI or CNIS) is the French national identity card. It's an official identity document consisting of a 12-digit identification number. This number is commonly used when opening bank accounts and when paying by check. It can sometimes be used instead of a passport or visa within the European Union (EU) and in some other countries.
+  FRANCE_CNI = 1000;
+
+  // The French Numéro d'Inscription au Répertoire (NIR) is a permanent personal identification number that's also known as the French social security number for services including healthcare and pensions.
+  FRANCE_NIR = 1001;
+
+  //  A French passport number.
+  FRANCE_PASSPORT = 1002;
+
+  // The French tax identification number is a government-issued ID for all individuals paying taxes in France.
+  FRANCE_TAX_IDENTIFICATION_NUMBER = 1003;
+
+
+  // A Finnish personal identity code, a national government identification number for Finnish citizens used on identity cards, driver's licenses and passports.
+  FINLAND_NATIONAL_ID_NUMBER = 1100;
+
+
+  // A German driver's license number.
+  GERMANY_DRIVERS_LICENSE_NUMBER = 1200;
+
+  // The German Personalausweis, or identity card, is used as the main identity document for citizens of Germany.
+  GERMANY_IDENTITY_CARD_NUMBER = 1201;
+
+  // A German passport number. The format of a German passport number is 10 alphanumeric characters, chosen from numerals 0–9 and letters C, F, G, H, J, K, L, M, N, P, R, T, V, W, X, Y, Z.
+  GERMANY_PASSPORT = 1202;
+
+  // An 11-digit German taxpayer identification number assigned to both natural-born and other legal residents of Germany for the purposes of recording tax payments.
+  GERMANY_TAXPAYER_IDENTIFICATION_NUMBER = 1203;
+
+  //  A German Schufa identification number. Schufa Holding AG is a German credit bureau whose aim is to protect clients from credit risk.
+  GERMANY_SCHUFA_ID = 1204;
+
+
+  // The 香港身份證, or Hong Kong identity card (HKIC), is used as the main identity document for citizens of Hong Kong.
+  HONG_KONG_ID_NUMBER = 1300;
+
+
+  // The Indian Aadhaar number is a 12-digit unique identity number obtained by residents of India, based on their biometric and demographic data.
+  INDIA_AADHAAR_INDIVIDUAL = 1400;
+
+  // The Indian GST identification number (GSTIN) is a unique identifier required of every business in India for taxation.
+  INDIA_GST_INDIVIDUAL = 1401;
+
+  // The Indian Personal Permanent Account Number (PAN) is a unique 10-digit alphanumeric identifier used for identification of individuals—particularly people who pay income tax. It's issued by the Indian Income Tax Department. The PAN is valid for the lifetime of the holder.
+  INDIA_PAN_INDIVIDUAL = 1402;
+
+
+  // An Indonesian Single Identity Number (Nomor Induk Kependudukan, or NIK) is the national identification number of Indonesia. The NIK is used as the basis for issuing Indonesian resident identity cards (Kartu Tanda Penduduk, or KTP), passports, driver's licenses and other identity documents.
+  INDONESIA_NIK_NUMBER = 1500;
+
+
+  // An Irish driving license number.
+  IRELAND_DRIVING_LICENSE_NUMBER = 1600;
+
+  // Eircode is an Irish postal code that uniquely identifies an address.
+  IRELAND_EIRCODE = 1601;
+
+  // An Irish (IE) passport number.
+  IRELAND_PASSPORT = 1602;
+
+  // The Irish Personal Public Service Number (PPS number, or PPSN) is a unique number for accessing social welfare benefits, public services, and information in Ireland.
+  IRELAND_PPSN = 1603;
+
+
+  // The Israel identity card number is issued to all Israeli citizens at birth by the Ministry of the Interior. Temporary residents are assigned a number when they receive temporary resident status.
+  ISRAEL_IDENTITY_CARD_NUMBER = 1700;
+
+
+  // An Italy fiscal code number is a unique 16-digit code assigned to Italian citizens as a form of identification.
+  ITALY_FISCAL_CODE = 1800;
+
+
+  //  A Japanese bank account number.
+  JAPAN_BANK_ACCOUNT = 1900;
+
+  // A Japanese driver's license number.
+  JAPAN_DRIVERS_LICENSE_NUMBER = 1901;
+
+  // The Japanese national identification number—sometimes referred to as "My Number"—is a new national ID number as of January 2016.
+  JAPAN_INDIVIDUAL_NUMBER = 1902;
+
+  // A Japanese passport number. The passport number consists of two alphabetic characters followed by seven digits.
+  JAPAN_PASSPORT = 1903;
+
+
+  // A Korean passport number.
+  KOREA_PASSPORT = 2000;
+
+  // A South Korean Social Security number.
+  KOREA_RRN = 2001;
+
+
+  // The Mexico Clave Única de Registro de Población (CURP) number, or Unique Population Registry Code or Personal Identification Code number. The CURP number is an 18-character state-issued identification number assigned by the Mexican government to citizens or residents of Mexico and used for taxpayer identification.
+  MEXICO_CURP_NUMBER = 2100;
+
+  // A Mexican passport number.
+  MEXICO_PASSPORT = 2101;
+
+
+  // A Dutch Burgerservicenummer (BSN), or Citizen's Service Number, is a state-issued identification number that's on driver's licenses, passports, and international ID cards.
+  NETHERLANDS_BSN_NUMBER = 2200;
+
+  // A Dutch passport number.
+  NETHERLANDS_PASSPORT = 2201;
+
+
+  // Norway‘s Fødselsnummer, National Identification Number, or Birth Number is assigned at birth, or on migration into the country. It is registered with the Norwegian Tax Office.
+  NORWAY_NI_NUMBER = 2300;
+
+
+  // A Paraguayan Cédula de Identidad Civil (CIC), or civil identity card, is used as the main identity document for citizens.
+  PARAGUAY_CIC_NUMBER = 2400;
+
+
+  // A Peruvian Documento Nacional de Identidad (DNI), or national identity card, is used as the main identity document for citizens.
+  PERU_DNI_NUMBER = 2500;
+
+
+  // The PESEL number is the national identification number used in Poland. It is mandatory for all permanent residents of Poland, and for temporary residents staying there longer than 2 months. It is assigned to just one person and cannot be changed.
+  POLAND_PESEL_NUMBER = 2600;
+
+  // The Polish identity card number. is a government identification number for Polish citizens. Every citizen older than 18 years must have an identity card. The local Office of Civic Affairs issues the card, and each card has its own unique number.
+  POLAND_NATIONAL_ID_NUMBER = 2601;
+
+  // A Polish passport number. Polish passport is an international travel document for Polish citizens. It can also be used as a proof of Polish citizenship.
+  POLAND_PASSPORT = 2602;
+
+
+  // A Portuguese Cartão de cidadão (CDC), or Citizen Card, is used as the main identity, Social Security, health services, taxpayer, and voter document for citizens.
+  PORTUGAL_CDC_NUMBER = 2700;
+
+
+  // A unique set of nine alpha-numeric characters on the Singapore National Registration Identity Card.
+  SINGAPORE_NATIONAL_REGISTRATION_ID_NUMBER = 2800;
+
+  // A Singaporean passport number.
+  SINGAPORE_PASSPORT = 2801;
+
+
+  //  A South Africa ID number.
+  SOUTH_AFRICA_ID_NUMBER = 2900;
+
+
+  // The Spanish Código de Identificación Fiscal (CIF) was the tax identification system used in Spain for legal entities until 2008. It was then replaced by the Número de Identificación Fiscal (NIF) for natural and juridical persons.
+  SPAIN_CIF_NUMBER = 3000;
+
+  // A Spain national identity number.
+  SPAIN_DNI_NUMBER = 3001;
+
+  // A Spanish driver's license number.
+  SPAIN_DRIVERS_LICENSE_NUMBER = 3002;
+
+  // The Spanish Número de Identificación de Extranjeros (NIE) is an identification number for foreigners living or doing business in Spain. An NIE number is needed for key transactions such as opening a bank account, buying a car, or setting up a mobile phone contract.
+  SPAIN_NIE_NUMBER = 3003;
+
+  // The Spanish Número de Identificación Fiscal (NIF) is a government identification number for Spanish citizens. An NIF number is needed for key transactions such as opening a bank account, buying a car, or setting up a mobile phone contract.
+  SPAIN_NIF_NUMBER = 3004;
+
+  //  A Spanish Ordinary Passport (Pasaporte Ordinario) number. There are 4 different types of passports in Spain. This detector is for the Ordinary Passport (Pasaporte Ordinario) type, which is issued for ordinary travel, such as vacations and business trips.
+  SPAIN_PASSPORT = 3005;
+
+  // The Spanish Social Security number (Número de Afiliación a la Seguridad Social) is a 10-digit sequence that identifies a person in Spain for all interactions with the country's Social Security system.
+  SPAIN_SOCIAL_SECURITY_NUMBER = 3006;
+
+
+  // A Swedish Personal Identity Number (personnummer), a national government identification number for Swedish citizens.
+  SWEDEN_NATIONAL_ID_NUMBER = 3100;
+
+  // A Swedish passport number.
+  SWEDEN_PASSPORT = 3101;
+
+
+  // A Taiwanese passport number.
+  TAIWAN_PASSPORT = 3200;
+
+
+  // The Thai บัตรประจำตัวประชาชนไทย, or identity card, is used as the main identity document for Thai nationals.
+  THAILAND_NATIONAL_ID_NUMBER = 3300;
+
+
+  // A unique Turkish personal identification number, assigned to every citizen of Turkey.
+  TURKEY_ID_NUMBER = 3400;
+
+
+  // The Scotland Community Health Index Number (CHI number) is a 10-digit sequence used to uniquely identify a patient within National Health Service Scotland (NHS Scotland).
+  SCOTLAND_COMMUNITY_HEALTH_INDEX_NUMBER = 3500;
+
+  // A driver's license number for the United Kingdom of Great Britain and Northern Ireland (UK).
+  UK_DRIVERS_LICENSE_NUMBER = 3501;
+
+  //  A National Health Service (NHS) number is the unique number allocated to a registered user of the three public health services in England, Wales, and the Isle of Man.
+  UK_NATIONAL_HEALTH_SERVICE_NUMBER = 3502;
+
+  // The National Insurance number (NINO) is a number used in the United Kingdom (UK) in the administration of the National Insurance or social security system. It identifies people, and is also used for some purposes in the UK tax system. The number is sometimes referred to as NI No or NINO.
+  UK_NATIONAL_INSURANCE_NUMBER = 3503;
+
+  // A United Kingdom (UK) passport number.
+  UK_PASSPORT = 3504;
+
+  // A United Kingdom (UK) Unique Taxpayer Reference (UTR) number. This number, comprised of a string of 10 decimal digits, is an identifier used by the UK government to manage the taxation system. Unlike other identifiers, such as the passport number or social insurance number, the UTR is not listed on official identity cards.
+  UK_TAXPAYER_REFERENCE = 3505;
+
+
+  // An American Bankers' Committee on Uniform Security Identification Procedures (CUSIP) number is a 9-character alphanumeric code that identifies a North American financial security.
+  AMERICAN_BANKERS_CUSIP_ID = 3600;
+
+  // Drug product name or active ingredient registered by the United States Food and Drug Administration (FDA).
+  FDA_CODE = 3601;
+
+  //  A United States Adoption Taxpayer Identification Number (ATIN) is a type of United States Tax Identification Number (TIN). An ATIN is issued by the Internal Revenue Service (IRS) to individuals who are in the process of legally adopting a US citizen or resident child.
+  US_ADOPTION_TAXPAYER_IDENTIFICATION_NUMBER = 3602;
+
+  // The American Bankers Association (ABA) Routing Number (also called the transit number) is a nine-digit code. It's used to identify the financial institution that's responsible to credit or entitled to receive credit for a check or electronic transaction.
+  US_BANK_ROUTING_MICR = 3603;
+
+  //  A US Drug Enforcement Administration (DEA) number is assigned to a health care provider by the US DEA. It allows the health care provider to write prescriptions for controlled substances. The DEA number is often used as a general "prescriber number" that is a unique identifier for anyone who can prescribe medication.
+  US_DEA_NUMBER = 3604;
+
+  // A driver's license number for the United States. Format can vary depending on the issuing state.
+  US_DRIVERS_LICENSE_NUMBER = 3605;
+
+  //  A United States Employer Identification Number (EIN) is also known as a Federal Tax Identification Number, and is used to identify a business entity.
+  US_EMPLOYER_IDENTIFICATION_NUMBER = 3606;
+
+  // The US National Provider Identifier (NPI) is a unique 10-digit identification number issued to health care providers in the United States by the Centers for Medicare and Medicaid Services (CMS). The NPI has replaced the unique provider identification number (UPIN) as the required identifier for Medicare services. It's also used by other payers, including commercial healthcare insurers.
+  US_HEALTHCARE_NPI = 3607;
+
+  // A United States Individual Taxpayer Identification Number (ITIN) is a type of Tax Identification Number (TIN), issued by the Internal Revenue Service (IRS). An ITIN is a tax processing number only available for certain nonresident and resident aliens, their spouses, and dependents who cannot get a Social Security Number (SSN).
+  US_INDIVIDUAL_TAXPAYER_IDENTIFICATION_NUMBER = 3608;
+
+  // A United States passport number.
+  US_PASSPORT = 3609;
+
+  // A United States Preparer Taxpayer Identification Number (PTIN) is an identification number that all paid tax return preparers must use on US federal tax returns or claims for refund submitted to the US Internal Revenue Service (IRS).
+  US_PREPARER_TAXPAYER_IDENTIFICATION_NUMBER = 3610;
+
+  // A United States Social Security number (SSN) is a 9-digit number issued to US citizens, permanent residents, and temporary residents. This detector will not match against numbers with all zeroes in any digit group (that is, 000-##-####, ###-00-####, or ###-##-0000), against numbers with 666 in the first digit group, or against numbers whose first digit is 9.
+  US_SOCIAL_SECURITY_NUMBER = 3611;
+
+  //  A United States state name.
+  US_STATE = 3612;
+
+  // A US toll-free telephone number.
+  US_TOLLFREE_PHONE_NUMBER = 3613;
+
+  // A vehicle identification number (VIN) is a unique 17-digit code assigned to every on-road motor vehicle in North America.
+  US_VEHICLE_IDENTIFICATION_NUMBER = 3614;
+
+
+  // A Uruguayan Cédula de Identidad (CDI), or identity card, is used as the main identity document for citizens.
+  URUGUAY_CDI_NUMBER = 3700;
+
+
+  //  A Venezuelan Cédula de Identidad (CDI), or national identity card, is used as the main identity document for citizens.
+  VENEZUELA_CDI_NUMBER = 3800;
+
+
+}
+
 extend google.protobuf.FieldOptions {
   // message.description is a Mandatory Metadata
   CoreMetadata field_core = 70001;
@@ -95,4 +565,6 @@ extend google.protobuf.FieldOptions {
   string product_type = 70004;
   // Set true if the field is a primary key. This must be true if the Schema type is Entity
   bool is_primary_key = 70005;
+  // Type of the classification: Refer: https://cloud.google.com/dlp/docs/infotypes-reference
+  ClassificationType classification_type = 70006;
 }
