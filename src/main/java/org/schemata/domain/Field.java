@@ -1,13 +1,16 @@
 package org.schemata.domain;
 
+import java.util.List;
+
+
 public record Field(String schema, String name, String dataType, boolean isPrimitiveType, String description,
                     String comment, String seeAlso, String reference, boolean isClassified, String classificationLevel,
-                    boolean isPrimaryKey, String productType) {
+                    boolean isPrimaryKey, String productType, Link link, List<Depends> depends) {
 
   private Field(Builder builder) {
     this(builder.schema, builder.name, builder.dataType, builder.isPrimitiveType, builder.description, builder.comment,
         builder.seeAlso, builder.reference, builder.isClassified, builder.classificationLevel, builder.isPrimaryKey,
-        builder.productType);
+        builder.productType, builder.link, builder.depends);
   }
 
   public static class Builder {
@@ -24,6 +27,8 @@ public record Field(String schema, String name, String dataType, boolean isPrimi
     String classificationLevel;
     boolean isPrimaryKey;
     String productType;
+    Link link;
+    List<Depends> depends;
 
     public Builder(String schema, String name, String dataType, boolean isPrimitiveType) {
       this.schema = schema;
@@ -72,6 +77,16 @@ public record Field(String schema, String name, String dataType, boolean isPrimi
       return this;
     }
 
+    public Builder link(Link link) {
+      this.link = link;
+      return this;
+    }
+
+    public Builder depends(List<Depends> depends) {
+      this.depends = depends;
+      return this;
+    }
+
     public Field build() {
       return new Field(this);
     }
@@ -85,5 +100,9 @@ public record Field(String schema, String name, String dataType, boolean isPrimi
     public static final String IS_CLASSIFIED = "is_classified";
     public static final String IS_PRIMARY_KEY = "is_primary_key";
     public static final String PRODUCT_TYPE = "product_type";
+    public static final String LINK = "link";
+    public static final String DEPENDS = "depends";
+    public static final String TABLE = "table";
+    public static final String COLUMN = "column";
   }
 }

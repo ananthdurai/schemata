@@ -4,13 +4,14 @@ import java.util.List;
 
 
 public record Schema(String name, String description, String comment, String seeAlso, String reference, String owner,
-                     String domain, String status, String type, String eventType, String teamChannel,
+                     String domain, String status, String type, String eventType, String modelType, String teamChannel,
                      String alertChannel, String complianceOwner, String complianceChannel, List<Field> fieldList) {
 
   private Schema(Builder builder) {
     this(builder.name, builder.description, builder.comment, builder.seeAlso, builder.reference, builder.owner,
-        builder.domain, builder.status, builder.schemaType.name(), builder.eventType.name(), builder.teamChannel,
-        builder.alertChannel, builder.complianceOwner, builder.complianceChannel, builder.fieldList);
+        builder.domain, builder.status, builder.schemaType.name(), builder.eventType.name(), builder.modelType.name(),
+        builder.teamChannel, builder.alertChannel, builder.complianceOwner, builder.complianceChannel,
+        builder.fieldList);
   }
 
   public static class Builder {
@@ -24,6 +25,7 @@ public record Schema(String name, String description, String comment, String see
     String status;
     SchemaType schemaType;
     EventType eventType;
+    ModelType modelType;
     String teamChannel;
     String alertChannel;
     String complianceOwner;
@@ -34,6 +36,7 @@ public record Schema(String name, String description, String comment, String see
       this.name = name;
       this.fieldList = fieldList;
       this.eventType = EventType.NONE;
+      this.modelType = ModelType.NONE;
     }
 
     public Builder description(String description) {
@@ -81,6 +84,11 @@ public record Schema(String name, String description, String comment, String see
       return this;
     }
 
+    public Builder modelType(String modelTypeValue) {
+      this.modelType = ModelType.valueOf(modelTypeValue);
+      return this;
+    }
+
     public Builder teamChannel(String teamChannel) {
       this.teamChannel = teamChannel;
       return this;
@@ -117,6 +125,7 @@ public record Schema(String name, String description, String comment, String see
     public static final String STATUS = "status";
     public static final String SCHEMA_TYPE = "schema_type";
     public static final String EVENT_TYPE = "event_type";
+    public static final String MODEL_TYPE = "model_type";
     public static final String TEAM_CHANNEL = "team_channel";
     public static final String ALERT_CHANNEL = "alert_channel";
     public static final String COMPLIANCE_OWNER = "compliance_owner";

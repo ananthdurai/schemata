@@ -228,7 +228,7 @@ message UserEvent {
 }
 ```
 
-#### Type 2: ACTIVITY
+#### Type 2: Activity
 
 ACTIVITY event captures the events that resulted from one Entity changing the state of another Entity.
 (e.g.) User A purchases Product B. The ACTIVITY event is often the result of a business transaction.
@@ -449,12 +449,14 @@ protoc --include-imports --descriptor_set_out=mymodel.desc -I path/to/schema -I 
 ./score.sh validate -s=mymodel.desc -p=PROTOBUF
 ```
 
-## Done:
+## Supported Providers:
 
-🚧 Support for Avro.
-🚧 Support for ProtoBuf.
+✅ Avro.
+
+✅ ProtoBuf.
 
 ## InProgress:
+
 🚧 Support for dbt model.
 
 ## TODO:
