@@ -1,7 +1,6 @@
 package org.schemata.provider.dbt;
 
 import com.google.gson.JsonElement;
-import java.io.IOException;
 import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -20,8 +19,7 @@ public class DbtCatalogParserTest {
   DbtCatalogParser parser;
 
   @BeforeEach
-  public void init()
-      throws IOException {
+  public void init() {
     parser = new DbtCatalogParser();
     element = parser.getCatalogJsonParser(ResourceLoader.getDbtBasePath());
   }

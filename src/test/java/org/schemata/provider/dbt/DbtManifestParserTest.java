@@ -1,7 +1,6 @@
 package org.schemata.provider.dbt;
 
 import java.util.List;
-import java.util.stream.Collectors;
 import org.junit.jupiter.api.Test;
 import java.util.Map;
 import org.junit.jupiter.api.BeforeEach;
