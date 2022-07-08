@@ -26,6 +26,7 @@
     <logback.version>1.2.11</logback.version>
     <slf4j.version>1.7.36</slf4j.version>
     <avro.version>1.11.0</avro.version>
+    <gson.version>2.9.0</gson.version>
   </properties>
 
   <dependencies>
@@ -98,7 +99,21 @@
       <artifactId>avro</artifactId>
       <version>${avro.version}</version>
     </dependency>
-    
+
+    <dependency>
+      <groupId>com.google.code.gson</groupId>
+      <artifactId>gson</artifactId>
+      <version>${gson.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>com.github.jsqlparser</groupId>
+      <artifactId>jsqlparser</artifactId>
+      <version>4.4</version>
+    </dependency>
+
+
+
   </dependencies>
   <build>
     <plugins>

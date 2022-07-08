@@ -19,7 +19,7 @@ public class SchemataExecutorTest {
   }
 
   @Test
-  @Description("Run schema validate function to run all the schema and fields validation rules")
+  @Description("Run schema validate function to run all the schema and column validation rules")
   public void testSchemaValidateCmd() {
     int exitCode = cmd.execute("validate", "-s=" + ResourceLoader.getDescriptorsPath(), "-p=PROTOBUF");
     assertEquals(0, exitCode);

@@ -1,0 +1,470 @@
+{
+  "metadata": {
+    "dbt_schema_version": "https://schemas.getdbt.com/dbt/catalog/v1.json",
+    "dbt_version": "1.0.5",
+    "generated_at": "2022-04-29T04:29:35.188250Z",
+    "invocation_id": "6f5bd62d-50bb-4d99-b92b-933c06fe7759",
+    "env": {}
+  },
+  "nodes": {
+    "model.dbtlearn.dim_listings_cleansed": {
+      "metadata": {
+        "type": "VIEW",
+        "schema": "DEV",
+        "name": "DIM_LISTINGS_CLEANSED",
+        "database": "AIRBNB",
+        "comment": null,
+        "owner": "TRANSFORM"
+      },
+      "columns": {
+        "LISTING_ID": {
+          "type": "NUMBER",
+          "index": 1,
+          "name": "LISTING_ID",
+          "comment": null
+        },
+        "LISTING_NAME": {
+          "type": "TEXT",
+          "index": 2,
+          "name": "LISTING_NAME",
+          "comment": null
+        },
+        "ROOM_TYPE": {
+          "type": "TEXT",
+          "index": 3,
+          "name": "ROOM_TYPE",
+          "comment": null
+        },
+        "MINIMUM_NIGHTS": {
+          "type": "NUMBER",
+          "index": 4,
+          "name": "MINIMUM_NIGHTS",
+          "comment": null
+        },
+        "HOST_ID": {
+          "type": "NUMBER",
+          "index": 5,
+          "name": "HOST_ID",
+          "comment": null
+        },
+        "PRICE": {
+          "type": "NUMBER",
+          "index": 6,
+          "name": "PRICE",
+          "comment": null
+        },
+        "CREATED_AT": {
+          "type": "TIMESTAMP_NTZ",
+          "index": 7,
+          "name": "CREATED_AT",
+          "comment": null
+        },
+        "UPDATED_AT": {
+          "type": "TIMESTAMP_NTZ",
+          "index": 8,
+          "name": "UPDATED_AT",
+          "comment": null
+        }
+      },
+      "stats": {
+        "has_stats": {
+          "id": "has_stats",
+          "label": "Has Stats?",
+          "value": false,
+          "include": false,
+          "description": "Indicates whether there are statistics for this table"
+        }
+      },
+      "unique_id": "model.dbtlearn.dim_listings_cleansed"
+    },
+    "model.dbtlearn.src_hosts": {
+      "metadata": {
+        "type": "VIEW",
+        "schema": "DEV",
+        "name": "SRC_HOSTS",
+        "database": "AIRBNB",
+        "comment": null,
+        "owner": "TRANSFORM"
+      },
+      "columns": {
+        "HOST_ID": {
+          "type": "NUMBER",
+          "index": 1,
+          "name": "HOST_ID",
+          "comment": null
+        },
+        "HOST_NAME": {
+          "type": "TEXT",
+          "index": 2,
+          "name": "HOST_NAME",
+          "comment": null
+        },
+        "IS_SUPERHOST": {
+          "type": "TEXT",
+          "index": 3,
+          "name": "IS_SUPERHOST",
+          "comment": null
+        },
+        "CREATED_AT": {
+          "type": "TIMESTAMP_NTZ",
+          "index": 4,
+          "name": "CREATED_AT",
+          "comment": null
+        },
+        "UPDATED_AT": {
+          "type": "TIMESTAMP_NTZ",
+          "index": 5,
+          "name": "UPDATED_AT",
+          "comment": null
+        }
+      },
+      "stats": {
+        "has_stats": {
+          "id": "has_stats",
+          "label": "Has Stats?",
+          "value": false,
+          "include": false,
+          "description": "Indicates whether there are statistics for this table"
+        }
+      },
+      "unique_id": "model.dbtlearn.src_hosts"
+    },
+    "model.dbtlearn.src_reviews": {
+      "metadata": {
+        "type": "VIEW",
+        "schema": "DEV",
+        "name": "SRC_REVIEWS",
+        "database": "AIRBNB",
+        "comment": null,
+        "owner": "TRANSFORM"
+      },
+      "columns": {
+        "LISTING_ID": {
+          "type": "NUMBER",
+          "index": 1,
+          "name": "LISTING_ID",
+          "comment": null
+        },
+        "REVIEW_DATE": {
+          "type": "TIMESTAMP_NTZ",
+          "index": 2,
+          "name": "REVIEW_DATE",
+          "comment": null
+        },
+        "REVIEWER_NAME": {
+          "type": "TEXT",
+          "index": 3,
+          "name": "REVIEWER_NAME",
+          "comment": null
+        },
+        "REVIEW_TEXT": {
+          "type": "TEXT",
+          "index": 4,
+          "name": "REVIEW_TEXT",
+          "comment": null
+        },
+        "REVIEW_SENTIMENT": {
+          "type": "TEXT",
+          "index": 5,
+          "name": "REVIEW_SENTIMENT",
+          "comment": null
+        }
+      },
+      "stats": {
+        "has_stats": {
+          "id": "has_stats",
+          "label": "Has Stats?",
+          "value": false,
+          "include": false,
+          "description": "Indicates whether there are statistics for this table"
+        }
+      },
+      "unique_id": "model.dbtlearn.src_reviews"
+    },
+    "model.dbtlearn.dim_hosts_cleansed": {
+      "metadata": {
+        "type": "VIEW",
+        "schema": "DEV",
+        "name": "DIM_HOSTS_CLEANSED",
+        "database": "AIRBNB",
+        "comment": null,
+        "owner": "TRANSFORM"
+      },
+      "columns": {
+        "HOST_ID": {
+          "type": "NUMBER",
+          "index": 1,
+          "name": "HOST_ID",
+          "comment": null
+        },
+        "HOST_NAME": {
+          "type": "TEXT",
+          "index": 2,
+          "name": "HOST_NAME",
+          "comment": null
+        },
+        "IS_SUPERHOST": {
+          "type": "TEXT",
+          "index": 3,
+          "name": "IS_SUPERHOST",
+          "comment": null
+        },
+        "CREATED_AT": {
+          "type": "TIMESTAMP_NTZ",
+          "index": 4,
+          "name": "CREATED_AT",
+          "comment": null
+        },
+        "UPDATED_AT": {
+          "type": "TIMESTAMP_NTZ",
+          "index": 5,
+          "name": "UPDATED_AT",
+          "comment": null
+        }
+      },
+      "stats": {
+        "has_stats": {
+          "id": "has_stats",
+          "label": "Has Stats?",
+          "value": false,
+          "include": false,
+          "description": "Indicates whether there are statistics for this table"
+        }
+      },
+      "unique_id": "model.dbtlearn.dim_hosts_cleansed"
+    },
+    "model.dbtlearn.dim_listings_w_hosts": {
+      "metadata": {
+        "type": "VIEW",
+        "schema": "DEV",
+        "name": "DIM_LISTINGS_W_HOSTS",
+        "database": "AIRBNB",
+        "comment": null,
+        "owner": "TRANSFORM"
+      },
+      "columns": {
+        "LISTING_ID": {
+          "type": "NUMBER",
+          "index": 1,
+          "name": "LISTING_ID",
+          "comment": null
+        },
+        "LISTING_NAME": {
+          "type": "TEXT",
+          "index": 2,
+          "name": "LISTING_NAME",
+          "comment": null
+        },
+        "ROOM_TYPE": {
+          "type": "TEXT",
+          "index": 3,
+          "name": "ROOM_TYPE",
+          "comment": null
+        },
+        "MINIMUM_NIGHTS": {
+          "type": "NUMBER",
+          "index": 4,
+          "name": "MINIMUM_NIGHTS",
+          "comment": null
+        },
+        "PRICE": {
+          "type": "NUMBER",
+          "index": 5,
+          "name": "PRICE",
+          "comment": null
+        },
+        "HOST_ID": {
+          "type": "NUMBER",
+          "index": 6,
+          "name": "HOST_ID",
+          "comment": null
+        },
+        "HOST_NAME": {
+          "type": "TEXT",
+          "index": 7,
+          "name": "HOST_NAME",
+          "comment": null
+        },
+        "HOST_IS_SUPERHOST": {
+          "type": "TEXT",
+          "index": 8,
+          "name": "HOST_IS_SUPERHOST",
+          "comment": null
+        },
+        "CREATED_AT": {
+          "type": "TIMESTAMP_NTZ",
+          "index": 9,
+          "name": "CREATED_AT",
+          "comment": null
+        },
+        "UPDATED_AT": {
+          "type": "TIMESTAMP_NTZ",
+          "index": 10,
+          "name": "UPDATED_AT",
+          "comment": null
+        }
+      },
+      "stats": {
+        "has_stats": {
+          "id": "has_stats",
+          "label": "Has Stats?",
+          "value": false,
+          "include": false,
+          "description": "Indicates whether there are statistics for this table"
+        }
+      },
+      "unique_id": "model.dbtlearn.dim_listings_w_hosts"
+    },
+    "model.dbtlearn.fct_reviews": {
+      "metadata": {
+        "type": "BASE TABLE",
+        "schema": "DEV",
+        "name": "FCT_REVIEWS",
+        "database": "AIRBNB",
+        "comment": null,
+        "owner": "TRANSFORM"
+      },
+      "columns": {
+        "LISTING_ID": {
+          "type": "NUMBER",
+          "index": 1,
+          "name": "LISTING_ID",
+          "comment": null
+        },
+        "REVIEW_DATE": {
+          "type": "TIMESTAMP_NTZ",
+          "index": 2,
+          "name": "REVIEW_DATE",
+          "comment": null
+        },
+        "REVIEWER_NAME": {
+          "type": "TEXT",
+          "index": 3,
+          "name": "REVIEWER_NAME",
+          "comment": null
+        },
+        "REVIEW_TEXT": {
+          "type": "TEXT",
+          "index": 4,
+          "name": "REVIEW_TEXT",
+          "comment": null
+        },
+        "REVIEW_SENTIMENT": {
+          "type": "TEXT",
+          "index": 5,
+          "name": "REVIEW_SENTIMENT",
+          "comment": null
+        }
+      },
+      "stats": {
+        "bytes": {
+          "id": "bytes",
+          "label": "Approximate Size",
+          "value": 42548736.0,
+          "include": true,
+          "description": "Approximate size of the table as reported by Snowflake"
+        },
+        "row_count": {
+          "id": "row_count",
+          "label": "Row Count",
+          "value": 409697.0,
+          "include": true,
+          "description": "An approximate count of rows in this table"
+        },
+        "last_modified": {
+          "id": "last_modified",
+          "label": "Last Modified",
+          "value": "2022-04-05 20:47UTC",
+          "include": true,
+          "description": "The timestamp for last update/change"
+        },
+        "has_stats": {
+          "id": "has_stats",
+          "label": "Has Stats?",
+          "value": true,
+          "include": false,
+          "description": "Indicates whether there are statistics for this table"
+        }
+      },
+      "unique_id": "model.dbtlearn.fct_reviews"
+    },
+    "model.dbtlearn.src_listings": {
+      "metadata": {
+        "type": "VIEW",
+        "schema": "DEV",
+        "name": "SRC_LISTINGS",
+        "database": "AIRBNB",
+        "comment": null,
+        "owner": "TRANSFORM"
+      },
+      "columns": {
+        "LISTING_ID": {
+          "type": "NUMBER",
+          "index": 1,
+          "name": "LISTING_ID",
+          "comment": null
+        },
+        "LISTING_NAME": {
+          "type": "TEXT",
+          "index": 2,
+          "name": "LISTING_NAME",
+          "comment": null
+        },
+        "LISTING_URL": {
+          "type": "TEXT",
+          "index": 3,
+          "name": "LISTING_URL",
+          "comment": null
+        },
+        "ROOM_TYPE": {
+          "type": "TEXT",
+          "index": 4,
+          "name": "ROOM_TYPE",
+          "comment": null
+        },
+        "MINIMUM_NIGHTS": {
+          "type": "NUMBER",
+          "index": 5,
+          "name": "MINIMUM_NIGHTS",
+          "comment": null
+        },
+        "HOST_ID": {
+          "type": "NUMBER",
+          "index": 6,
+          "name": "HOST_ID",
+          "comment": null
+        },
+        "PRICE_STR": {
+          "type": "TEXT",
+          "index": 7,
+          "name": "PRICE_STR",
+          "comment": null
+        },
+        "CREATED_AT": {
+          "type": "TIMESTAMP_NTZ",
+          "index": 8,
+          "name": "CREATED_AT",
+          "comment": null
+        },
+        "UPDATED_AT": {
+          "type": "TIMESTAMP_NTZ",
+          "index": 9,
+          "name": "UPDATED_AT",
+          "comment": null
+        }
+      },
+      "stats": {
+        "has_stats": {
+          "id": "has_stats",
+          "label": "Has Stats?",
+          "value": false,
+          "include": false,
+          "description": "Indicates whether there are statistics for this table"
+        }
+      },
+      "unique_id": "model.dbtlearn.src_listings"
+    }
+  },
+  "sources": {},
+  "errors": null
+}

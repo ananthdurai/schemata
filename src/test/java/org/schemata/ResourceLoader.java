@@ -26,4 +26,14 @@ public class ResourceLoader {
     Path resourceDirectory = Paths.get("src", "test", "resources");
     return resourceDirectory.toFile().getAbsolutePath() + "/avro_schema/brand_dummy.avsc";
   }
+
+  public static String getDbtBasePath() {
+    Path resourceDirectory = Paths.get("src", "test", "resources");
+    return resourceDirectory.toFile().getAbsolutePath() + "/dbt";
+  }
+
+  public static String getInvalidDbtBasePath() {
+    Path resourceDirectory = Paths.get("src", "main", "dbt");
+    return resourceDirectory.toFile().getAbsolutePath();
+  }
 }
