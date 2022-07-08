@@ -28,8 +28,8 @@ public class ResourceLoader {
   }
 
   public static String getDbtBasePath() {
-    Path resourceDirectory = Paths.get("src", "main", "resources", "dbt");
-    return resourceDirectory.toFile().getAbsolutePath();
+    Path resourceDirectory = Paths.get("src", "test", "resources");
+    return resourceDirectory.toFile().getAbsolutePath() + "/dbt";
   }
 
   public static String getInvalidDbtBasePath() {

@@ -16,7 +16,6 @@ import org.schemata.exception.SchemaParserException;
 import org.schemata.json.Json;
 
 import static org.schemata.provider.dbt.DbtCatalogMetadata.CATALOG_FILE;
-import static org.schemata.provider.dbt.DbtCatalogMetadata.TARGET_PATH;
 
 
 public class DbtCatalogParser {
@@ -35,7 +34,7 @@ public class DbtCatalogParser {
   }
 
   public JsonElement getCatalogJsonParser(String path) {
-    try (Stream<String> lines = Files.lines(Paths.get(path, TARGET_PATH, CATALOG_FILE))) {
+    try (Stream<String> lines = Files.lines(Paths.get(path, CATALOG_FILE))) {
       String data = lines.collect(Collectors.joining("\n"));
       return JsonParser.parseString(data);
     } catch (IOException e) {

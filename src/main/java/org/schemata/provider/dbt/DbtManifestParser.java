@@ -21,7 +21,6 @@ import org.schemata.exception.SchemaParserException;
 import org.schemata.json.Json;
 
 import static org.schemata.provider.dbt.DbtCatalogMetadata.MANIFEST_FILE;
-import static org.schemata.provider.dbt.DbtCatalogMetadata.TARGET_PATH;
 
 
 public class DbtManifestParser {
@@ -78,7 +77,7 @@ public class DbtManifestParser {
 
   public JsonElement getManifestJsonParser(String path)
       throws IOException {
-    Stream<String> lines = Files.lines(Paths.get(path, TARGET_PATH, MANIFEST_FILE));
+    Stream<String> lines = Files.lines(Paths.get(path, MANIFEST_FILE));
     String data = lines.collect(Collectors.joining("\n"));
     return JsonParser.parseString(data);
   }
