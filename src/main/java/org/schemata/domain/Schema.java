@@ -75,17 +75,17 @@ public record Schema(String name, String description, String comment, String see
     }
 
     public Builder schemaType(String schemaTypeValue) {
-      this.schemaType = SchemaType.valueOf(schemaTypeValue);
+      this.schemaType = SchemaType.get(schemaTypeValue);
       return this;
     }
 
     public Builder eventType(String eventTypeValue) {
-      this.eventType = EventType.valueOf(eventTypeValue);
+      this.eventType = EventType.get(eventTypeValue);
       return this;
     }
 
     public Builder modelType(String modelTypeValue) {
-      this.modelType = ModelType.valueOf(modelTypeValue);
+      this.modelType = ModelType.get(modelTypeValue);
       return this;
     }
 
@@ -117,6 +117,8 @@ public record Schema(String name, String description, String comment, String see
   public static final class Prop {
 
     public static final String DESC = "desc";
+
+    public static final String DESCRIPTION = "description";
     public static final String COMMENT = "comment";
     public static final String SEE_ALSO = "see_also";
     public static final String REFERENCE = "reference";

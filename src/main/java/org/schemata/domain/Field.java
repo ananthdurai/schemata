@@ -58,7 +58,7 @@ public record Field(String schema, String name, String dataType, boolean isPrimi
     }
 
     public Builder isClassified(boolean classified) {
-      isClassified = classified;
+      this.isClassified = classified;
       return this;
     }
 
@@ -68,7 +68,7 @@ public record Field(String schema, String name, String dataType, boolean isPrimi
     }
 
     public Builder primaryKey(boolean primaryKey) {
-      isPrimaryKey = primaryKey;
+      this.isPrimaryKey = primaryKey;
       return this;
     }
 
@@ -94,6 +94,7 @@ public record Field(String schema, String name, String dataType, boolean isPrimi
 
   public static class Prop {
     public static final String DESC = "desc";
+    public static final String DESCRIPTION = "description";
     public static final String COMMENT = "comment";
     public static final String SEE_ALSO = "see_also";
     public static final String REFERENCE = "reference";
@@ -102,7 +103,8 @@ public record Field(String schema, String name, String dataType, boolean isPrimi
     public static final String PRODUCT_TYPE = "product_type";
     public static final String LINK = "link";
     public static final String DEPENDS = "depends";
-    public static final String TABLE = "table";
+    public static final String MODEL = "model";
+
     public static final String COLUMN = "column";
   }
 }

@@ -37,7 +37,7 @@ public final class Json {
   }
 
   public static Optional<JsonArray> getAsJsonArray(JsonObject obj, String element) {
-    return containsField(obj, element) && obj.isJsonArray() ?
-        Optional.of(obj.get(element).getAsJsonArray()) : Optional.empty();
+    return containsField(obj, element) ?
+        Optional.of(obj.getAsJsonArray(element)) : Optional.empty();
   }
 }
