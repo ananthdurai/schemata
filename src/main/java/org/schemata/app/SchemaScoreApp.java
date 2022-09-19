@@ -11,8 +11,8 @@ import org.schemata.printer.Console;
 
 public class SchemaScoreApp implements Callable<Integer> {
 
-  private List<Schema> schemaList;
-  private String schemaName;
+  private final List<Schema> schemaList;
+  private final String schemaName;
 
   public SchemaScoreApp(List<Schema> schemaList, String schemaName) {
     this.schemaList = schemaList;

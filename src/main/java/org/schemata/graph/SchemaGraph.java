@@ -103,6 +103,10 @@ public final class SchemaGraph {
     return graph.vertexSet().stream().filter(f -> "ENTITY".equalsIgnoreCase(f.type())).collect(Collectors.toSet());
   }
 
+  public Set<Schema> getAllFactVertex() {
+    return graph.vertexSet().stream().filter(f -> "MODEL".equalsIgnoreCase(f.type()) && "FACT".equalsIgnoreCase(f.modelType()) ).collect(Collectors.toSet());
+  }
+
   public Double getVertexPageRankScore(String vertex) {
     return pageRank.getVertexScore(getSchema(vertex));
   }
@@ -112,6 +116,7 @@ public final class SchemaGraph {
     double score = switch (schema.type().toUpperCase()) {
       case "ENTITY" -> computeEntityScore(vertex);
       case "EVENT" -> computeEventScore(vertex, schema.eventType());
+      case "FACT" -> computeFactScore(vertex);
       default -> 0.0;
     };
     return roundUp(score);
@@ -134,6 +139,11 @@ public final class SchemaGraph {
       default -> 0.0;
     };
     return score;
+  }
+
+  public double computeFactScore(String vertex) {
+    System.out.println(getAllFactVertex());
+    return 0.0;
   }
 
   private double computeNonLifecycleScore(String vertex) {

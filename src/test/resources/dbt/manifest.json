@@ -241,6 +241,8 @@
         "tags": [],
         "meta": {},
         "materialized": "incremental",
+        "domain": "core",
+        "model_type": "fact",
         "persist_docs": {},
         "quoting": {},
         "column_types": {},
