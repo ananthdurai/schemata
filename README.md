@@ -455,24 +455,19 @@ protoc --include-imports --descriptor_set_out=mymodel.desc -I path/to/schema -I 
 
 ✅ ProtoBuf.
 
+✅ dbt
+
 ## InProgress:
-
-🚧 Support for dbt model.
-
-## TODO:
 
 🚧 Support for JSON schema.
 
+## TODO:
+
 🚧 Support for Thrift.
 
-🚧 Add visualization layer to show the graph representation of the Schema.
+🚧 Add visualization layer to show the graph representation of the Schema. (Looking for contributors)
 
 # Contributing
 
-See [CONTRIBUTING.md](../CONTRIBUTING.MD)
+See [CONTRIBUTING.md](CONTRIBUTING.md)
 
-# Contact Me
-
-Sometimes Github notifications get lost in the shuffle. If you file an issue and don't hear from me in 24-48 hours feel
-free to ping me on [twitter](https://twitter.com/ananthdurai) now for easy contact with me and larger community
-discussions!
