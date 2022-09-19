@@ -469,7 +469,7 @@ protoc --include-imports --descriptor_set_out=mymodel.desc -I path/to/schema -I 
 
 # Contributing
 
-See [CONTRIBUTING.md](CONTRIBUTING.MD)
+See [CONTRIBUTING.md](../CONTRIBUTING.MD)
 
 # Contact Me
 
