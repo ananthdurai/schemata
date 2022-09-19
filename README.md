@@ -469,9 +469,7 @@ protoc --include-imports --descriptor_set_out=mymodel.desc -I path/to/schema -I 
 
 # Contributing
 
-Time is of the essence. Before developing a Pull Request I recommend opening a
-new [topic for discussion](https://github.com/ananthdurai/schemata/discussions). It is an initial release, so I've not
-added the `contributing.md`, but if you are interested, I will definitely put together a detailed writeup.
+See [CONTRIBUTING.md](CONTRIBUTING.MD)
 
 # Contact Me
 
