@@ -2,7 +2,7 @@
 
 # Schemata
 
-Schemata is a schema modeling framework for decentralized domain-driven ownership of data. Schemata combine a set of
+Schemata is a schema modeling framework for decentralized domain-driven ownership of data. Schemata combines a set of
 standard metadata definitions for each schema & data field and a scoring algorithm to provide a feedback loop on how
 efficient the data modeling of your data warehouse is. Schemata support ProtoBuf & Avro formats.
 
@@ -35,27 +35,27 @@ Data Warehouse becomes a technical debt rather than a strategic advantage as it 
 
 # How do Schemata solve the Garbage-In Garbage-Out (GIGO) problem?
 
-## Schemata Enable Domain-Oriented Data Ownership
-Schemata focus on treating data as a product. The feature team that works on the product feature has the domain understanding of the data, not the data's consumer. 
-Schemata enable the data ownership to the feature team to create, attach metadata, catalog the data, and store it for easier consumption.
+## Schemata enables domain-oriented data ownership
+Schemata focuses on treating data as a product. The feature team that works on the product feature has the domain understanding of the data, not the data's consumer. 
+Schemata enables a feature team to create, attach metadata, catalog the data, and store it for easier consumption.
 
 The data curation and the cataloging of the data at the data creation phase bring more visibility and make it easier for consumption. 
 The process also eliminates the human knowledge silo and truly democratizes the data. 
 It helps the data consumers not worry about the data discovery and focuses on producing value from the data.
 
-## Schemata Facilitates Decentralized Data Modeling
+## Schemata facilitates decentralized data modeling
 
-Traditionally upfront data modeling comes with a cost. Often a centralized data architecture/ modeling team coordinates with multiple teams to design an enterprise data modeling. 
+Traditionally upfront data modeling came with a cost. Often a centralized data architecture/ modeling team coordinates with multiple teams to design an enterprise data modeling. 
 It is hard for one individual human to hold the entire company's data architecture in their head. 
 The data modeling tools don't reflect the current state of the data modeling. 
 Decentralized data modeling is the only scalable approach, and Schemata enables the bottom-up crowdsourcing data modeling approach to democratize data access in an organization.
 
-## Schemata Bring DevOps principle to data modeling 
+## Schemata bringd DevOps principles to data modeling 
 
 The decentralized data modeling principle brings a unique collaborative approach to managing the data asset's lifecycle. 
 It brings all the proven devops principles like ownership, accountability, collaboration, automation, continuous improvement, and customer-centric action to the data management.
 
-## Schemata Enforce the Connectivity & Integrity of the Data Model
+## Schemata ensures the connectivity & integrity of the data model
 Data is inherently social in nature. The significant challenge of decentralized data management is that the lack of connectivity among the data will degrade its usability of the data. 
 Schemata is an opinionated data modeling framework that programmatically measures the connectivity of the data model and assigns a score to it. We call this Schemata Score.
 
