@@ -50,7 +50,7 @@ It is hard for one individual human to hold the entire company's data architectu
 The data modeling tools don't reflect the current state of the data modeling. 
 Decentralized data modeling is the only scalable approach, and Schemata enables the bottom-up crowdsourcing data modeling approach to democratize data access in an organization.
 
-## Schemata bringd DevOps principles to data modeling 
+## Schemata brings DevOps principles to data modeling 
 
 The decentralized data modeling principle brings a unique collaborative approach to managing the data asset's lifecycle. 
 It brings all the proven devops principles like ownership, accountability, collaboration, automation, continuous improvement, and customer-centric action to the data management.
