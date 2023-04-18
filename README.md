@@ -139,7 +139,7 @@ extend google.protobuf.FieldOptions {
   // Specify the product type. product_type is an useful annotation to represent a field in a business perspective.
   // (e.g) user_id can be an INT field, but in the system design it could represent External Users rather than internal users.
   string product_type = 70004;
-  // Set true if the field is a primary key. This must be true if the Schema type is Entity
+  // Set true if the field is a primary key.
   bool is_primary_key = 70005;
 }
 ```
@@ -153,7 +153,7 @@ At any point in time, the data producer should provide two types of data product
 ### Entity
 
 Entity streams represent the current state of the Entity. In the classical Data Warehouse concepts, Entities typically
-represent the dimensions. The Entity must have a primary key field.
+represent the dimensions. 
 
 **Sample Entity Definition**
 
@@ -327,15 +327,15 @@ Score = 1 - ((Total Incoming Edges + Total Outgoing Edges)) / Total Edges in the
 If you run the Schemata Score for User you'll get 0.222
 
 ```shell
-./score.sh org.protocol.schema.User
-Schemata score for org.protocol.schema.User : 0.222
+./score.sh org.schemata.schema.User
+Schemata score for org.schemata.schema.User : 0.222
 ```
 
 If you run the Schemata Score for Product you'll get 0.389
 
 ```shell
-./score.sh org.protocol.schema.Product
-Schemata score for org.protocol.schema.Product : 0.389
+./score.sh org.schemata.schema.Product
+Schemata score for org.schemata.schema.Product : 0.389
 ```
 
 The Schemata score indicates that Product Entity much more connected than User Entity
@@ -349,8 +349,8 @@ Score = Total Outgoing Edges > 1 ? 1 : 0
 User event captures the lifecycle of User Entity. So if you run Schemata Score for UserEvent, it will give you 1.0
 
 ```shell
-./score.sh org.protocol.schema.UserEvent
-Schemata score for org.protocol.schema.UserEvent : 1.0
+./score.sh org.schemata.schema.UserEvent
+Schemata score for org.schemata.schema.UserEvent : 1.0
 ```
 
 ### Activity & Aggregated Events Score
@@ -362,15 +362,15 @@ Score = 1 - ((Total Outgoing Entity Vertex + Total Outgoing Vertex of all Entity
 If you run schemata score for CampaignCategoryTrackerEvent you will get **0.4**
 
 ```shell
-./score.sh org.protocol.schema.CampaignCategoryTrackerEvent
-Schemata score for org.protocol.schema.CampaignCategoryTrackerEvent : 0.4
+./score.sh org.schemata.schema.CampaignCategoryTrackerEvent
+Schemata score for org.schemata.schema.CampaignCategoryTrackerEvent : 0.4
 ```
 
 if you run schema score for CampaignProductTrackerEvent you'll get **0.8**
 
 ```shell
-./score.sh org.protocol.schema.CampaignProductTrackerEvent
-Schemata score for org.protocol.schema.CampaignProductTrackerEvent : 0.8
+./score.sh org.schemata.schema.CampaignProductTrackerEvent
+Schemata score for org.schemata.schema.CampaignProductTrackerEvent : 0.8
 ```
 
 The CampaignProductTrackerEvent connect to Product, which has high connectivity with other dimensions such as Brand &
@@ -428,7 +428,7 @@ schemata document --source=src/test/resources/descriptors/entities.desc --provid
 🏃 To see of Schemata Score
 
 ```shell
-./score.sh org.protocol.schema.CampaignCategoryTracker
+./score.sh org.schemata.schema.CampaignProductTrackerEvent
 ```
 
 🏃 To see the JSON documentation

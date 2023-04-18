@@ -25,7 +25,6 @@ public class SchemaValidator implements Function<Schema, Result>, Validator<Sche
 
   private Map<Rules, SchemaTrigger> schemaValidatorMap() {
     return Map.of(Rules.SCHEMA_DESCRIPTION_EMPTY, isDescriptionEmpty, Rules.SCHEMA_OWNER_EMPTY, isOwnerEmpty,
-        Rules.SCHEMA_DOMAIN_EMPTY, isDomainEmpty, Rules.SCHEMA_UNKNOWN_TYPE, isInValidType,
-        Rules.SCHEMA_VALID_ENTITY_WITH_PRIMARY_KEY, isPrimaryKeyNotExistsForEntity);
+        Rules.SCHEMA_DOMAIN_EMPTY, isDomainEmpty, Rules.SCHEMA_UNKNOWN_TYPE, isInValidType);
   }
 }

@@ -17,10 +17,4 @@ public interface SchemaTrigger extends Predicate<Schema> {
 
   SchemaTrigger isInValidType = schema -> SchemaType.UNKNOWN.name().equalsIgnoreCase(schema.type());
 
-  SchemaTrigger isPrimaryKeyNotExistsForEntity = schema -> {
-    if (!schema.type().equalsIgnoreCase(SchemaType.ENTITY.name())) {
-      return false;
-    }
-    return schema.fieldList().stream().filter(Field::isPrimaryKey).count() != 1;
-  };
 }
