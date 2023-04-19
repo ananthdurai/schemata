@@ -119,6 +119,10 @@ public final class SchemaGraph {
 
   private double computeEntityScore(String vertex) {
     double totalEdges = graph.edgeSet().size();
+    if (totalEdges == 0) {
+      return 0.0;
+    }
+
     double referenceEdges = referenceEdges(vertex).size();
     return 1 - ((totalEdges - referenceEdges) / totalEdges);
   }
@@ -137,12 +141,16 @@ public final class SchemaGraph {
   }
 
   private double computeNonLifecycleScore(String vertex) {
+    double totalVertex = getAllEntityVertex().size();
+    if (totalVertex == 0) {
+      return 0.0;
+    }
     Set<Schema> referenceVertex =
         outgoingEntityVertexOf(vertex).stream().map(v -> outgoingEntityVertexOf(v.name())).flatMap(Collection::stream)
             .collect(Collectors.toSet());
     Set<Schema> outgoingVertex = outgoingEntityVertexOf(vertex);
     double vertexCount = SetUtils.union(referenceVertex, outgoingVertex).size();
-    double totalVertex = getAllEntityVertex().size();
+
     return 1 - ((totalVertex - vertexCount) / totalVertex);
   }
 
