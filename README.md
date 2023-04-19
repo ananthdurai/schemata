@@ -404,7 +404,7 @@ The project requires the following dependencies
 🏃 compile the project
 
 ```shell
-make package or mvn clean package
+make build-all
 ```
 
 ### Directly via the packaged jar
