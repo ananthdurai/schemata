@@ -21,7 +21,7 @@ package: check_java check_maven
 
 .PHONY: proto-gen
 proto-gen:
-	protoc  --proto_path=src/org --proto_path=src/main/resources/schema --descriptor_set_out=model.desc --include_imports --include_source_info ./src/main/resources/**/*.proto
+	protoc  --proto_path=src/opencontract/v1/org --proto_path=src/main/resources/schema --descriptor_set_out=model.desc --include_imports --include_source_info ./src/main/resources/**/*.proto
 
 .PHONY: build-all
-build-all: package proto-gen
+build-all: proto-gen package
