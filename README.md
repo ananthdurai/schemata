@@ -399,7 +399,7 @@ It will add the opencontract/v1/org/schemata/protobuf/schemata.proto file in you
 Make sure you include the schemata.proto path while compiling the proto files.
 (e.g)
 ```shell
-protoc  --proto_path=src/opencontract/v1/org --proto_path=<your proto schema directory> --include_imports
+protoc  --proto_path=opencontract/v1/org --proto_path=<your proto schema directory> --include_imports
 ```
 
 The code ships with an example ProtoBuf schema definition for easier understanding.
