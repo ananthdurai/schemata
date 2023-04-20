@@ -15,6 +15,10 @@ endif
 compile: check_java check_maven
 	mvn clean compile
 
+.PHONY: test
+test: check_java check_maven
+	mvn clean test
+
 .PHONY: package
 package: check_java check_maven
 	mvn clean package
