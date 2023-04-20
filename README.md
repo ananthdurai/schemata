@@ -388,6 +388,20 @@ Category where CampaignCategoryTrackerEvent is the leaf dimension. The score ind
 
 # Curious to Try?
 
+## Download and install Protobuf Open Contract definitions
+
+Go to the home page of your project and run the following command
+
+```shell
+/bin/bash -c "$(curl -fsSL https://github.com/ananthdurai/schemata/blob/main/install.sh)"
+```
+It will add the opencontract/v1/org/schemata/protobuf/schemata.proto file in your project home.
+Make sure you include the schemata.proto path while compiling the proto files.
+(e.g)
+```shell
+protoc  --proto_path=opencontract/v1/org --proto_path=<your proto schema directory> --include_imports
+```
+
 The code ships with an example ProtoBuf schema definition for easier understanding.
 
 ## Prerequisites
