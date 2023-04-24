@@ -393,7 +393,7 @@ Category where CampaignCategoryTrackerEvent is the leaf dimension. The score ind
 Go to the home page of your project and run the following command
 
 ```shell
-/bin/bash -c "$(curl -fsSL https://github.com/ananthdurai/schemata/blob/main/install.sh)"
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/ananthdurai/schemata/main/install.sh v1)"
 ```
 It will add the opencontract/v1/org/schemata/protobuf/schemata.proto file in your project home.
 Make sure you include the schemata.proto path while compiling the proto files.
