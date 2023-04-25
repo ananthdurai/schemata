@@ -26,6 +26,11 @@ message User {
   option(team_channel) = "#team-platform";
   option(alert_channel) = "#alerts-platform";
 
+  option (consumer) = {
+    subscribe: { name: "Team A" usage: "Usage A" }
+    subscribe: { name: "Team B" usage: "Usage B" }
+  };
+
   int32 id = 1
   [(field_core).description = "Unique identifier for User", (is_primary_key) = true];
 

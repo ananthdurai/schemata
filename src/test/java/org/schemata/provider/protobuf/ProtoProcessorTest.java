@@ -48,4 +48,13 @@ public class ProtoProcessorTest {
     var fieldList = userSchema.fieldList();
     assertEquals(5, fieldList.size());
   }
+
+  @Test
+  @DisplayName("Test User Schema metadata")
+  public void checkSubscribersList() {
+    assertAll("User Schema Subscribers Sanity Check", () -> assertNotNull(userSchema.subscribersList()),
+        () -> assertTrue(userSchema.subscribersList().size() > 1));
+    var subscribersList = userSchema.subscribersList();
+    assertEquals(2, subscribersList.size());
+  }
 }

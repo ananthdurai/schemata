@@ -3,6 +3,7 @@ package org.schemata.provider.protobuf;
 import com.google.protobuf.Descriptors;
 import org.schemata.domain.Field;
 import org.schemata.domain.Schema;
+import org.schemata.domain.Subscribers;
 import org.schemata.schema.SchemataBuilder;
 
 import java.util.*;
@@ -49,6 +50,14 @@ public class ProtoProcessor {
         case "alert_channel" -> builder.alertChannel(Objects.toString(entry.getValue(), ""));
         case "compliance_owner" -> builder.complianceOwner(Objects.toString(entry.getValue(), ""));
         case "compliance_channel" -> builder.complianceChannel(Objects.toString(entry.getValue(), ""));
+        case "consumer" -> {
+          SchemataBuilder.Consumer consumer = (SchemataBuilder.Consumer) entry.getValue();
+          List<Subscribers> subscribersList = new ArrayList<>();
+          for (SchemataBuilder.Subscribe subscribe : consumer.getSubscribeList()) {
+            subscribersList.add(new Subscribers(subscribe.getName(), subscribe.getUsage()));
+          }
+            builder.subscribersList(subscribersList);
+        }
       }
     }
     return builder.build();
