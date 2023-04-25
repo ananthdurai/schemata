@@ -44,18 +44,6 @@ enum TimeUnit {
   HOURS = 2;
 }
 
-// There will be multiple consumers can subscribe to a event or entity stream. Having an explicit consumer list
-// helps a better governance of the schema & collaboration between the teams.
-message Consumer {
-  repeated Subscribe subscribe = 1;
-}
-
-// The Consumers subscribe a stream by providing the name of the consumer & the usage of the stream.
-message Subscribe {
-  string name = 1;
-  string usage = 2;
-}
-
 // CoreMetadata is the set of attribute apply to both the Message & Field
 message CoreMetadata {
   // Mandatory Metadata: description of the entity
@@ -93,8 +81,6 @@ extend google.protobuf.MessageOptions {
   string compliance_owner = 60009;
   // Compliance Owner Slack/ Teams Channel name
   string compliance_channel = 600010;
-  // List of subscribers who are the consumers of this entity.
-  Consumer consumer = 600011;
 
 }
 

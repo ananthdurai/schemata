@@ -1,0 +1,24 @@
+syntax = "proto3";
+
+package org.schemata.schema;
+
+import "google/protobuf/descriptor.proto";
+
+option java_package = "org.schemata.schema";
+option java_outer_classname = "SchemataConsumerBuilder";
+
+// There will be multiple consumers can subscribe to a event or entity stream. Having an explicit consumer list
+// helps a better governance of the schema & collaboration between the teams.
+message Consumer {
+  repeated Subscribe subscribe = 1;
+}
+
+// The Consumers subscribe a stream by providing the name of the consumer & the usage of the stream.
+message Subscribe {
+  string name = 1;
+  string usage = 2;
+}
+
+extend google.protobuf.MessageOptions {
+  Consumer consumer = 700001;
+}
