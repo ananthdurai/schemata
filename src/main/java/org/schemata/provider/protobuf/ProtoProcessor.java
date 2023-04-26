@@ -3,7 +3,11 @@ package org.schemata.provider.protobuf;
 import com.google.protobuf.Descriptors;
 import org.schemata.domain.Field;
 import org.schemata.domain.Schema;
+import org.schemata.domain.Subscribers;
 import org.schemata.schema.SchemataBuilder;
+import org.schemata.schema.SchemataSubscribersBuilder;
+
+
 
 import java.util.*;
 
@@ -31,7 +35,6 @@ public class ProtoProcessor {
   public Schema extractSchema(Descriptors.Descriptor descriptorType, String schema, List<Field> fieldList) {
     Schema.Builder builder = new Schema.Builder(schema, fieldList);
     for (Map.Entry<Descriptors.FieldDescriptor, Object> entry : descriptorType.getOptions().getAllFields().entrySet()) {
-
       switch (entry.getKey().getName()) {
         case "message_core" -> {
           SchemataBuilder.CoreMetadata coreMetadata = (SchemataBuilder.CoreMetadata) entry.getValue();
@@ -49,6 +52,23 @@ public class ProtoProcessor {
         case "alert_channel" -> builder.alertChannel(Objects.toString(entry.getValue(), ""));
         case "compliance_owner" -> builder.complianceOwner(Objects.toString(entry.getValue(), ""));
         case "compliance_channel" -> builder.complianceChannel(Objects.toString(entry.getValue(), ""));
+        case "downstream" -> {
+          SchemataSubscribersBuilder.Downstream downstream = (SchemataSubscribersBuilder.Downstream) entry.getValue();
+          List<Subscribers> subscribersList = new ArrayList<>();
+          for (SchemataSubscribersBuilder.Subscribers subscribe : downstream.getSubscribersList()) {
+            subscribersList.add(new Subscribers(subscribe.getName(), subscribe.getUsage()));
+          }
+            builder.downstreamSubscribersList(subscribersList);
+        }
+
+        case "upstream" -> {
+          SchemataSubscribersBuilder.Upstream upstream = (SchemataSubscribersBuilder.Upstream) entry.getValue();
+          List<Subscribers> subscribersList = new ArrayList<>();
+          for (SchemataSubscribersBuilder.Subscribers subscribe : upstream.getSubscribersList()) {
+            subscribersList.add(new Subscribers(subscribe.getName(), subscribe.getUsage()));
+          }
+          builder.upstreamSubscribersList(subscribersList);
+        }
       }
     }
     return builder.build();

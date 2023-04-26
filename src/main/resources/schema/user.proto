@@ -2,6 +2,7 @@ syntax = "proto3";
 package org.schemata.schema;
 
 import "schemata/protobuf/schemata.proto";
+import "schemata/protobuf/subscribers.proto";
 import "product.proto";
 import "google/protobuf/timestamp.proto";
 
@@ -25,6 +26,16 @@ message User {
   option(schema_type) = ENTITY;
   option(team_channel) = "#team-platform";
   option(alert_channel) = "#alerts-platform";
+
+  option (upstream) = {
+    subscribers: { name: "Upstream Team A" usage: "Upstream Usage A" }
+    subscribers: { name: "Upstream Team B" usage: "Upstream Usage B" }
+  };
+
+  option (downstream) = {
+    subscribers: { name: "Downstream Team A" usage: "Downstream Usage A" }
+    subscribers: { name: "Downstream Team B" usage: "Downstream Usage B" }
+  };
 
   int32 id = 1
   [(field_core).description = "Unique identifier for User", (is_primary_key) = true];

@@ -1,0 +1,32 @@
+syntax = "proto3";
+
+package org.schemata.schema;
+
+import "google/protobuf/descriptor.proto";
+
+option java_package = "org.schemata.schema";
+option java_outer_classname = "SchemataSubscribersBuilder";
+
+// The Consumers subscribe a stream by providing the name of the consumer & the usage of the stream.
+message Subscribers {
+  string name = 1;
+  string usage = 2;
+}
+
+// The Upstream message is used to send the list of subscribers to the publisher.
+message Upstream {
+  repeated Subscribers subscribers = 2;
+}
+
+// The Downstream message is used to send the list of subscribers to the publisher.
+message Downstream {
+  repeated Subscribers subscribers = 1;
+}
+
+// Add the Downstream Subscribers to the MessageOptions.
+extend google.protobuf.MessageOptions {
+  Downstream downstream = 700001;
+  Upstream upstream = 700002;
+}
+
+

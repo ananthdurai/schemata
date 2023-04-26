@@ -81,6 +81,7 @@ extend google.protobuf.MessageOptions {
   string compliance_owner = 60009;
   // Compliance Owner Slack/ Teams Channel name
   string compliance_channel = 600010;
+
 }
 
 enum ClassificationType {
