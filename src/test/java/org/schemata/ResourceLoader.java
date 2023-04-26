@@ -9,7 +9,7 @@ public class ResourceLoader {
   public static String getDescriptorsPath() {
     Path resourceDirectory = Paths.get("src", "test", "resources");
     String absolutePath = resourceDirectory.toFile().getAbsolutePath();
-    return absolutePath + "/descriptors/entities.desc";
+    return absolutePath + "/descriptors/model.desc";
   }
 
   public static String getAvroSchemaPath() {

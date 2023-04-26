@@ -5,13 +5,15 @@ import java.util.List;
 
 public record Schema(String name, String description, String comment, String seeAlso, String reference, String owner,
                      String domain, String status, String type, String eventType, String modelType, String teamChannel,
-                     String alertChannel, String complianceOwner, String complianceChannel,List<Subscribers> subscribersList, List<Field> fieldList) {
+                     String alertChannel, String complianceOwner, String complianceChannel,
+                     List<Subscribers> downstreamSubscribersList, List<Subscribers> upstreamSubscribersList,
+                     List<Field> fieldList) {
 
   private Schema(Builder builder) {
     this(builder.name, builder.description, builder.comment, builder.seeAlso, builder.reference, builder.owner,
         builder.domain, builder.status, builder.schemaType.name(), builder.eventType.name(), builder.modelType.name(),
         builder.teamChannel, builder.alertChannel, builder.complianceOwner, builder.complianceChannel,
-        builder.subscribersList, builder.fieldList);
+        builder.downstreamSubscribersList, builder.upstreamSubscribersList, builder.fieldList);
   }
 
   public static class Builder {
@@ -31,7 +33,8 @@ public record Schema(String name, String description, String comment, String see
     String complianceOwner;
     String complianceChannel;
     List<Field> fieldList;
-    List<Subscribers> subscribersList;
+    List<Subscribers> downstreamSubscribersList;
+    List<Subscribers> upstreamSubscribersList;
 
     public Builder(String name, List<Field> fieldList) {
       this.name = name;
@@ -110,8 +113,13 @@ public record Schema(String name, String description, String comment, String see
       return this;
     }
 
-    public Builder subscribersList(List<Subscribers> subscribersList) {
-      this.subscribersList = subscribersList;
+    public Builder downstreamSubscribersList(List<Subscribers> subscribersList) {
+      this.downstreamSubscribersList = subscribersList;
+      return this;
+    }
+
+    public Builder upstreamSubscribersList(List<Subscribers> subscribersList) {
+      this.upstreamSubscribersList = subscribersList;
       return this;
     }
 

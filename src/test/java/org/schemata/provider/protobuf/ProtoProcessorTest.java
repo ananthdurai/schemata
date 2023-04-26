@@ -50,11 +50,20 @@ public class ProtoProcessorTest {
   }
 
   @Test
-  @DisplayName("Test User Schema metadata")
-  public void checkSubscribersList() {
-    assertAll("User Schema Subscribers Sanity Check", () -> assertNotNull(userSchema.subscribersList()),
-        () -> assertTrue(userSchema.subscribersList().size() > 1));
-    var subscribersList = userSchema.subscribersList();
+  @DisplayName("Test Downstream Subscribers List metadata")
+  public void checkDownstreamSubscribersList() {
+    assertAll("User Schema Downstream Subscribers Sanity Check", () -> assertNotNull(userSchema.downstreamSubscribersList()),
+        () -> assertTrue(userSchema.downstreamSubscribersList().size() > 1));
+    var subscribersList = userSchema.downstreamSubscribersList();
+    assertEquals(2, subscribersList.size());
+  }
+
+  @Test
+  @DisplayName("Test Upstream Subscribers List metadata")
+  public void checkUpstreamSubscribersList() {
+    assertAll("User Schema Upstream Subscribers Sanity Check", () -> assertNotNull(userSchema.upstreamSubscribersList()),
+            () -> assertTrue(userSchema.upstreamSubscribersList().size() > 1));
+    var subscribersList = userSchema.upstreamSubscribersList();
     assertEquals(2, subscribersList.size());
   }
 }
