@@ -40,7 +40,6 @@ message User {
 
 
   option(constraints) = {
-    provider: "Great Expectations",
     constraint: [
       {
         name: "age_range",

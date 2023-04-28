@@ -21,9 +21,8 @@ message Constraint {
 
 // You can define N number of constraints for a message or a field.
 message Constraints {
-  string provider = 1;
   // The list of constraints that are applied to the message.
-  repeated Constraint constraint = 2;
+  repeated Constraint constraint = 1;
 }
 
 // Add the Constraints rules to the MessageOptions.
