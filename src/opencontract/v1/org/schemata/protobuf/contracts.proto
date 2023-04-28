@@ -1,0 +1,32 @@
+syntax = "proto3";
+
+package org.schemata.schema;
+
+import "google/protobuf/descriptor.proto";
+import "google/protobuf/struct.proto";
+
+option java_package = "org.schemata.schema";
+option java_outer_classname = "SchemataConstraintsBuilder";
+
+
+
+// The Constraints message is used to define the constraints that are
+// applied to a message.
+message Constraint {
+  // The list of constraints that are applied to the message.
+  string name = 1;
+  string description = 2;
+  map<string, google.protobuf.Value> config = 3;
+}
+
+// You can define N number of constraints for a message or a field.
+message Constraints {
+  string provider = 1;
+  // The list of constraints that are applied to the message.
+  repeated Constraint constraint = 2;
+}
+
+// Add the Constraints rules to the MessageOptions.
+extend google.protobuf.MessageOptions {
+  Constraints constraints = 800001;
+}
