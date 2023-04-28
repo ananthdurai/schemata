@@ -3,6 +3,7 @@ package org.schemata.schema;
 
 import "schemata/protobuf/schemata.proto";
 import "schemata/protobuf/subscribers.proto";
+import "schemata/protobuf/contracts.proto";
 import "product.proto";
 import "google/protobuf/timestamp.proto";
 
@@ -28,13 +29,57 @@ message User {
   option(alert_channel) = "#alerts-platform";
 
   option (upstream) = {
-    subscribers: { name: "Upstream Team A" usage: "Upstream Usage A" }
-    subscribers: { name: "Upstream Team B" usage: "Upstream Usage B" }
+    subscribers: {name: "Upstream Team A" usage: "Upstream Usage A"}
+    subscribers: {name: "Upstream Team B" usage: "Upstream Usage B"}
   };
 
   option (downstream) = {
-    subscribers: { name: "Downstream Team A" usage: "Downstream Usage A" }
-    subscribers: { name: "Downstream Team B" usage: "Downstream Usage B" }
+    subscribers: {name: "Downstream Team A" usage: "Downstream Usage A"}
+    subscribers: {name: "Downstream Team B" usage: "Downstream Usage B"}
+  };
+
+
+  option(constraints) = {
+    constraint: [
+      {
+        name: "age_range",
+        description: "Age column should have values between 18 and 150",
+        config: {
+          key: "class_name",
+          value: {string_value: "great_expectations.core.validation_operators.expect_column_values_to_be_between"}
+        },
+        config: {
+          key: "column",
+          value: {string_value: "age"}
+        },
+        config: {
+          key: "min_value",
+          value: {number_value: 18}
+        },
+        config: {
+          key: "max_value",
+          value: {number_value: 150}
+        },
+        config: {
+          key: "mostly",
+          value: {number_value: 0.95}
+        }
+      }
+    ],
+    constraint: [
+      {
+        name: "email_format",
+        description: "email column should have valid email format",
+        config: {
+          key: "class_name",
+          value: {string_value: "great_expectations.core.validation_operators.expect_column_values_to_be_valid_email"}
+        },
+        config: {
+          key: "column",
+          value: {string_value: "email"}
+        }
+      }
+    ]
   };
 
   int32 id = 1
@@ -51,6 +96,9 @@ message User {
 
   string timezone = 5
   [(field_core).description = "preferred time zone for the user"] ;
+
+  string age = 6
+  [(field_core).description = "Age of the user"] ;
 }
 
 message UserEvent {
