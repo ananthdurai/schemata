@@ -46,6 +46,10 @@ message User {
         name: "age_range",
         description: "Age column should have values between 18 and 150",
         config: {
+          key: "class_name",
+          value: {string_value: "great_expectations.core.validation_operators.expect_column_values_to_be_between"}
+        },
+        config: {
           key: "column",
           value: {string_value: "age"}
         },
@@ -60,6 +64,20 @@ message User {
         config: {
           key: "mostly",
           value: {number_value: 0.95}
+        }
+      }
+    ],
+    constraint: [
+      {
+        name: "email_format",
+        description: "email column should have valid email format",
+        config: {
+          key: "class_name",
+          value: {string_value: "great_expectations.core.validation_operators.expect_column_values_to_be_valid_email"}
+        },
+        config: {
+          key: "column",
+          value: {string_value: "email"}
         }
       }
     ]
