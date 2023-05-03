@@ -3,7 +3,7 @@ package org.schemata.schema;
 
 import "schemata/protobuf/schemata.proto";
 import "schemata/protobuf/subscribers.proto";
-import "schemata/protobuf/contracts.proto";
+import "schemata/protobuf/constraints.proto";
 import "product.proto";
 import "google/protobuf/timestamp.proto";
 
@@ -38,48 +38,53 @@ message User {
     subscribers: {name: "Downstream Team B" usage: "Downstream Usage B"}
   };
 
+  option (constraints) = {
 
-  option(constraints) = {
-    constraint: [
-      {
-        name: "age_range",
-        description: "Age column should have values between 18 and 150",
-        config: {
-          key: "class_name",
-          value: {string_value: "great_expectations.core.validation_operators.expect_column_values_to_be_between"}
-        },
-        config: {
-          key: "column",
-          value: {string_value: "age"}
-        },
-        config: {
-          key: "min_value",
-          value: {number_value: 18}
-        },
-        config: {
-          key: "max_value",
-          value: {number_value: 150}
-        },
-        config: {
-          key: "mostly",
-          value: {number_value: 0.95}
+    constraint: [{
+      name: "age range",
+      description: "age range constraint",
+      config: {
+        key: "column",
+        value: {string_value: "age"}
+      },
+      config: {
+        key: "class_name",
+        value: {string_value: "great_expectations.core.validation_operators.expect_column_values_to_be_between"}
+      },
+      config: {
+        key: "min_value",
+        value: {number_value: 18}
+      },
+      config: {
+        key: "max_value",
+        value: {number_value: 150}
+      },
+      config: {
+        key: "mostly",
+        value: {number_value: 0.95}
+      }
+    }],
+    constraint: [{
+      name: "Timezone Constraint",
+      description: "Timezone should be either EST or PST",
+      config: {
+        key: "column",
+        value: {string_value: "timezone"}
+      },
+      config: {
+        key: "class_name",
+        value: {string_value: "expect_column_values_to_be_in_set"}
+      },
+      config: {
+        key: "value_set",
+        value: {
+          list_value: {
+            values: {string_value: "EST"}
+            values: {string_value: "PST"}
+          }
         }
       }
-    ],
-    constraint: [
-      {
-        name: "email_format",
-        description: "email column should have valid email format",
-        config: {
-          key: "class_name",
-          value: {string_value: "great_expectations.core.validation_operators.expect_column_values_to_be_valid_email"}
-        },
-        config: {
-          key: "column",
-          value: {string_value: "email"}
-        }
-      }
-    ]
+    }]
   };
 
   int32 id = 1
@@ -98,7 +103,7 @@ message User {
   [(field_core).description = "preferred time zone for the user"] ;
 
   string age = 6
-  [(field_core).description = "Age of the user"] ;
+  [(field_core).description = "Age of the user"];
 }
 
 message UserEvent {
