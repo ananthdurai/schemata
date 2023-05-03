@@ -6,6 +6,7 @@ import com.google.protobuf.ExtensionRegistry;
 import org.jgrapht.graph.DirectedAcyclicGraph;
 import org.jgrapht.util.SupplierUtil;
 import org.schemata.schema.SchemataBuilder;
+import org.schemata.schema.SchemataConstraintsBuilder;
 import org.schemata.schema.SchemataSubscribersBuilder;
 
 import java.io.IOException;
@@ -31,6 +32,8 @@ public class ProtoFileDescriptorSetLoader implements Loader {
         var registry = ExtensionRegistry.newInstance();
         SchemataBuilder.registerAllExtensions(registry);
         SchemataSubscribersBuilder.registerAllExtensions(registry);
+        SchemataConstraintsBuilder.registerAllExtensions(registry);
+
         this.descriptorSet = DescriptorProtos.FileDescriptorSet.parseFrom(stream, registry);
     }
 

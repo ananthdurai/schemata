@@ -7,13 +7,14 @@ public record Schema(String name, String description, String comment, String see
                      String domain, String status, String type, String eventType, String modelType, String teamChannel,
                      String alertChannel, String complianceOwner, String complianceChannel,
                      List<Subscribers> downstreamSubscribersList, List<Subscribers> upstreamSubscribersList,
-                     List<Field> fieldList) {
+                     List<Field> fieldList, List<Constraints> constraintsList) {
 
   private Schema(Builder builder) {
     this(builder.name, builder.description, builder.comment, builder.seeAlso, builder.reference, builder.owner,
         builder.domain, builder.status, builder.schemaType.name(), builder.eventType.name(), builder.modelType.name(),
         builder.teamChannel, builder.alertChannel, builder.complianceOwner, builder.complianceChannel,
-        builder.downstreamSubscribersList, builder.upstreamSubscribersList, builder.fieldList);
+        builder.downstreamSubscribersList, builder.upstreamSubscribersList,
+            builder.fieldList, builder.constraintsList);
   }
 
   public static class Builder {
@@ -35,6 +36,7 @@ public record Schema(String name, String description, String comment, String see
     List<Field> fieldList;
     List<Subscribers> downstreamSubscribersList;
     List<Subscribers> upstreamSubscribersList;
+    List<Constraints> constraintsList;
 
     public Builder(String name, List<Field> fieldList) {
       this.name = name;
@@ -120,6 +122,11 @@ public record Schema(String name, String description, String comment, String see
 
     public Builder upstreamSubscribersList(List<Subscribers> subscribersList) {
       this.upstreamSubscribersList = subscribersList;
+      return this;
+    }
+
+    public Builder constraintsList(List<Constraints> constraints) {
+      this.constraintsList = constraints;
       return this;
     }
 
