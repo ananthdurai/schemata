@@ -3,11 +3,17 @@ package org.schemata;
 import org.schemata.app.DocumentApp;
 import org.schemata.app.SchemaScoreApp;
 import org.schemata.app.SchemaValidatorApp;
+import org.schemata.compatibility.SchemaCompatibilityChecker;
+import org.schemata.compatibility.Summary;
 import org.schemata.provider.SchemaParser;
+import org.schemata.provider.avro.AvroSchemaCompatibilityChecker;
 import org.schemata.provider.avro.AvroSchemaParser;
+import org.schemata.provider.protobuf.ProtoSchemaCompatibilityChecker;
 import org.schemata.provider.protobuf.ProtoSchemaParser;
 import picocli.CommandLine.Option;
 import picocli.CommandLine.ScopeType;
+
+import java.util.Set;
 
 import static picocli.CommandLine.Command;
 import static picocli.CommandLine.Parameters;
@@ -26,6 +32,9 @@ public class SchemataExecutor {
   @Option(names = {"-p", "--provider"}, description = "Valid provider values: ${COMPLETION-CANDIDATES}", scope =
       ScopeType.INHERIT)
   private Provider provider;
+
+  @Option(names = {"-b", "--base"}, description = "Base Path to schema file", scope = ScopeType.INHERIT)
+  private String basePath;
 
   @Command(description = "Validate schema")
   public int validate()
@@ -48,10 +57,29 @@ public class SchemataExecutor {
     return new DocumentApp(parser.getSchemaList(path)).call();
   }
 
+  @Command(description = "Check if schema is backward compatible")
+  public boolean isBackwardCompatible() {
+    var checker = getSchemaCompatibilityChecker();
+    return checker.check(basePath, path).isCompatible();
+  }
+
+  @Command(description = "Print the backward compatibility summary with incompatible fields")
+  public Set<Summary> compatibilitySummary() {
+    var checker = getSchemaCompatibilityChecker();
+    return checker.check(basePath, path).summary();
+  }
+
   public SchemaParser getSchemaParser() {
     return switch (provider) {
       case PROTOBUF -> new ProtoSchemaParser();
       case AVRO -> new AvroSchemaParser();
+    };
+  }
+
+  public SchemaCompatibilityChecker getSchemaCompatibilityChecker() {
+    return switch (provider) {
+      case PROTOBUF -> new ProtoSchemaCompatibilityChecker();
+      case AVRO -> new AvroSchemaCompatibilityChecker();
     };
   }
 }

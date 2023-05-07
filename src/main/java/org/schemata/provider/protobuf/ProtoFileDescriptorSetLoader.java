@@ -24,10 +24,6 @@ public class ProtoFileDescriptorSetLoader implements Loader {
 
     private final DescriptorProtos.FileDescriptorSet descriptorSet;
 
-    public ProtoFileDescriptorSetLoader(DescriptorProtos.FileDescriptorSet descriptorSet) {
-        this.descriptorSet = descriptorSet;
-    }
-
     public ProtoFileDescriptorSetLoader(InputStream stream) throws IOException {
         var registry = ExtensionRegistry.newInstance();
         SchemataBuilder.registerAllExtensions(registry);
@@ -40,11 +36,11 @@ public class ProtoFileDescriptorSetLoader implements Loader {
     @Override
     public List<Descriptors.Descriptor> loadDescriptors() throws Descriptors.DescriptorValidationException {// we need to build a DAG of filenames so that we can build the Descriptors.Descriptor objects
         // we need to build a DAG of filenames that import each other, so that we can build the Descriptors.Descriptor
-        // objects in the the correct order, providing each one with a Descriptor for each file it imports
+        // objects in the correct order, providing each one with a Descriptor for each file it imports
         var dependencyFilenames = buildFileDependencyGraph(descriptorSet);
 
         // we key the basic proto representations of the FileDescriptor by filename for simpler retrieval
-        var fileDescriptorProtosByName = indexFileDescriptorProtosByFilename(descriptorSet);
+        var fileDescriptorProtosByName = indexFileDescriptorProtoByFilename(descriptorSet);
 
         // these be the parsed FileDescriptor objects (again keyed by filename) so that they can be passed back into
         // the instantiation of any other files that import them
@@ -69,7 +65,7 @@ public class ProtoFileDescriptorSetLoader implements Loader {
     }
 
     private DirectedAcyclicGraph<String, String> buildFileDependencyGraph(DescriptorProtos.FileDescriptorSet descriptorSet) {
-        var dependencyFilenames = new DirectedAcyclicGraph<String, String>(
+        var dependencyFilenames = new DirectedAcyclicGraph<>(
                 SupplierUtil.createSupplier(String.class),
                 SupplierUtil.createSupplier(String.class), false);
 
@@ -86,12 +82,16 @@ public class ProtoFileDescriptorSetLoader implements Loader {
         return dependencyFilenames;
     }
 
-    private Map<String, DescriptorProtos.FileDescriptorProto> indexFileDescriptorProtosByFilename
+    public Map<String, DescriptorProtos.FileDescriptorProto> indexFileDescriptorProtoByFilename
             (DescriptorProtos.FileDescriptorSet descriptorSet) {
         return descriptorSet
                 .getFileList()
                 .stream()
                 .collect(Collectors.toMap(DescriptorProtos.FileDescriptorProto::getName, file -> file));
+    }
+
+    public DescriptorProtos.FileDescriptorSet getDescriptorSet() {
+        return descriptorSet;
     }
 
     private List<Descriptors.Descriptor> collectAllMessageDescriptors

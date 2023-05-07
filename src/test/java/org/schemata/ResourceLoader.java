@@ -12,6 +12,18 @@ public class ResourceLoader {
     return absolutePath + "/descriptors/model.desc";
   }
 
+  public static String getChangedDescriptorsPath() {
+    Path resourceDirectory = Paths.get("src", "test", "resources");
+    String absolutePath = resourceDirectory.toFile().getAbsolutePath();
+    return absolutePath + "/descriptors/changed_model.desc";
+  }
+
+  public static String getProtoEntitiesPath() {
+    Path resourceDirectory = Paths.get("src", "test", "resources");
+    String absolutePath = resourceDirectory.toFile().getAbsolutePath();
+    return absolutePath + "/schema/entities.proto";
+  }
+
   public static String getAvroSchemaPath() {
     Path resourceDirectory = Paths.get("src", "test", "resources");
     return resourceDirectory.toFile().getAbsolutePath();
