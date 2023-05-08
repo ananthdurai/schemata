@@ -70,7 +70,6 @@ public class SchemataExecutor {
       System.out.println("Schema is backward compatible");
       return 0;
     } else {
-        System.out.println("Schema is not backward compatible");
         System.out.println("Incompatible fields:");
         checker.summary().forEach(System.out::println);
         return 1;
