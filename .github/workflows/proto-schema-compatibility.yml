@@ -50,5 +50,5 @@ jobs:
         
     - name: Run ProtoBuf Backward compatibility changes
       run: |
-        java -jar schemata.jar -s model.desc -b base-branch/model.desc -p protobuf
+        java -jar schemata.jar isBackwardCompatible -s model.desc -b base-branch/model.desc -p protobuf
     
