@@ -58,15 +58,23 @@ public class SchemataExecutor {
   }
 
   @Command(description = "Check if schema is backward compatible")
-  public boolean isBackwardCompatible() {
+  public int isBackwardCompatible() {
     var checker = getSchemaCompatibilityChecker();
-    return checker.check(basePath, path).isCompatible();
+    return checker.check(basePath, path).isCompatible() ? 0 : 1;
   }
 
   @Command(description = "Print the backward compatibility summary with incompatible fields")
-  public Set<Summary> compatibilitySummary() {
-    var checker = getSchemaCompatibilityChecker();
-    return checker.check(basePath, path).summary();
+  public int compatibilitySummary() {
+    var checker = getSchemaCompatibilityChecker().check(basePath, path);
+    if (checker.isCompatible()) {
+      System.out.println("Schema is backward compatible");
+      return 0;
+    } else {
+        System.out.println("Schema is not backward compatible");
+        System.out.println("Incompatible fields:");
+        checker.summary().forEach(System.out::println);
+        return 1;
+    }
   }
 
   public SchemaParser getSchemaParser() {

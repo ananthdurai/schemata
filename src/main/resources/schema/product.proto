@@ -23,7 +23,7 @@ message Product {
   int32 id = 1
   [(field_core).description = "Unique identifier for Product", (is_primary_key) = true];
 
-  string name = 2
+  string name_changed = 2
   [(field_core).description = "Name of the Product"];
 
   Category category = 3
