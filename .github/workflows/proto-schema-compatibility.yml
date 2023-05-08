@@ -4,7 +4,7 @@ on:
   pull_request:
 
 jobs:
-  clone_branches:
+  backward_compatibility:
     runs-on: ubuntu-latest
 
     steps:
