@@ -28,6 +28,12 @@ jobs:
         token: ${{ secrets.GITHUB_TOKEN }}
         fetch-depth: 0
         path: base-branch
+        
+    - name: Set up JDK 17
+      uses: actions/setup-java@v2
+      with:
+        distribution: 'temurin'
+        java-version: '17'
 
     - name: Run compile command on PR and base branches
       run: |
@@ -36,3 +42,13 @@ jobs:
         echo "Running compile command on base branch:"
         cd base-branch
         protoc  --proto_path=src/opencontract/v1/org --proto_path=src/main/resources/schema --descriptor_set_out=model.desc --include_imports --include_source_info ./src/main/resources/**/*.proto
+        cd ..
+    
+    - name: Download Schemata jar
+      run: |
+        curl -L -o schemata.jar https://github.com/ananthdurai/schemata/releases/download/v0.2/schemata-1.0.jar        
+        
+    - name: Run ProtoBuf Backward compatibility changes
+      run: |
+        java -jar schemata.jar -s model.desc -b base-branch/model.desc -p protobuf
+    
