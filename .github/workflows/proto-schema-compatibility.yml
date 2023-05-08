@@ -1,0 +1,37 @@
+name: ProtoBuf Backward Compatibility check
+
+on:
+  pull_request:
+
+jobs:
+  clone_branches:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout PR branch
+      uses: actions/checkout@v2
+      with:
+        ref: ${{ github.head_ref }}
+        token: ${{ secrets.GITHUB_TOKEN }}
+        fetch-depth: 0
+        
+    - name: Install protoc
+      uses: bufbuild/protoc-install@v0.1.0
+      with:
+        version: '3.21.12'
+
+    - name: Checkout base branch
+      uses: actions/checkout@v2
+      with:
+        ref: ${{ github.base_ref }}
+        token: ${{ secrets.GITHUB_TOKEN }}
+        fetch-depth: 0
+        path: base-branch
+
+    - name: Run compile command on PR and base branches
+      run: |
+        echo "Running compile command on PR branch:"
+        protoc  --proto_path=src/opencontract/v1/org --proto_path=src/main/resources/schema --descriptor_set_out=model.desc --include_imports --include_source_info ./src/main/resources/**/*.proto
+        echo "Running compile command on base branch:"
+        cd base-branch
+        protoc  --proto_path=src/opencontract/v1/org --proto_path=src/main/resources/schema --descriptor_set_out=model.desc --include_imports --include_source_info ./src/main/resources/**/*.proto
