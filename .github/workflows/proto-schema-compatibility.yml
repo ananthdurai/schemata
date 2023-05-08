@@ -46,7 +46,7 @@ jobs:
     
     - name: Download Schemata jar
       run: |
-        curl -L -o schemata.jar https://github.com/ananthdurai/schemata/releases/download/v0.2/schemata-1.0.jar        
+        curl -L -o schemata.jar https://github.com/ananthdurai/schemata/releases/download/v0.3/schemata.jar        
         
     - name: Run ProtoBuf Backward compatibility changes
       run: |
