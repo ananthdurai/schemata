@@ -15,10 +15,11 @@ jobs:
         token: ${{ secrets.GITHUB_TOKEN }}
         fetch-depth: 0
         
-    - name: Install protoc
-      uses: bufbuild/protoc-install@v0.1.0
-      with:
-        version: '3.21.12'
+    - name: Install protoc using apt-get
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y protobuf-compiler
+        protoc --version
 
     - name: Checkout base branch
       uses: actions/checkout@v2
