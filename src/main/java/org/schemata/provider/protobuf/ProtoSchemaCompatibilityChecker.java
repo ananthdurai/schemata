@@ -47,6 +47,11 @@ public class ProtoSchemaCompatibilityChecker implements SchemaCompatibilityCheck
         for (var entry : base.entrySet()) {
             var key = entry.getKey();
             var value = entry.getValue();
+            summaries.add(new Summary.Builder().filename(key.filename)
+                    .schemaName(key.messageName)
+                    .fieldName(key.fieldName)
+                    .fieldType(value.type)
+                    .build());
             summaries.add(new Summary(key.filename, key.messageName(), key.fieldName(), value.type()));
         }
         return summaries;
